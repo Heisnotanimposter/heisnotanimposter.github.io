@@ -20,6 +20,11 @@
         }
 
         /* Base Styling */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 75px;
+        }
+
         body {
             font-family: var(--font-family);
             color: var(--text-color);
@@ -28,6 +33,7 @@
             margin: 0;
             padding: 0;
             font-size: 11pt;
+            -webkit-text-size-adjust: 100%;
         }
 
         .resume-container {
@@ -136,6 +142,8 @@
             color: var(--primary-color);
             text-decoration: none;
             transition: color 0.3s;
+            word-break: break-word;
+            overflow-wrap: anywhere;
         }
         a:hover {
             text-decoration: underline;
@@ -145,6 +153,10 @@
         /* Section Layout */
         .section {
             margin-bottom: 30px;
+        }
+
+        section, header[id] {
+            scroll-margin-top: 75px;
         }
 
         .item-block {
@@ -191,6 +203,163 @@
             color: var(--secondary-text-color);
             padding-top: 20px;
             border-top: 1px solid var(--border-color);
+        }
+
+        /* ====================================================
+           Mobile Responsive Enhancements (Screen width <= 768px)
+           ==================================================== */
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 90px;
+            }
+
+            section, header[id] {
+                scroll-margin-top: 90px;
+            }
+
+            body {
+                font-size: 14.5px;
+                line-height: 1.65;
+            }
+
+            .resume-container {
+                padding: 20px 14px;
+                margin: 0;
+                max-width: 100%;
+                width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            /* Compact, Non-Intrusive Floating Header (~60px height) */
+            .main-header {
+                padding: 6px 0 8px 0;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            }
+
+            .navigation {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+                padding: 0 10px;
+            }
+
+            /* Language Switcher on Mobile */
+            .language-switcher {
+                order: 1;
+                display: flex;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            .lang-button {
+                padding: 3px 10px;
+                font-size: 0.74rem;
+                border-radius: 12px;
+                line-height: 1.2;
+                letter-spacing: 0.5px;
+            }
+
+            /* Single-row Horizontal Scrollable Navigation Chips */
+            .nav-links {
+                order: 2;
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+                gap: 6px;
+                padding: 2px 2px;
+            }
+
+            .nav-links::-webkit-scrollbar {
+                display: none; /* Chrome, Safari */
+            }
+
+            .nav-link {
+                flex-shrink: 0;
+                white-space: nowrap;
+                font-size: 0.78rem;
+                padding: 4px 10px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 14px;
+                line-height: 1.3;
+            }
+
+            .nav-link:hover {
+                transform: none;
+            }
+
+            /* Mobile Typography */
+            h1 {
+                font-size: 1.65em;
+                margin-bottom: 12px;
+                padding-bottom: 8px;
+            }
+
+            h2 {
+                font-size: 1.18em;
+                margin-top: 28px;
+                margin-bottom: 12px;
+                letter-spacing: 0.5px;
+            }
+
+            /* Mobile Contact Info */
+            .contact-info {
+                font-size: 0.86em;
+                line-height: 1.6;
+                margin-bottom: 16px;
+            }
+
+            .contact-info .separator {
+                display: none;
+            }
+
+            .contact-info span {
+                margin: 2px 6px;
+                display: inline-block;
+            }
+
+            .contact-info br {
+                display: none;
+            }
+
+            /* Mobile Item Header: prevent school/title and dates collision */
+            .item-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+                margin-bottom: 4px;
+            }
+
+            .item-header span:last-child {
+                font-size: 0.88em;
+                color: var(--secondary-text-color);
+                font-weight: 500;
+            }
+
+            .item-sub {
+                font-size: 0.9em;
+                line-height: 1.45;
+                margin-bottom: 6px;
+            }
+
+            ul {
+                padding-left: 18px;
+                margin: 5px 0 10px 0;
+            }
+
+            li {
+                margin-bottom: 6px;
+                font-size: 0.95em;
+                line-height: 1.55;
+            }
+
+            .footer {
+                margin-top: 35px;
+                padding-top: 15px;
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
@@ -1568,7 +1737,11 @@
                     const targetId = this.getAttribute('href');
                     const targetEl = document.querySelector(targetId);
                     if (targetEl) {
-                        targetEl.scrollIntoView({
+                        const header = document.querySelector('.main-header');
+                        const headerHeight = header ? header.offsetHeight : 0;
+                        const targetPos = targetEl.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+                        window.scrollTo({
+                            top: targetPos,
                             behavior: 'smooth'
                         });
                     }
