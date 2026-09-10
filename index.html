@@ -46,14 +46,24 @@
             box-sizing: border-box;
         }
 
-        /* Navigation Feature (Sticky Header) */
+        /* Navigation Feature (Sticky Header with Smart Auto-Hide) */
         .main-header {
-            background: #1a1a1a;
-            padding: 15px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: rgba(26, 26, 26, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             position: sticky; 
             top: 0;
             z-index: 1000;
+            transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .main-header.nav-hidden {
+            transform: translateY(-100%);
+            box-shadow: none;
         }
 
         .navigation {
@@ -203,6 +213,40 @@
             color: var(--secondary-text-color);
             padding-top: 20px;
             border-top: 1px solid var(--border-color);
+        }
+
+        /* Back to Top Floating Action Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(0, 75, 150, 0.35);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease, background-color 0.2s;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: #003366;
+            transform: translateY(-2px);
         }
 
         /* ====================================================
@@ -360,6 +404,13 @@
                 padding-top: 15px;
                 font-size: 0.8em;
             }
+
+            .back-to-top {
+                bottom: 18px;
+                right: 18px;
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -465,6 +516,11 @@
         </div>
 
     </div>
+
+    <!-- Floating Back to Top Button -->
+    <button id="btn-back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
 
     <script>
         const translations = {
@@ -1729,21 +1785,87 @@
                 });
             });
             
-            // 2. Smooth Navigation Feature
+            // 2. Smart Auto-Hide Floating Header & Back to Top Logic
+            const header = document.querySelector('.main-header');
+            const backToTopBtn = document.getElementById('btn-back-to-top');
+            let lastScrollTop = 0;
+            const scrollDelta = 8;
+
+            window.addEventListener('scroll', () => {
+                const currentScroll = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+
+                // Back to Top button visibility
+                if (backToTopBtn) {
+                    if (currentScroll > 300) {
+                        backToTopBtn.classList.add('visible');
+                    } else {
+                        backToTopBtn.classList.remove('visible');
+                    }
+                }
+
+                // If at the very top, always show header
+                if (currentScroll <= 25) {
+                    if (header) header.classList.remove('nav-hidden');
+                    lastScrollTop = currentScroll;
+                    return;
+                }
+
+                // Guard against iOS overscroll bounce at bottom of page
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                if (currentScroll >= maxScroll - 15) {
+                    return;
+                }
+
+                // Directional scroll threshold detection
+                if (Math.abs(currentScroll - lastScrollTop) > scrollDelta) {
+                    if (currentScroll > lastScrollTop) {
+                        // Scrolling DOWN -> Hide Header
+                        if (header) header.classList.add('nav-hidden');
+                    } else {
+                        // Scrolling UP -> Reveal Header
+                        if (header) header.classList.remove('nav-hidden');
+                    }
+                    lastScrollTop = currentScroll;
+                }
+            }, { passive: true });
+
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    if (header) header.classList.remove('nav-hidden');
+                });
+            }
+
+            // 3. Smooth Navigation Feature
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     
                     const targetId = this.getAttribute('href');
+                    if (targetId === '#summary-sec') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        if (header) header.classList.remove('nav-hidden');
+                        return;
+                    }
+
                     const targetEl = document.querySelector(targetId);
                     if (targetEl) {
-                        const header = document.querySelector('.main-header');
                         const headerHeight = header ? header.offsetHeight : 0;
                         const targetPos = targetEl.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
                         window.scrollTo({
                             top: targetPos,
                             behavior: 'smooth'
                         });
+
+                        // On mobile, auto-hide the header after navigation completes to maximize reading space
+                        if (window.innerWidth <= 768 && header) {
+                            setTimeout(() => {
+                                header.classList.add('nav-hidden');
+                            }, 350);
+                        }
                     }
                 });
             });
