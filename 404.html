@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Lee | Academic Resume</title>
+    <script>
+        (function() {
+            var path = window.location.pathname.toLowerCase();
+            var match = path.match(/\/(kor|en|jp|chn|ko|ja|zh|cn)(\/|$)/i);
+            var lang = 'en';
+            if (match) {
+                var raw = match[1].toLowerCase();
+                if (raw === 'ko') lang = 'kor';
+                else if (raw === 'ja') lang = 'jp';
+                else if (raw === 'zh' || raw === 'cn') lang = 'chn';
+                else lang = raw;
+                window.location.replace('/#' + lang);
+            } else {
+                window.location.replace('/#en');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <p>Redirecting to resume...</p>
+</body>
+</html>

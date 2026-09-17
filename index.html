@@ -1735,18 +1735,64 @@
             }
         };
 
+        const validLangs = ['en', 'kor', 'jp', 'chn'];
+
+        function detectLangFromUrl() {
+            // 1. Check Hash: #kor, #en, #jp, #chn, #/kor, etc.
+            const hash = window.location.hash.toLowerCase().replace(/^[#/]+/, '').trim();
+            if (hash) {
+                for (const l of validLangs) {
+                    if (hash === l || hash.startsWith(l + '/') || hash.startsWith(l + '?') || hash.startsWith(l + '&') || hash.startsWith(l + '-')) {
+                        return l;
+                    }
+                }
+                if (hash === 'ko') return 'kor';
+                if (hash === 'ja') return 'jp';
+                if (hash === 'zh' || hash === 'cn') return 'chn';
+            }
+
+            // 2. Check Search query: ?lang=kor, ?l=kor, ?kor, etc.
+            const searchParams = new URLSearchParams(window.location.search);
+            const langParam = searchParams.get('lang') || searchParams.get('l');
+            if (langParam) {
+                const lp = langParam.toLowerCase();
+                if (validLangs.includes(lp)) return lp;
+                if (lp === 'ko') return 'kor';
+                if (lp === 'ja') return 'jp';
+                if (lp === 'zh' || lp === 'cn') return 'chn';
+            }
+            for (const l of validLangs) {
+                if (searchParams.has(l)) return l;
+            }
+
+            // 3. Check Pathname: /kor/, /en/, /jp/, /chn/
+            const pathSegments = window.location.pathname.toLowerCase().split('/').filter(Boolean);
+            for (const segment of pathSegments) {
+                if (validLangs.includes(segment)) return segment;
+                if (segment === 'ko') return 'kor';
+                if (segment === 'ja') return 'jp';
+                if (segment === 'zh' || segment === 'cn') return 'chn';
+            }
+
+            return 'en';
+        }
+
         let currentLang = 'en';
 
         // Function to update all text content based on the selected language
-        function updateContent(lang) {
+        function updateContent(lang, updateUrl = true) {
+            if (!translations[lang]) lang = 'en';
             currentLang = lang;
             const t = translations[lang];
 
-            // 1. Update Title and Header Name
+            // 1. Update Document HTML lang attribute
+            document.documentElement.lang = (lang === 'kor') ? 'ko' : (lang === 'jp') ? 'ja' : (lang === 'chn') ? 'zh' : 'en';
+
+            // 2. Update Title and Header Name
             document.getElementById('page-title').textContent = `Simon Lee | Academic Resume | ${t.title_suffix}`;
             document.getElementById('header-name').textContent = t.header_name;
             
-            // 2. Update Nav Links
+            // 3. Update Nav Links
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if (key !== 'header_name' && t[key]) {
@@ -1754,7 +1800,7 @@
                 }
             });
 
-            // 3. Update Dynamic Layout Sections
+            // 4. Update Dynamic Layout Sections
             document.getElementById('div_summary').innerHTML = t.summary_content;
             document.getElementById('div_education').innerHTML = t.education_content;
             document.getElementById('div_admissions').innerHTML = t.admissions_content;
@@ -1764,24 +1810,42 @@
             document.getElementById('div_certs').innerHTML = t.certs_content;
             document.getElementById('footer-text').innerHTML = t.footer_text;
             
-            // Update active button state
+            // 5. Update active button state
             document.querySelectorAll('.lang-button').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.getAttribute('data-lang') === lang) {
                     btn.classList.add('active');
                 }
             });
+
+            // 6. Update URL hash so the address bar reflects the current language
+            if (updateUrl) {
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, '', '#' + lang);
+                } else {
+                    window.location.hash = lang;
+                }
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize content to English (default)
-            updateContent(currentLang);
+            // Detect language from URL on page load
+            const initialLang = detectLangFromUrl();
+            updateContent(initialLang, true);
+
+            // Listen to browser Back/Forward or manual hash changes
+            window.addEventListener('hashchange', () => {
+                const newLang = detectLangFromUrl();
+                if (newLang !== currentLang) {
+                    updateContent(newLang, false);
+                }
+            });
 
             // 1. Language Switcher Logic
             document.querySelectorAll('.lang-button').forEach(button => {
                 button.addEventListener('click', function() {
                     const newLang = this.getAttribute('data-lang');
-                    updateContent(newLang);
+                    updateContent(newLang, true);
                 });
             });
             
