@@ -812,18 +812,21 @@
         }
 
         /* ==========================================================================
-           View 2: Multi-Lingual Academic Resume (CV)
+           View System: 3-Way Independent View Architecture
+           1. #view-showcase
+           2. #view-curriculum
+           3. #view-resume
            ========================================================================== */
+        #view-showcase,
+        #view-curriculum,
         #view-resume {
             display: none;
         }
 
+        #view-showcase.active,
+        #view-curriculum.active,
         #view-resume.active {
             display: block;
-        }
-
-        #view-showcase.hidden {
-            display: none;
         }
 
         .resume-banner {
@@ -950,7 +953,8 @@
             #view-resume {
                 display: block !important;
             }
-            #view-showcase {
+            #view-showcase,
+            #view-curriculum {
                 display: none !important;
             }
         }
@@ -965,7 +969,7 @@
             <a href="#showcase" class="header-brand" id="brandLogo">Simon (Seungwon) Lee</a>
             <nav class="header-nav">
                 <a href="#showcase" class="nav-item active" id="navShowcase">Showcase & Projects</a>
-                <a href="#curriculum" class="nav-item" id="navCurriculum">Curriculum & Proofs</a>
+                <a href="#curriculum" class="nav-item" id="navCurriculum">Graduate Curriculum & Mathematical Proofs</a>
                 <a href="#resume" class="nav-item" id="navResume">Academic CV</a>
                 <div class="lang-group">
                     <button class="lang-btn active" data-lang="en">EN</button>
@@ -1200,91 +1204,109 @@
                 </div>
             </section>
 
-            <!-- SECTION 2: CURRICULUM & MATHEMATICAL PROOFS -->
-            <section id="curriculum" class="section-header">
-                <h2 class="section-heading">II. Graduate Curriculum & Mathematical Proofs</h2>
-                <p class="section-intro">
-                    Detailed mathematical solutions, closed-form derivations, and algorithmic implementations for graduate coursework and foundational machine learning theories. Click any module to inspect step-by-step proofs and derivations.
-                </p>
-
-                <div class="curriculum-list">
-
-                    <!-- Curriculum 1: CS229 -->
-                    <article class="curriculum-entry">
-                        <div class="curriculum-title">1. Stanford CS229: Machine Learning</div>
-                        <div class="curriculum-inst">Instructor: Prof. Andrew Ng · Stanford Graduate School · Autumn 2018</div>
-                        <p class="curriculum-topics">
-                            <strong>Foundational Scope:</strong> Supervised Learning (Linear Regression, Logistic Regression, GLMs, GDA, Naive Bayes), Support Vector Machines (Lagrange Multipliers, Dual Formulation, Mercer's Kernels, SMO), Learning Theory (PAC Learning, VC Dimension), Unsupervised Learning (K-Means, EM Algorithm for GMMs, PCA, ICA), Reinforcement Learning (MDPs, Value Iteration, Policy Iteration, Bellman Equations).
-                        </p>
-                        <div class="project-actions">
-                            <button onclick="openStudyModal('cs229')" class="btn-minimal">[ Inspect Problem Sets & Proofs (PS0–PS4) ↗ ]</button>
-                            <a href="/cs229-2018-autumn/" target="_blank" class="btn-minimal">[ Open CS229 Interactive Platform ↗ ]</a>
-                        </div>
-                    </article>
-
-                    <!-- Curriculum 2: CS230 -->
-                    <article class="curriculum-entry">
-                        <div class="curriculum-title">2. Stanford CS230: Deep Learning</div>
-                        <div class="curriculum-inst">Instructor: Prof. Andrew Ng · Stanford University</div>
-                        <p class="curriculum-topics">
-                            <strong>Foundational Scope:</strong> Vectorized Matrix Calculus Formulation of Backpropagation, Tensor Shape Invariance, Deep Feedforward Networks, Optimization (SGD with Momentum, RMSprop, Adam Bias Correction), Regularization (L2, Dropout), Batch Normalization Forward/Backward Equations, Convolutional & Sequence Architectures.
-                        </p>
-                        <div class="project-actions">
-                            <button onclick="openStudyModal('cs230')" class="btn-minimal">[ Inspect Deep Learning Proofs & Derivations ↗ ]</button>
-                        </div>
-                    </article>
-
-                    <!-- Curriculum 3: MITx Statistics -->
-                    <article class="curriculum-entry">
-                        <div class="curriculum-title">3. MITx 6.431x / 18.6501x: Fundamentals of Statistics</div>
-                        <div class="curriculum-inst">MITx MicroMasters in Statistics and Data Science</div>
-                        <p class="curriculum-topics">
-                            <strong>Foundational Scope:</strong> Convergence of Random Variables (Weak/Strong Law of Large Numbers, Central Limit Theorem), Maximum Likelihood Estimation (MLE), Fisher Information Matrix, Cramér-Rao Lower Bound, Confidence Intervals, Hypothesis Testing (Neyman-Pearson Lemma, Generalized Likelihood Ratio Test).
-                        </p>
-                        <div class="project-actions">
-                            <button onclick="openStudyModal('mitx')" class="btn-minimal">[ Inspect Statistical Derivations & Theorems ↗ ]</button>
-                        </div>
-                    </article>
-
-                    <!-- Curriculum 4: ZBDD -->
-                    <article class="curriculum-entry">
-                        <div class="curriculum-title">4. Zero-Suppressed Binary Decision Diagrams (ZBDD) & Discrete Logic</div>
-                        <div class="curriculum-inst">Mathematical Foundations: Donald Knuth (TAOCP Vol 4A) & Shin-ichi Minato (1993)</div>
-                        <p class="curriculum-topics">
-                            <strong>Foundational Scope:</strong> Canonical Graph Representations of Combinatorial Families, Elimination Rule for 0-edges (ZBDD) vs Node Elimination (standard BDD), Shannon Decomposition, Polynomial-Time Set Union/Intersection Primitives, Memoized Recursive Path Counting for Constraint Satisfaction.
-                        </p>
-                        <div class="project-actions">
-                            <button onclick="openStudyModal('zbdd')" class="btn-minimal">[ Inspect ZBDD Reduction Rules & Proofs ↗ ]</button>
-                        </div>
-                    </article>
-
-                </div>
-            </section>
-
-            <!-- SECTION 3: TRANSITION TO CV -->
-            <section class="section-header">
-                <h2 class="section-heading">III. Formal Academic Curriculum Vitae (CV)</h2>
-                <p class="section-intro">
-                    For university admissions committees, institutional review boards, and prospective research mentors, a complete multi-lingual curriculum vitae is available with verified citations and records.
-                </p>
-                <div class="hero-actions">
-                    <button id="bannerOpenResumeBtn" class="btn-minimal">Switch to Full Academic Curriculum Vitae (CV) →</button>
+            <!-- Bottom Transition to Other Views -->
+            <section class="section-header aero-step step-4" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-primary);">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                    <div>
+                        <div style="font-weight:600; color:var(--text-primary); margin-bottom:4px;">Graduate Studies & Formal Records</div>
+                        <div style="font-size:13.5px; color:var(--text-secondary);">Explore closed-form mathematical proofs or review the full academic curriculum vitae.</div>
+                    </div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button id="showcaseToCurriculumBtn" class="btn-minimal">Graduate Curriculum & Proofs →</button>
+                        <button id="showcaseToResumeBtn" class="btn-minimal">Academic CV →</button>
+                    </div>
                 </div>
             </section>
         </main>
 
-        <!-- ================= VIEW 2: MULTI-LINGUAL ACADEMIC RESUME ================= -->
+        <!-- ================= VIEW 2: GRADUATE CURRICULUM & PROOFS ================= -->
+        <main id="view-curriculum">
+            <div class="resume-banner aero-step step-1">
+                <a class="btn-minimal" id="curriculumBackToShowcase">← Back to Showcase & Interactive Hub</a>
+                <button id="curriculumToResumeBtn" class="btn-minimal">Switch to Academic CV →</button>
+            </div>
+
+            <section class="section-header aero-step step-2" style="margin-bottom: 28px;">
+                <h1 class="hero-title" style="font-size: 28px; margin-bottom: 8px;">Graduate Curriculum & Mathematical Proofs</h1>
+                <p class="section-intro" style="margin-bottom: 0;">
+                    Rigorous algorithmic implementations, closed-form derivations, and step-by-step problem set solutions for Stanford CS229, CS230, MITx MicroMasters, and ZBDD discrete logic. Click any module to inspect step-by-step proofs and derivations.
+                </p>
+            </section>
+
+            <div class="curriculum-list aero-step step-3">
+
+                <!-- Curriculum 1: CS229 -->
+                <article class="curriculum-entry">
+                    <div class="curriculum-title">1. Stanford CS229: Machine Learning</div>
+                    <div class="curriculum-inst">Instructor: Prof. Andrew Ng · Stanford Graduate School · Autumn 2018</div>
+                    <p class="curriculum-topics">
+                        <strong>Foundational Scope:</strong> Supervised Learning (Linear Regression, Logistic Regression, GLMs, GDA, Naive Bayes), Support Vector Machines (Lagrange Multipliers, Dual Formulation, Mercer's Kernels, SMO), Learning Theory (PAC Learning, VC Dimension), Unsupervised Learning (K-Means, EM Algorithm for GMMs, PCA, ICA), Reinforcement Learning (MDPs, Value Iteration, Policy Iteration, Bellman Equations).
+                    </p>
+                    <div class="project-actions">
+                        <button onclick="openStudyModal('cs229')" class="btn-minimal">[ Inspect Problem Sets & Proofs (PS0–PS4) ↗ ]</button>
+                        <a href="/cs229-2018-autumn/" target="_blank" class="btn-minimal">[ Open CS229 Interactive Platform ↗ ]</a>
+                    </div>
+                </article>
+
+                <!-- Curriculum 2: CS230 -->
+                <article class="curriculum-entry">
+                    <div class="curriculum-title">2. Stanford CS230: Deep Learning</div>
+                    <div class="curriculum-inst">Instructor: Prof. Andrew Ng · Stanford University</div>
+                    <p class="curriculum-topics">
+                        <strong>Foundational Scope:</strong> Vectorized Matrix Calculus Formulation of Backpropagation, Tensor Shape Invariance, Deep Feedforward Networks, Optimization (SGD with Momentum, RMSprop, Adam Bias Correction), Regularization (L2, Dropout), Batch Normalization Forward/Backward Equations, Convolutional & Sequence Architectures.
+                    </p>
+                    <div class="project-actions">
+                        <button onclick="openStudyModal('cs230')" class="btn-minimal">[ Inspect Deep Learning Proofs & Derivations ↗ ]</button>
+                    </div>
+                </article>
+
+                <!-- Curriculum 3: MITx Statistics -->
+                <article class="curriculum-entry">
+                    <div class="curriculum-title">3. MITx 6.431x / 18.6501x: Fundamentals of Statistics</div>
+                    <div class="curriculum-inst">MITx MicroMasters in Statistics and Data Science</div>
+                    <p class="curriculum-topics">
+                        <strong>Foundational Scope:</strong> Convergence of Random Variables (Weak/Strong Law of Large Numbers, Central Limit Theorem), Maximum Likelihood Estimation (MLE), Fisher Information Matrix, Cramér-Rao Lower Bound, Confidence Intervals, Hypothesis Testing (Neyman-Pearson Lemma, Generalized Likelihood Ratio Test).
+                    </p>
+                    <div class="project-actions">
+                        <button onclick="openStudyModal('mitx')" class="btn-minimal">[ Inspect Statistical Derivations & Theorems ↗ ]</button>
+                    </div>
+                </article>
+
+                <!-- Curriculum 4: ZBDD -->
+                <article class="curriculum-entry">
+                    <div class="curriculum-title">4. Zero-Suppressed Binary Decision Diagrams (ZBDD) & Discrete Logic</div>
+                    <div class="curriculum-inst">Mathematical Foundations: Donald Knuth (TAOCP Vol 4A) & Shin-ichi Minato (1993)</div>
+                    <p class="curriculum-topics">
+                        <strong>Foundational Scope:</strong> Canonical Graph Representations of Combinatorial Families, Elimination Rule for 0-edges (ZBDD) vs Node Elimination (standard BDD), Shannon Decomposition, Polynomial-Time Set Union/Intersection Primitives, Memoized Recursive Path Counting for Constraint Satisfaction.
+                    </p>
+                    <div class="project-actions">
+                        <button onclick="openStudyModal('zbdd')" class="btn-minimal">[ Inspect ZBDD Reduction Rules & Proofs ↗ ]</button>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Transition from Curriculum to CV -->
+            <section class="section-header aero-step step-4" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-primary);">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                    <div>
+                        <div style="font-weight:600; color:var(--text-primary); margin-bottom:4px;">Formal Academic Curriculum Vitae (CV)</div>
+                        <div style="font-size:13.5px; color:var(--text-secondary);">For university admissions committees, institutional review boards, and prospective research mentors.</div>
+                    </div>
+                    <button id="curriculumBottomToResumeBtn" class="btn-minimal">Switch to Full Academic CV →</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- ================= VIEW 3: MULTI-LINGUAL ACADEMIC RESUME ================= -->
         <main id="view-resume">
             <div class="resume-banner aero-step step-1">
-                <a class="btn-minimal" id="btnBackToShowcase">← Back to Showcase & Interactive Hub</a>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <a class="btn-minimal" id="btnBackToShowcase">← Back to Showcase</a>
+                    <a class="btn-minimal" id="resumeToCurriculumBtn">← View Curriculum & Proofs</a>
+                </div>
                 <div style="display:flex; align-items:center; gap:8px;">
                     <button onclick="window.print()" class="btn-minimal">🖨️ Print CV</button>
-                    <div class="lang-group">
-                        <button class="lang-btn active" data-lang="en">EN</button>
-                        <button class="lang-btn" data-lang="kor">KO</button>
-                        <button class="lang-btn" data-lang="jp">JA</button>
-                        <button class="lang-btn" data-lang="chn">ZH</button>
-                    </div>
                 </div>
             </div>
 
@@ -3036,7 +3058,7 @@
             if (hash.includes('jp') || path.includes('/jp/')) return 'jp';
             if (hash.includes('chn') || path.includes('/chn/')) return 'chn';
             if (hash.includes('en') || path.includes('/en/')) return 'en';
-            return 'en';
+            return localStorage.getItem('preferredLang') || 'en';
         }
 
         function updateContent(lang, updateUrl = true) {
@@ -3084,46 +3106,75 @@
 
         function switchView(targetView, updateHash = true) {
             const showcaseView = document.getElementById('view-showcase');
+            const curriculumView = document.getElementById('view-curriculum');
             const resumeView = document.getElementById('view-resume');
+
             const navShowcase = document.getElementById('navShowcase');
             const navCurriculum = document.getElementById('navCurriculum');
             const navResume = document.getElementById('navResume');
 
-            if (targetView === 'resume') {
-                showcaseView.classList.add('hidden');
-                resumeView.classList.add('active');
-                navShowcase.classList.remove('active');
-                navCurriculum.classList.remove('active');
-                navResume.classList.add('active');
+            // Deactivate all views
+            [showcaseView, curriculumView, resumeView].forEach(v => {
+                if (v) {
+                    v.classList.remove('active');
+                    v.style.display = 'none';
+                }
+            });
+
+            // Deactivate all nav items
+            [navShowcase, navCurriculum, navResume].forEach(n => {
+                if (n) n.classList.remove('active');
+            });
+
+            if (targetView === 'curriculum') {
+                if (curriculumView) {
+                    curriculumView.classList.add('active');
+                    curriculumView.style.display = 'block';
+                }
+                if (navCurriculum) navCurriculum.classList.add('active');
                 if (updateHash) {
-                    if (window.history && window.history.replaceState) {
-                        window.history.replaceState(null, '', '#' + currentLang);
+                    if (window.history && window.history.pushState) {
+                        window.history.pushState(null, '', '#curriculum');
                     } else {
-                        window.location.hash = currentLang;
+                        window.location.hash = 'curriculum';
                     }
                 }
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                showcaseView.classList.remove('hidden');
-                resumeView.classList.remove('active');
-                navShowcase.classList.add('active');
-                navResume.classList.remove('active');
-                if (targetView === 'curriculum') {
-                    navCurriculum.classList.add('active');
-                    navShowcase.classList.remove('active');
-                    document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' });
-                } else if (targetView === 'services') {
-                    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    if (updateHash) {
-                        if (window.history && window.history.replaceState) {
-                            window.history.replaceState(null, '', '#showcase');
-                        } else {
-                            window.location.hash = 'showcase';
-                        }
-                    }
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            } else if (targetView === 'resume') {
+                if (resumeView) {
+                    resumeView.classList.add('active');
+                    resumeView.style.display = 'block';
                 }
+                if (navResume) navResume.classList.add('active');
+                if (updateHash) {
+                    if (window.history && window.history.pushState) {
+                        window.history.pushState(null, '', '#resume');
+                    } else {
+                        window.location.hash = 'resume';
+                    }
+                }
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            } else if (targetView === 'services') {
+                if (showcaseView) {
+                    showcaseView.classList.add('active');
+                    showcaseView.style.display = 'block';
+                }
+                if (navShowcase) navShowcase.classList.add('active');
+                document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+            } else { // default: showcase
+                if (showcaseView) {
+                    showcaseView.classList.add('active');
+                    showcaseView.style.display = 'block';
+                }
+                if (navShowcase) navShowcase.classList.add('active');
+                if (updateHash) {
+                    if (window.history && window.history.pushState) {
+                        window.history.pushState(null, '', '#showcase');
+                    } else {
+                        window.location.hash = 'showcase';
+                    }
+                }
+                window.scrollTo({ top: 0, behavior: 'instant' });
             }
         }
 
@@ -3194,72 +3245,81 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const detected = detectLangFromUrl();
-            updateContent(detected, false);
+            function handleRoute() {
+                const hash = window.location.hash.toLowerCase();
+                const lang = detectLangFromUrl();
+                updateContent(lang, false);
 
-            const hash = window.location.hash.toLowerCase();
-            if (hash.includes('resume') || hash.includes('kor') || hash.includes('jp') || hash.includes('chn') || hash.includes('en')) {
-                switchView('resume', false);
-            } else if (hash.includes('curriculum')) {
-                switchView('curriculum', false);
-            } else {
-                switchView('showcase', false);
-            }
-
-            window.addEventListener('hashchange', () => {
-                const currentHash = window.location.hash.toLowerCase();
-                if (currentHash.includes('resume') || currentHash.includes('kor') || currentHash.includes('jp') || currentHash.includes('chn') || currentHash.includes('en')) {
-                    const lang = detectLangFromUrl();
-                    updateContent(lang, false);
-                    switchView('resume', false);
-                } else if (currentHash.includes('curriculum')) {
+                if (hash.includes('curriculum')) {
                     switchView('curriculum', false);
+                } else if (hash.includes('resume') || hash.includes('kor') || hash.includes('jp') || hash.includes('chn') || hash.includes('en')) {
+                    switchView('resume', false);
                 } else {
                     switchView('showcase', false);
                 }
-            });
+            }
 
+            handleRoute();
+            window.addEventListener('hashchange', handleRoute);
+            window.addEventListener('popstate', handleRoute);
+
+            // Integrated language buttons in top global navigation bar
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
                     const lang = btn.getAttribute('data-lang');
                     updateContent(lang);
-                    if (document.getElementById('view-resume').classList.contains('active')) {
-                        if (window.history && window.history.replaceState) {
-                            window.history.replaceState(null, '', '#' + lang);
-                        } else {
-                            window.location.hash = lang;
-                        }
-                    }
+                    localStorage.setItem('preferredLang', lang);
                 });
             });
 
+            // Global navigation bar items
+            document.getElementById('brandLogo')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchView('showcase');
+            });
             document.getElementById('navShowcase')?.addEventListener('click', (e) => {
                 e.preventDefault();
                 switchView('showcase');
             });
-
             document.getElementById('navCurriculum')?.addEventListener('click', (e) => {
                 e.preventDefault();
                 switchView('curriculum');
             });
-
             document.getElementById('navResume')?.addEventListener('click', (e) => {
                 e.preventDefault();
                 switchView('resume');
             });
 
-            document.getElementById('heroOpenResumeBtn')?.addEventListener('click', () => {
-                switchView('resume');
-            });
+            // Showcase view buttons
+            document.getElementById('heroOpenResumeBtn')?.addEventListener('click', () => switchView('resume'));
+            document.getElementById('showcaseToCurriculumBtn')?.addEventListener('click', () => switchView('curriculum'));
+            document.getElementById('showcaseToResumeBtn')?.addEventListener('click', () => switchView('resume'));
 
-            document.getElementById('bannerOpenResumeBtn')?.addEventListener('click', () => {
-                switchView('resume');
-            });
+            // Curriculum view buttons
+            document.getElementById('curriculumBackToShowcase')?.addEventListener('click', () => switchView('showcase'));
+            document.getElementById('curriculumToResumeBtn')?.addEventListener('click', () => switchView('resume'));
+            document.getElementById('curriculumBottomToResumeBtn')?.addEventListener('click', () => switchView('resume'));
 
-            document.getElementById('btnBackToShowcase')?.addEventListener('click', (e) => {
-                e.preventDefault();
-                switchView('showcase');
+            // Resume view buttons
+            document.getElementById('btnBackToShowcase')?.addEventListener('click', () => switchView('showcase'));
+            document.getElementById('resumeToCurriculumBtn')?.addEventListener('click', () => switchView('curriculum'));
+
+            // Handle anchor clicks smoothly
+            document.querySelectorAll('a[href="#showcase"]').forEach(a => {
+                a.addEventListener('click', (e) => { e.preventDefault(); switchView('showcase'); });
+            });
+            document.querySelectorAll('a[href="#curriculum"]').forEach(a => {
+                a.addEventListener('click', (e) => { e.preventDefault(); switchView('curriculum'); });
+            });
+            document.querySelectorAll('a[href="#resume"]').forEach(a => {
+                a.addEventListener('click', (e) => { e.preventDefault(); switchView('resume'); });
+            });
+            document.querySelectorAll('a[href="#services"]').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchView('services');
+                });
             });
 
             document.getElementById('showcaseSearch')?.addEventListener('input', filterProjects);
