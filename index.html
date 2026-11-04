@@ -1251,7 +1251,7 @@
 
                 <!-- Curriculum 1: CS229 -->
                 <article class="curriculum-entry">
-                    <div class="curriculum-title">1. Stanford CS229: Machine Learning</div>
+                    <div class="curriculum-title" data-i18n="c1_title">1. Stanford CS229: Machine Learning</div>
                     <div class="curriculum-inst" data-i18n="c1_inst">Instructor: Prof. Andrew Ng · Stanford Graduate School · Autumn 2018</div>
                     <p class="curriculum-topics" data-i18n="c1_scope">
                         <strong>Foundational Scope:</strong> Supervised Learning (Linear Regression, Logistic Regression, GLMs, GDA, Naive Bayes), Support Vector Machines (Lagrange Multipliers, Dual Formulation, Mercer's Kernels, SMO), Learning Theory (PAC Learning, VC Dimension), Unsupervised Learning (K-Means, EM Algorithm for GMMs, PCA, ICA), Reinforcement Learning (MDPs, Value Iteration, Policy Iteration, Bellman Equations).
@@ -1264,7 +1264,7 @@
 
                 <!-- Curriculum 2: CS230 -->
                 <article class="curriculum-entry">
-                    <div class="curriculum-title">2. Stanford CS230: Deep Learning</div>
+                    <div class="curriculum-title" data-i18n="c2_title">2. Stanford CS230: Deep Learning</div>
                     <div class="curriculum-inst" data-i18n="c2_inst">Instructor: Prof. Andrew Ng · Stanford University</div>
                     <p class="curriculum-topics" data-i18n="c2_scope">
                         <strong>Foundational Scope:</strong> Vectorized Matrix Calculus Formulation of Backpropagation, Tensor Shape Invariance, Deep Feedforward Networks, Optimization (SGD with Momentum, RMSprop, Adam Bias Correction), Regularization (L2, Dropout), Batch Normalization Forward/Backward Equations, Convolutional & Sequence Architectures.
@@ -1276,7 +1276,7 @@
 
                 <!-- Curriculum 3: MITx Statistics -->
                 <article class="curriculum-entry">
-                    <div class="curriculum-title">3. MITx 6.431x / 18.6501x: Fundamentals of Statistics</div>
+                    <div class="curriculum-title" data-i18n="c3_title">3. MITx 6.431x / 18.6501x: Fundamentals of Statistics</div>
                     <div class="curriculum-inst" data-i18n="c3_inst">MITx MicroMasters in Statistics and Data Science</div>
                     <p class="curriculum-topics" data-i18n="c3_scope">
                         <strong>Foundational Scope:</strong> Convergence of Random Variables (Weak/Strong Law of Large Numbers, Central Limit Theorem), Maximum Likelihood Estimation (MLE), Fisher Information Matrix, Cramér-Rao Lower Bound, Confidence Intervals, Hypothesis Testing (Neyman-Pearson Lemma, Generalized Likelihood Ratio Test).
@@ -1288,13 +1288,26 @@
 
                 <!-- Curriculum 4: ZBDD -->
                 <article class="curriculum-entry">
-                    <div class="curriculum-title">4. Zero-Suppressed Binary Decision Diagrams (ZBDD) & Discrete Logic</div>
+                    <div class="curriculum-title" data-i18n="c4_title">4. Zero-Suppressed Binary Decision Diagrams (ZBDD) & Discrete Logic</div>
                     <div class="curriculum-inst" data-i18n="c4_inst">Mathematical Foundations: Donald Knuth (TAOCP Vol 4A) & Shin-ichi Minato (1993)</div>
                     <p class="curriculum-topics" data-i18n="c4_scope">
                         <strong>Foundational Scope:</strong> Canonical Graph Representations of Combinatorial Families, Elimination Rule for 0-edges (ZBDD) vs Node Elimination (standard BDD), Shannon Decomposition, Polynomial-Time Set Union/Intersection Primitives, Memoized Recursive Path Counting for Constraint Satisfaction.
                     </p>
                     <div class="project-actions">
                         <button onclick="openStudyModal('zbdd')" class="btn-minimal">[ Inspect ZBDD Reduction Rules & Proofs ↗ ]</button>
+                    </div>
+                </article>
+
+                <!-- Curriculum 5: Institutional Accreditation & Foundational Rigor -->
+                <article class="curriculum-entry">
+                    <div class="curriculum-title" data-i18n="c5_title">5. University Academic Accreditation & Core Rigor (118+ Evaluated Credits)</div>
+                    <div class="curriculum-inst" data-i18n="c5_inst">World Education Services (WES) Verified · North American Graduate & Transfer Equivalency</div>
+                    <p class="curriculum-topics" data-i18n="c5_scope">
+                        <strong>Certified Academic Foundations:</strong> 118+ university credits verified by WES with top honors in foundational computer science and applied mathematics. Core coursework includes: <strong>Data Structures (A+)</strong> (asymptotic complexity analysis, red-black trees, disjoint sets, graph algorithms), <strong>Systems Programming (A+)</strong> (x86/8086 assembly, linkers, memory-mapped I/O, OS scheduling), <strong>Linear Algebra</strong> (matrix decomposition, SVD, eigenspaces), <strong>Multivariable Calculus</strong> (vector fields, Jacobian, Stokes' theorem), and <strong>Engineering Mathematics</strong>.
+                    </p>
+                    <div class="project-actions">
+                        <button onclick="openStudyModal('accreditation')" class="btn-minimal">[ Inspect Certified Course Rigor & Syllabus ↗ ]</button>
+                        <button onclick="switchView('resume')" class="btn-minimal">[ View Academic CV ↗ ]</button>
                     </div>
                 </article>
 
@@ -1496,6 +1509,7 @@
                 'curriculum_to_resume': `Switch to Academic CV →`,
                 'curriculum_hero_title': `Graduate Curriculum & Mathematical Proofs`,
                 'curriculum_hero_desc': `Rigorous algorithmic implementations, closed-form derivations, and step-by-step problem set solutions for Stanford CS229, CS230, MITx MicroMasters, and ZBDD discrete logic. Click any module to inspect step-by-step proofs and derivations.`,
+                'c1_title': `1. Stanford CS229: Machine Learning`,
                 'c1_inst': `Instructor: Prof. Andrew Ng · Stanford Graduate School · Autumn 2018`,
                 'c1_scope': `<strong>Foundational Scope:</strong> Supervised Learning (Linear Regression, Logistic Regression, GLMs, GDA, Naive Bayes), Support Vector Machines (Lagrange Multipliers, Dual Formulation, Mercer's Kernels, SMO), Learning Theory (PAC Learning, VC Dimension), Unsupervised Learning (K-Means, EM Algorithm for GMMs, PCA, ICA), Reinforcement Learning (MDPs, Value Iteration, Policy Iteration, Bellman Equations).`,
                 'c2_inst': `Instructor: Prof. Andrew Ng · Stanford University`,
@@ -1503,7 +1517,13 @@
                 'c3_inst': `MITx MicroMasters in Statistics and Data Science`,
                 'c3_scope': `<strong>Foundational Scope:</strong> Convergence of Random Variables (Weak/Strong Law of Large Numbers, Central Limit Theorem), Maximum Likelihood Estimation (MLE), Fisher Information Matrix, Cramér-Rao Lower Bound, Confidence Intervals, Hypothesis Testing (Neyman-Pearson Lemma, Generalized Likelihood Ratio Test).`,
                 'c4_inst': `Mathematical Foundations: Donald Knuth (TAOCP Vol 4A) & Shin-ichi Minato (1993)`,
+                'c2_title': `2. Stanford CS230: Deep Learning`,
+                'c3_title': `3. MITx 6.431x / 18.6501x: Fundamentals of Statistics`,
+                'c4_title': `4. Zero-Suppressed Binary Decision Diagrams (ZBDD) & Discrete Logic`,
                 'c4_scope': `<strong>Foundational Scope:</strong> Canonical Graph Representations of Combinatorial Families, Elimination Rule for 0-edges (ZBDD) vs Node Elimination (standard BDD), Shannon Decomposition, Polynomial-Time Set Union/Intersection Primitives, Memoized Recursive Path Counting for Constraint Satisfaction.`,
+                'c5_title': `5. University Academic Accreditation & Core Rigor (118+ Evaluated Credits)`,
+                'c5_inst': `World Education Services (WES) Verified · North American Graduate & Transfer Equivalency`,
+                'c5_scope': `<strong>Certified Academic Foundations:</strong> 118+ university credits verified by WES with top honors in foundational computer science and applied mathematics. Core coursework includes: <strong>Data Structures (A+)</strong> (asymptotic complexity analysis, red-black trees, disjoint sets, graph algorithms), <strong>Systems Programming (A+)</strong> (x86/8086 assembly, linkers, memory-mapped I/O, OS scheduling), <strong>Linear Algebra</strong> (matrix decomposition, SVD, eigenspaces), <strong>Multivariable Calculus</strong> (vector fields, Jacobian, Stokes' theorem), and <strong>Engineering Mathematics</strong>.`,
                 'curriculum_bottom_title': `Formal Academic Curriculum Vitae (CV)`,
                 'curriculum_bottom_sub': `For university admissions committees, institutional review boards, and prospective research mentors.`,
                 'curriculum_bottom_to_resume': `Switch to Full Academic CV →`,
@@ -1922,6 +1942,7 @@
                 'curriculum_to_resume': `학술 이력서 (CV)로 이동 →`,
                 'curriculum_hero_title': `대학원 커리큘럼 및 수식 증명`,
                 'curriculum_hero_desc': `스탠포드 CS229, CS230, MITx MicroMasters, ZBDD 이산 논리에 대한 엄밀한 알고리즘 구현, 닫힌 형태(closed-form) 수식 유도 및 Problem Set 풀이입니다. 각 모듈을 클릭하여 단계별 증명과 유도 과정을 확인하십시오.`,
+                'c1_title': `1. 스탠포드 CS229: 머신러닝`,
                 'c1_inst': `강사: 앤드류 응 교수 · 스탠포드 대학원 · 2018 가을학기`,
                 'c1_scope': `<strong>이론적 기초 범위:</strong> 지도학습(선형 회귀, 로지스틱 회귀, 일반화 선형 모델 GLM, GDA, 나이브 베이즈), 서포트 벡터 머신(라그랑주 승수법, 듀얼 정식화, 머서의 정리, SMO), 학습 이론(PAC 러닝, VC 차원), 비지도학습(K-평균, GMM 기대값 최대화 EM 알고리즘, PCA, ICA), 강화학습(MDP, 가치 반복, 정책 반복, 벨만 방정식).`,
                 'c2_inst': `강사: 앤드류 응 교수 · 스탠포드 대학교`,
@@ -1929,7 +1950,13 @@
                 'c3_inst': `MITx 통계 및 데이터 사이언스 마이크로마스터즈`,
                 'c3_scope': `<strong>이론적 기초 범위:</strong> 확률변수의 수렴(약/강 큰 수의 법칙, 중심극한정리), 최대우도추정(MLE), 피셔 정보 행렬, 크라메르-라오 하한(CRLB), 신뢰구간, 가설검정(네이만-피어슨 보조정리, 일반화 가능도비 검정 GLRT).`,
                 'c4_inst': `수리적 기초: 도널드 커누스 (TAOCP Vol 4A) 및 미나토 신이치 (1993)`,
+                'c2_title': `2. 스탠포드 CS230: 딥러닝`,
+                'c3_title': `3. MITx 6.431x / 18.6501x: 통계학의 기초 및 추론 이론`,
+                'c4_title': `4. 영-억제 이진 결정 다이어그램 (ZBDD) 및 이산 논리 합성`,
                 'c4_scope': `<strong>이론적 기초 범위:</strong> 조합 집합군의 정규 그래프 표현, 0-에지 제거 규칙(ZBDD)과 노드 제거 규칙(표준 BDD)의 비교, 섀넌 분해, 다항 시간 집합 합집합/교집합 연산 프리미티브, 제약 충족을 위한 메모이제이션 기반 재귀 경로 계수.`,
+                'c5_title': `5. 대학 공인 학점 이수 및 핵심 학술 역량 (118+ 학점 공인 평가)`,
+                'c5_inst': `World Education Services (WES) 공인 인증 · 북미 대학원 및 편입 학력 동등성 평가 완료`,
+                'c5_scope': `<strong>공인 학술 기초 역량:</strong> WES를 통해 검증된 118+ 학점의 공인 대학 커리큘럼으로 컴퓨터 과학 및 응용수학 핵심 분야를 수석급 성적으로 이수하였습니다. 주요 이수 과목: <strong>자료구조 (A+)</strong> (점근적 복잡도 분석, 레드-블랙 트리, 서로소 집합, 그래프 알고리즘), <strong>시스템 프로그래밍 (A+)</strong> (x86/8086 어셈블리, 링커, 메모리 맵 I/O, OS 스케줄링), <strong>선형대수학</strong> (행렬 분해, SVD, 고유공간), <strong>다변수 미적분학</strong> (벡터장, 야코비안, 스토크스 정리), <strong>공업수학</strong>.`,
                 'curriculum_bottom_title': `공인 학술 이력서 (CV)`,
                 'curriculum_bottom_sub': `해외 대학원 어드미션 커미티, 연구 기관 심사위원회 및 지도교수용 공식 문서입니다.`,
                 'curriculum_bottom_to_resume': `학술 이력서 전체 보기 →`,
@@ -2348,6 +2375,7 @@
                 'curriculum_to_resume': `学術履歴書（CV）へ進む →`,
                 'curriculum_hero_title': `大学院カリキュラム＆数理証明`,
                 'curriculum_hero_desc': `スタンフォードCS229、CS230、MITx MicroMasters、ZBDD離散論理に関する厳密なアルゴリズム実装、数式導出および課題解答集。各モジュールをクリックして証明の詳細を確認できます。`,
+                'c1_title': `1. スタンフォード大学 CS229: 機械学習`,
                 'c1_inst': `担当講師：アンドリュー・エン教授 · スタンフォード大学院 · 2018年秋学期`,
                 'c1_scope': `<strong>講義範囲：</strong>教師あり学習（線形回帰、ロジスティック回帰、一般化線形モデル GLM、GDA、ナイーブベイズ）、サポートベクターマシン（ラグランジュ乗数法、双対形式、マーサーの定理、SMO）、学習理論（PAC学習、VC次元）、教師なし学習（K-means、GMMに対するEMアルゴリズム、PCA、ICA）、強化学習（MDP、価値反復、方策反復、ベルマン方程式）。`,
                 'c2_inst': `担当講師：アンドリュー・エン教授 · スタンフォード大学`,
@@ -2355,7 +2383,13 @@
                 'c3_inst': `MITx 統計・データサイエンス マイクロマスターズ`,
                 'c3_scope': `<strong>講義範囲：</strong>確率変数の収束（大数の弱・強法則、中心極限定理）、最尤推定法（MLE）、フィッシャー情報行列、クラメール・ラオの不等式、信頼区間、仮説検定（ネイマン・ピアソンの補題、一般化尤度比検定 GLRT）。`,
                 'c4_inst': `数理的基礎：ドナルド・クヌース（TAOCP Vol 4A）および 湊真一（1993）`,
+                'c2_title': `2. スタンフォード大学 CS230: ディープラーニング`,
+                'c3_title': `3. MITx 6.431x / 18.6501x: 統計学の基礎と推論理論`,
+                'c4_title': `4. ゼロ抑制二分決定グラフ（ZBDD）および離散論理合成`,
                 'c4_scope': `<strong>講義範囲：</strong>組合せ集合族の正準グラフ表現、0枝削除則（ZBDD）と節点削除則（通常BDD）の比較、シャノン展開、多項式時間集合演算（和集合・共通部分）、制約充足問題のためのメモ化再帰経路数え上げ。`,
+                'c5_title': `5. 大学公認単位認定及び数理・システム中核基礎（118+単位公認評価）`,
+                'c5_inst': `World Education Services (WES) 認証 · 北米大学院・編入 学歴同等性評価認定`,
+                'c5_scope': `<strong>公認学術基礎力：</strong> WESによって認定された118+単位の正規大学カリキュラムであり、計算機科学および応用数学の基幹分野を最優等（A+）で修得。主要履修科目：<strong>データ構造（A+）</strong>（漸近的計算量解析、赤黒木、素集合、グラフ理論）、<strong>システムプログラミング（A+）</strong>（x86/8086アセンブリ、リンカ、メモリマップトI/O、OSスケジューリング）、<strong>線形代数学</strong>（行列分解、SVD、固有空間）、<strong>多変数微積分学</strong>（ベクトル場、ヤコビアン、ストークスの定理）、<strong>工学数学</strong>。`,
                 'curriculum_bottom_title': `公認学術履歴書 (CV)`,
                 'curriculum_bottom_sub': `大学院入試選考委員会、研究機関審査委員会、および指導教員向けの公式記録です。`,
                 'curriculum_bottom_to_resume': `学術履歴書（CV）へ移動 →`,
@@ -2774,6 +2808,7 @@
                 'curriculum_to_resume': `前往学术简历 (CV) →`,
                 'curriculum_hero_title': `研究生课程与数理推导`,
                 'curriculum_hero_desc': `针对斯坦福 CS229、CS230、MITx 微硕士项目及 ZBDD 离散逻辑的严谨算法实现、解析解（closed-form）数学推导与作业题解。点击各模块即可查阅推导与证明细节。`,
+                'c1_title': `1. 斯坦福大学 CS229: 机器学习`,
                 'c1_inst': `主讲：吴恩达教授 · 斯坦福大学研究生院 · 2018年秋季`,
                 'c1_scope': `<strong>涵盖范围：</strong>监督学习（线性回归、逻辑回归、广义线性模型 GLM、GDA、朴素贝叶斯）、支持向量机（拉格朗日乘子法、对偶形式、Mercer 核、SMO）、学习理论（PAC 学习、VC 维）、无监督学习（K-Means、高斯混合模型 EM 算法、PCA、ICA）、强化学习（MDP、价值迭代、策略迭代、贝尔曼方程）。`,
                 'c2_inst': `主讲：吴恩达教授 · 斯坦福大学`,
@@ -2781,7 +2816,13 @@
                 'c3_inst': `MITx 统计与数据科学微硕士项目`,
                 'c3_scope': `<strong>涵盖范围：</strong>随机变量的收敛性（弱/强大数定律、中心极限定理）、极大似然估计（MLE）、费希尔信息矩阵、克拉美-罗下界（CRLB）、置信区间、假设检验（奈曼-皮尔逊引理、广义似然比检验 GLRT）。`,
                 'c4_inst': `数理基础：Donald Knuth（TAOCP 卷 4A）与 Shin-ichi Minato（1993）`,
+                'c2_title': `2. 斯坦福大学 CS230: 深度学习`,
+                'c3_title': `3. MITx 6.431x / 18.6501x: 统计学基础与推断理论`,
+                'c4_title': `4. 零抑制二元决策图（ZBDD）与离散逻辑合成`,
                 'c4_scope': `<strong>涵盖范围：</strong>组合集合族的规范图表示、0-边消除规则（ZBDD）与节点消除规则（标准 BDD）的对比、香农展开、多项式时间集合并集/交集运算原语、面向约束满足问题的记忆化递归路径计数。`,
+                'c5_title': `5. 大学学分认证与数理计算核心基石（118+ 官方认证学分）`,
+                'c5_inst': `World Education Services (WES) 官方认证 · 北美研究生及转学学历同等性评估`,
+                'c5_scope': `<strong>权威学术基础：</strong> 经权威机构 WES 认证的 118+ 大学正规学分，计算机科学与应用数学核心课程均获优异成绩（A+）。核心课程包含：<strong>数据结构（A+）</strong>（渐近复杂度分析、红黑树、并查集、图算法）、<strong>系统编程（A+）</strong>（x86/8086 汇编、链接器、内存映射 I/O、操作系统调度）、<strong>线性代数</strong>（矩阵分解、SVD奇异值分解、特征子空间）、<strong>多变量微积分</strong>（向量场、雅可比矩阵、斯托克斯定理）及<strong>工程数学</strong>。`,
                 'curriculum_bottom_title': `正式学术简历 (CV)`,
                 'curriculum_bottom_sub': `适用于高校招生委员会、学术评审机构及导师审阅的正式文件。`,
                 'curriculum_bottom_to_resume': `前往完整学术简历 →`,
@@ -3416,60 +3457,389 @@
                 `
             },
             'mitx': {
-                title: "MITx: Fundamentals of Statistics",
-                sub: "MITx Verified Credential (ID: 1eeec17b20514bdeb6d478dae9317b36)",
+                title: "MITx: Fundamentals of Statistics & Inference Theory",
+                sub: "MITx MicroMasters in Statistics and Data Science (IDSS) · Asymptotic Analysis, Likelihood Inference & Hypothesis Testing",
                 tabs: [
-                    { id: 'estimation', label: 'Estimation & Asymptotics' },
-                    { id: 'hypothesis', label: 'Hypothesis Testing' }
+                    { id: 'convergence', label: '1. Asymptotic Limit Theorems & Delta Method' },
+                    { id: 'mle_asymptotics', label: '2. MLE Consistency & Asymptotic Normality' },
+                    { id: 'crlb_efficiency', label: '3. Fisher Information, CRLB & UMVUE' },
+                    { id: 'hypothesis_testing', label: '4. Neyman-Pearson & Wilks\' Theorem' }
                 ],
                 content: {
-                    'estimation': `
-                        <h4>Parametric Estimation & Asymptotic Theory</h4>
+                    'convergence': `
+                        <h4>Problem Set & Lecture Series: Stochastic Convergence & Limit Theorems</h4>
+                        <p>Establishes the rigorous mathematical measure-theoretic foundations governing the asymptotic behavior of estimators, establishing conditions for consistency and limiting distributions.</p>
+                        
                         <div class="math-box">
-                            <strong>Cramer-Rao Lower Bound:</strong><br>
-                            Var(θ̂) ≥ 1 / I_n(θ), where I_n(θ) = n 𝔼[(∂/∂θ log f(X; θ))²].<br>
-                            Proved that Maximum Likelihood Estimators achieve this lower bound asymptotically: √n (θ̂_MLE - θ*) ⟶ 𝒩(0, I(θ*)^{-1}).
+                            <strong>1. Hierarchy and Definitions of Stochastic Convergence</strong><br>
+                            Let $(X_n)_{n \ge 1}$ be a sequence of random variables and $X$ a target random variable on probability space $(\Omega, \mathcal{F}, \mathbb{P})$:<br>
+                            • <strong>Convergence in Probability ($X_n \\xrightarrow{P} X$):</strong> $\forall \epsilon > 0, \lim_{n \to \infty} \mathbb{P}(|X_n - X| \ge \epsilon) = 0$.<br>
+                            • <strong>Almost Sure Convergence ($X_n \\xrightarrow{a.s.} X$):</strong> $\mathbb{P}\left(\left\{ \omega \in \Omega : \lim_{n \to \infty} X_n(\omega) = X(\omega) \right\}\right) = 1$, equivalent to $\lim_{N \to \infty} \mathbb{P}\left(\sup_{n \ge N} |X_n - X| \ge \epsilon\right) = 0$.<br>
+                            • <strong>Convergence in $L^p$ Norm ($X_n \\xrightarrow{L^p} X$):</strong> $\lim_{n \to \infty} \mathbb{E}[|X_n - X|^p] = 0$ for $p \ge 1$.<br>
+                            • <strong>Convergence in Distribution ($X_n \\xrightarrow{d} X$):</strong> $\lim_{n \to \infty} F_{X_n}(t) = F_X(t)$ for all points $t \in \mathbb{R}$ where cumulative distribution $F_X$ is continuous.<br>
+                            <strong>Implication Hierarchy:</strong><br>
+                            $X_n \\xrightarrow{a.s.} X \implies X_n \\xrightarrow{P} X \implies X_n \\xrightarrow{d} X$<br>
+                            $X_n \\xrightarrow{L^p} X \implies X_n \\xrightarrow{L^q} X \ (p > q \ge 1) \quad \text{and} \quad X_n \\xrightarrow{L^p} X \implies X_n \\xrightarrow{P} X$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Weak Law of Large Numbers (WLLN) via Markov & Chebyshev Inequalities</strong><br>
+                            <strong>Markov's Inequality:</strong> For any non-negative random variable $Y \ge 0$ and constant $\epsilon > 0$:<br>
+                            $\mathbb{E}[Y] = \int_0^\infty y f_Y(y) dy \ge \int_\epsilon^\infty y f_Y(y) dy \ge \epsilon \int_\epsilon^\infty f_Y(y) dy = \epsilon \, \mathbb{P}(Y \ge \epsilon) \implies \mathbb{P}(Y \ge \epsilon) \le \frac{\mathbb{E}[Y]}{\epsilon}$<br>
+                            <strong>Chebyshev's Inequality:</strong> Substituting $Y = (X - \mu)^2$ and threshold $\epsilon^2$ for $\mu = \mathbb{E}[X]$ and $\sigma^2 = \operatorname{Var}(X) < \infty$:<br>
+                            $\mathbb{P}(|X - \mu| \ge \epsilon) = \mathbb{P}\left((X - \mu)^2 \ge \epsilon^2\right) \le \frac{\mathbb{E}[(X - \mu)^2]}{\epsilon^2} = \frac{\sigma^2}{\epsilon^2}$<br>
+                            <strong>Proof of WLLN:</strong> For i.i.d. $X_1, \dots, X_n$ with mean $\mu$ and finite variance $\sigma^2$, sample mean $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$. Linearity gives $\mathbb{E}[\bar{X}_n] = \mu$ and independence gives $\operatorname{Var}(\bar{X}_n) = \frac{\sigma^2}{n}$. Applying Chebyshev:<br>
+                            $\mathbb{P}(|\bar{X}_n - \mu| \ge \epsilon) \le \frac{\operatorname{Var}(\bar{X}_n)}{\epsilon^2} = \frac{\sigma^2}{n \epsilon^2} \\xrightarrow{n \to \infty} 0 \implies \bar{X}_n \\xrightarrow{P} \mu$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. Central Limit Theorem (CLT) Proof via Characteristic Functions</strong><br>
+                            Let $Y_i = \frac{X_i - \mu}{\sigma}$ be standardized i.i.d. variables with $\mathbb{E}[Y_i] = 0$ and $\mathbb{E}[Y_i^2] = 1$. The standardized sum is:<br>
+                            $Z_n = \frac{\sqrt{n}(\bar{X}_n - \mu)}{\sigma} = \frac{1}{\sqrt{n}} \sum_{i=1}^n Y_i$<br>
+                            <strong>Step 1 (Taylor expansion of characteristic function):</strong> The characteristic function of $Y_1$ around $t = 0$ is:<br>
+                            $\phi_Y(t) = \mathbb{E}\left[e^{itY_1}\right] = \mathbb{E}\left[ 1 + itY_1 - \frac{t^2}{2} Y_1^2 + R(t, Y_1) \right]$<br>
+                            where $|R(t, Y_1)| \le \min\left( |t|^2 Y_1^2, \frac{|t|^3 |Y_1|^3}{6} \right)$, so $\mathbb{E}[R] = o(t^2)$ as $t \to 0$.<br>
+                            $\phi_Y(t) = 1 + it \mathbb{E}[Y_1] - \frac{t^2}{2} \mathbb{E}[Y_1^2] + o(t^2) = 1 - \frac{t^2}{2} + o(t^2)$<br>
+                            <strong>Step 2 (Characteristic function of scaled sum):</strong> By independence of $Y_i$:<br>
+                            $\phi_{Z_n}(t) = \mathbb{E}\left[ \exp\left(it \frac{1}{\sqrt{n}} \sum_{i=1}^n Y_i\right) \right] = \prod_{i=1}^n \phi_Y\left(\frac{t}{\sqrt{n}}\right) = \left[ 1 - \frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right]^n$<br>
+                            <strong>Step 3 (Limit evaluation):</strong> Taking the logarithm and expanding via $\log(1 + u) = u + \mathcal{O}(u^2)$:<br>
+                            $\log \phi_{Z_n}(t) = n \log\left( 1 - \frac{t^2}{2n} + o\left(\frac{1}{n}\right) \right) = n \left[ -\frac{t^2}{2n} + o\left(\frac{1}{n}\right) \right] = -\frac{t^2}{2} + o(1) \\xrightarrow{n \to \infty} -\frac{t^2}{2}$<br>
+                            Exponentiating yields $\lim_{n \to \infty} \phi_{Z_n}(t) = e^{-t^2/2}$, the exact characteristic function of standard normal $\mathcal{N}(0, 1)$.<br>
+                            <strong>Step 4 (Lévy's Continuity Theorem):</strong> Because $\lim_{n \to \infty} \phi_{Z_n}(t) = e^{-t^2/2}$ pointwise and $e^{-t^2/2}$ is continuous at $t = 0$, convergence in distribution is guaranteed: $Z_n \\xrightarrow{d} \mathcal{N}(0, 1)$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>4. Slutsky's Theorem & The Univariate/Multivariate Delta Method</strong><br>
+                            <strong>Slutsky's Theorem:</strong> If $X_n \\xrightarrow{d} X$ and $Y_n \\xrightarrow{P} c$ (constant), then:<br>
+                            $X_n + Y_n \\xrightarrow{d} X + c, \quad X_n Y_n \\xrightarrow{d} cX, \quad \text{and} \quad \frac{X_n}{Y_n} \\xrightarrow{d} \frac{X}{c} \quad (c \ne 0)$<br>
+                            <strong>Univariate Delta Method:</strong> Let $\sqrt{n}(T_n - \theta) \\xrightarrow{d} \mathcal{N}(0, \sigma^2)$ and let $g: \mathbb{R} \to \mathbb{R}$ be continuously differentiable at $\theta$ with $g'(\theta) \ne 0$.<br>
+                            First-order Taylor expansion around $\theta$: $g(T_n) = g(\theta) + g'(\theta)(T_n - \theta) + R_n$ where $\frac{R_n}{T_n - \theta} \\xrightarrow{P} 0$.<br>
+                            Scaling by $\sqrt{n}$: $\sqrt{n}(g(T_n) - g(\theta)) = g'(\theta) \sqrt{n}(T_n - \theta) + \sqrt{n} R_n$. Since $\sqrt{n} R_n \\xrightarrow{P} 0$ by Slutsky's Theorem:<br>
+                            $\sqrt{n}(g(T_n) - g(\theta)) \\xrightarrow{d} \mathcal{N}\left(0, [g'(\theta)]^2 \sigma^2\right)$<br>
+                            <strong>Multivariate Delta Method:</strong> For $T_n \in \mathbb{R}^k$ with $\sqrt{n}(T_n - \theta) \\xrightarrow{d} \mathcal{N}(0, \Sigma)$ and $g: \mathbb{R}^k \to \mathbb{R}^m$ differentiable with Jacobian $\nabla g(\theta) \in \mathbb{R}^{k \times m}$:<br>
+                            $\sqrt{n}(g(T_n) - g(\theta)) \\xrightarrow{d} \mathcal{N}\left(0, \nabla g(\theta)^T \Sigma \nabla g(\theta)\right)$.
                         </div>
                     `,
-                    'hypothesis': `
-                        <h4>Hypothesis Testing & Likelihood Ratio Tests</h4>
+                    'mle_asymptotics': `
+                        <h4>Maximum Likelihood Estimation: Asymptotic Consistency & Normality</h4>
+                        <p>Rigorous proofs of the zero-expectation score identity, Fisher information equivalences, MLE consistency via uniform LLN and Kullback-Leibler divergence, and asymptotic normality via Mean Value expansions.</p>
+
                         <div class="math-box">
-                            <strong>Wilks' Theorem:</strong><br>
-                            Under H_0, 2 (ℓ(θ̂) - ℓ(θ̂_0)) ⟶ χ²(dim(Θ) - dim(Θ_0)).<br>
-                            Formulated Wald tests, Score (Lagrange multiplier) tests, and goodness-of-fit Chi-square metrics.
+                            <strong>1. Score Function and Zero Expected Score Identity</strong><br>
+                            Let $X_1, \dots, X_n \stackrel{\text{iid}}{\sim} f(x; \theta)$ with parameter $\theta \in \Theta \subseteq \mathbb{R}^d$. The joint log-likelihood is $\ell_n(\theta) = \sum_{i=1}^n \log f(X_i; \theta)$.<br>
+                            The <strong>Score Function</strong> is the gradient: $\mathcal{S}_n(\theta) = \nabla_\theta \ell_n(\theta) = \sum_{i=1}^n \nabla_\theta \log f(X_i; \theta)$.<br>
+                            <strong>Proof that $\mathbb{E}_\theta[\mathcal{S}_1(\theta)] = \mathbf{0}$ under regular support:</strong><br>
+                            $\mathbb{E}_\theta[\nabla_\theta \log f(X; \theta)] = \int_{\mathcal{X}} \nabla_\theta \log f(x; \theta) \cdot f(x; \theta) dx = \int_{\mathcal{X}} \frac{\nabla_\theta f(x; \theta)}{f(x; \theta)} f(x; \theta) dx = \int_{\mathcal{X}} \nabla_\theta f(x; \theta) dx$<br>
+                            Under regularity conditions permitting differentiation under the integral sign (Leibniz integral rule):<br>
+                            $= \nabla_\theta \int_{\mathcal{X}} f(x; \theta) dx = \nabla_\theta (1) = \mathbf{0}$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Fisher Information Matrix & Second Information Identity</strong><br>
+                            The Fisher Information matrix for a single sample is $I_1(\theta) = \operatorname{Cov}_\theta(\mathcal{S}_1(\theta)) = \mathbb{E}_\theta\left[ \nabla_\theta \log f(X; \theta) (\nabla_\theta \log f(X; \theta))^T \right]$.<br>
+                            <strong>Proof of the Equivalence Identity $I_1(\theta) = -\mathbb{E}_\theta\left[ \nabla_\theta^2 \log f(X; \theta) \right]$:</strong><br>
+                            Differentiate both sides of $\int_{\mathcal{X}} \nabla_\theta \log f(x; \theta) f(x; \theta) dx = \mathbf{0}$ with respect to $\theta^T$:<br>
+                            $\nabla_\theta \int_{\mathcal{X}} \nabla_\theta \log f(x; \theta) f(x; \theta) dx = \int_{\mathcal{X}} \left[ \nabla_\theta^2 \log f(x; \theta) f(x; \theta) + \nabla_\theta \log f(x; \theta) (\nabla_\theta f(x; \theta))^T \right] dx = \mathbf{0}$<br>
+                            Substituting $\nabla_\theta f(x; \theta) = (\nabla_\theta \log f(x; \theta)) f(x; \theta)$ into the second term:<br>
+                            $\int_{\mathcal{X}} \nabla_\theta^2 \log f(x; \theta) f(x; \theta) dx + \int_{\mathcal{X}} (\nabla_\theta \log f(x; \theta))(\nabla_\theta \log f(x; \theta))^T f(x; \theta) dx = \mathbf{0}$<br>
+                            $\implies \mathbb{E}_\theta\left[ \nabla_\theta^2 \log f(X; \theta) \right] + I_1(\theta) = \mathbf{0} \implies I_1(\theta) = -\mathbb{E}_\theta\left[ \nabla_\theta^2 \log f(X; \theta) \right]$.<br>
+                            For $n$ i.i.d. observations, linearity and independence give total information $I_n(\theta) = n I_1(\theta)$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. Consistency of the Maximum Likelihood Estimator ($\hat{\theta}_n \\xrightarrow{P} \theta^*$)</strong><br>
+                            Define normalized sample criterion $M_n(\theta) = \frac{1}{n} \ell_n(\theta) = \frac{1}{n} \sum_{i=1}^n \log f(X_i; \theta)$ and population objective $M(\theta) = \mathbb{E}_{\theta^*}[\log f(X; \theta)]$.<br>
+                            By the Uniform Weak Law of Large Numbers (over compact $\Theta$ with dominated envelope): $\sup_{\theta \in \Theta} |M_n(\theta) - M(\theta)| \\xrightarrow{P} 0$.<br>
+                            Evaluate the gap between candidate parameter $\theta$ and true data-generating parameter $\theta^*$:<br>
+                            $M(\theta) - M(\theta^*) = \mathbb{E}_{\theta^*}\left[ \log \frac{f(X; \theta)}{f(X; \theta^*)} \right] = -D_{KL}(f_{\theta^*} \parallel f_\theta)$<br>
+                            Applying Jensen's inequality to strictly concave logarithm function:<br>
+                            $\mathbb{E}_{\theta^*}\left[ \log \frac{f(X; \theta)}{f(X; \theta^*)} \right] \le \log \mathbb{E}_{\theta^*}\left[ \frac{f(X; \theta)}{f(X; \theta^*)} \right] = \log \int_{\mathcal{X}} \frac{f(x; \theta)}{f(x; \theta^*)} f(x; \theta^*) dx = \log(1) = 0$<br>
+                            Assuming statistical identifiability ($\mathbb{P}_{\theta^*}(f(X; \theta) \ne f(X; \theta^*)) > 0$ for $\theta \ne \theta^*$), strict Jensen inequality holds:<br>
+                            $M(\theta) - M(\theta^*) < 0 \implies M(\theta) < M(\theta^*) \quad \forall \theta \ne \theta^*$.<br>
+                            Because $\theta^*$ is the strictly unique well-separated global maximizer of $M(\theta)$ and $M_n$ converges uniformly to $M$, the empirical argmax $\hat{\theta}_n = \arg\max_{\theta \in \Theta} M_n(\theta)$ satisfies $\hat{\theta}_n \\xrightarrow{P} \theta^*$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>4. Proof of Asymptotic Normality of the MLE via Mean Value Theorem</strong><br>
+                            Because $\hat{\theta}_n$ is an interior local maximizer with probability approaching 1, the first-order condition holds: $\mathcal{S}_n(\hat{\theta}_n) = \mathbf{0}$.<br>
+                            Applying the multivariate Mean Value Theorem coordinate-wise to score function $\mathcal{S}_n$ around true $\theta^*$:<br>
+                            $\mathbf{0} = \mathcal{S}_n(\hat{\theta}_n) = \mathcal{S}_n(\theta^*) + \nabla_\theta \mathcal{S}_n(\tilde{\theta}_n) (\hat{\theta}_n - \theta^*)$ for some $\tilde{\theta}_n$ satisfying $\|\tilde{\theta}_n - \theta^*\| \le \|\hat{\theta}_n - \theta^*\|$.<br>
+                            Note that $\nabla_\theta \mathcal{S}_n(\tilde{\theta}_n) = \nabla_\theta^2 \ell_n(\tilde{\theta}_n)$. Rearranging and scaling by $\sqrt{n}$:<br>
+                            $\sqrt{n}(\hat{\theta}_n - \theta^*) = \left[ -\frac{1}{n} \nabla_\theta^2 \ell_n(\tilde{\theta}_n) \right]^{-1} \left[ \frac{1}{\sqrt{n}} \mathcal{S}_n(\theta^*) \right]$<br>
+                            <strong>Convergence of factors:</strong><br>
+                            1. Since $\hat{\theta}_n \\xrightarrow{P} \theta^*$, $\tilde{\theta}_n \\xrightarrow{P} \theta^*$. By the Uniform WLLN: $-\frac{1}{n} \nabla_\theta^2 \ell_n(\tilde{\theta}_n) \\xrightarrow{P} -\mathbb{E}_{\theta^*}[\nabla^2 \log f(X; \theta^*)] = I_1(\theta^*)$.<br>
+                            2. By the Classical Multivariate CLT on i.i.d. zero-mean score vectors with covariance $I_1(\theta^*)$:<br>
+                            $\frac{1}{\sqrt{n}} \mathcal{S}_n(\theta^*) = \frac{1}{\sqrt{n}} \sum_{i=1}^n \nabla_\theta \log f(X_i; \theta^*) \\xrightarrow{d} \mathcal{N}\left(\mathbf{0}, I_1(\theta^*)\right)$.<br>
+                            <strong>Slutsky's Theorem:</strong> Combining with continuous matrix inversion $[I_1(\theta^*)]^{-1}$:<br>
+                            $\sqrt{n}(\hat{\theta}_n - \theta^*) \\xrightarrow{d} [I_1(\theta^*)]^{-1} \cdot \mathcal{N}\left(\mathbf{0}, I_1(\theta^*)\right) \sim \mathcal{N}\left(\mathbf{0}, [I_1(\theta^*)]^{-1} I_1(\theta^*) [I_1(\theta^*)]^{-1}\right) = \mathcal{N}\left(\mathbf{0}, I_1(\theta^*)^{-1}\right)$.
+                        </div>
+                    `,
+                    'crlb_efficiency': `
+                        <h4>Cramér-Rao Lower Bound, Rao-Blackwell & UMVUE Efficiency</h4>
+                        <p>Information-theoretic limits on unbiased estimator variance, sufficient statistics conditioning, and Uniformly Minimum-Variance Unbiased Estimator (UMVUE) characterization.</p>
+
+                        <div class="math-box">
+                            <strong>1. Derivation of the Cramér-Rao Lower Bound (CRLB)</strong><br>
+                            Let $T(X) = T(X_1, \dots, X_n)$ be an unbiased estimator of scalar parametric function $g(\theta)$, so $\mathbb{E}_\theta[T(X)] = g(\theta)$.<br>
+                            Differentiate both sides with respect to $\theta$ under integral sign:<br>
+                            $g'(\theta) = \frac{\partial}{\partial \theta} \int_{\mathcal{X}^n} T(x) f_n(x; \theta) dx = \int_{\mathcal{X}^n} T(x) \frac{\nabla_\theta f_n(x; \theta)}{f_n(x; \theta)} f_n(x; \theta) dx = \mathbb{E}_\theta\left[ T(X) \nabla_\theta \log f_n(X; \theta) \right] = \mathbb{E}_\theta[T(X) \mathcal{S}_n(\theta)]$<br>
+                            Recall that expected score $\mathbb{E}_\theta[\mathcal{S}_n(\theta)] = 0$. Hence the covariance between $T(X)$ and score $\mathcal{S}_n(\theta)$ is:<br>
+                            $\operatorname{Cov}_\theta(T(X), \mathcal{S}_n(\theta)) = \mathbb{E}_\theta[T(X) \mathcal{S}_n(\theta)] - \mathbb{E}_\theta[T(X)] \mathbb{E}_\theta[\mathcal{S}_n(\theta)] = g'(\theta)$<br>
+                            Applying the Cauchy-Schwarz inequality for random variables: $[\operatorname{Cov}(U, V)]^2 \le \operatorname{Var}(U) \operatorname{Var}(V)$:<br>
+                            $[g'(\theta)]^2 = [\operatorname{Cov}_\theta(T(X), \mathcal{S}_n(\theta))]^2 \le \operatorname{Var}_\theta(T(X)) \cdot \operatorname{Var}_\theta(\mathcal{S}_n(\theta))$<br>
+                            Substituting $\operatorname{Var}_\theta(\mathcal{S}_n(\theta)) = I_n(\theta) = n I_1(\theta)$ and isolating $\operatorname{Var}(T)$:<br>
+                            $\operatorname{Var}_\theta(T(X)) \ge \frac{[g'(\theta)]^2}{n I_1(\theta)}$<br>
+                            For direct parameter estimation where $g(\theta) = \theta \implies g'(\theta) = 1$: $\operatorname{Var}_\theta(T(X)) \ge \frac{1}{n I_1(\theta)}$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Condition for Exact Attainment & Exponential Families</strong><br>
+                            In Cauchy-Schwarz, equality holds if and only if $T(X) - g(\theta)$ and score $\mathcal{S}_n(\theta)$ are proportional almost surely:<br>
+                            $\mathcal{S}_n(\theta) = c(\theta)(T(X) - g(\theta))$ for some scalar function $c(\theta)$.<br>
+                            Integrating with respect to $\theta$: $\log f_n(x; \theta) = \int c(\theta)(T(x) - g(\theta)) d\theta + d(x) = C(\theta) T(x) - B(\theta) + d(x)$.<br>
+                            Exponentiating reveals the exact density structure:<br>
+                            $f_n(x; \theta) = \exp\left( C(\theta) T(x) - B(\theta) \right) \cdot h(x)$<br>
+                            <strong>Conclusion:</strong> An unbiased estimator attains the Cramér-Rao lower bound at finite sample size $n$ if and only if the distribution is a member of the 1-parameter Natural Exponential Family, where $T(X)$ is the natural sufficient statistic!
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. The Rao-Blackwell Theorem (Variance Reduction via Conditioning)</strong><br>
+                            Let $T$ be any unbiased estimator of $	heta$ ($\mathbb{E}_\theta[T] = \theta$) with finite variance $\operatorname{Var}_\theta(T) < \infty$. Let $S$ be a sufficient statistic for $	heta$.<br>
+                            Define the conditional expectation estimator: $T^*(S) = \mathbb{E}[T \mid S]$.<br>
+                            Because $S$ is sufficient, the conditional distribution $T \mid S$ is completely independent of $	heta$, ensuring $T^*(S)$ is a valid statistic.<br>
+                            <strong>Expectation (Unbiasedness):</strong> By the Law of Total Expectation:<br>
+                            $\mathbb{E}_\theta[T^*(S)] = \mathbb{E}_\theta[\mathbb{E}[T \mid S]] = \mathbb{E}_\theta[T] = \theta$<br>
+                            <strong>Variance Reduction (Law of Total Variance):</strong><br>
+                            $\operatorname{Var}_\theta(T) = \operatorname{Var}_\theta(\mathbb{E}[T \mid S]) + \mathbb{E}_\theta[\operatorname{Var}(T \mid S)] = \operatorname{Var}_\theta(T^*(S)) + \mathbb{E}_\theta[\operatorname{Var}(T \mid S)]$<br>
+                            Since conditional variance $\operatorname{Var}(T \mid S) \ge 0$ almost surely, its expectation is non-negative: $\mathbb{E}_\theta[\operatorname{Var}(T \mid S)] \ge 0$.<br>
+                            $\implies \operatorname{Var}_\theta(T^*(S)) \le \operatorname{Var}_\theta(T)$<br>
+                            Strict inequality holds unless $\operatorname{Var}(T \mid S) = 0$ a.s., which occurs if and only if $T$ is already almost surely equal to a deterministic function of $S$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>4. Lehmann-Scheffé Theorem & UMVUE Uniqueness</strong><br>
+                            <strong>Definition (Completeness):</strong> A sufficient statistic $S$ is complete if for every measurable function $h(S)$, $\mathbb{E}_\theta[h(S)] = 0 \ \forall \theta \in \Theta \implies \mathbb{P}_\theta(h(S) = 0) = 1$.<br>
+                            <strong>Theorem:</strong> If $S$ is complete and sufficient for $	heta$, and $T^* = g(S)$ is an unbiased estimator of $	heta$, then $T^*$ is the Unique Uniformly Minimum-Variance Unbiased Estimator (UMVUE).<br>
+                            <strong>Proof of Uniqueness:</strong> Suppose $T_1^*(S)$ and $T_2^*(S)$ are two unbiased estimators of $	heta$ that are both measurable functions of $S$.<br>
+                            Then $\mathbb{E}_\theta\left[ T_1^*(S) - T_2^*(S) \right] = \mathbb{E}_\theta[T_1^*(S)] - \mathbb{E}_\theta[T_2^*(S)] = \theta - \theta = 0 \quad \forall \theta \in \Theta$.<br>
+                            Defining $h(S) = T_1^*(S) - T_2^*(S)$, completeness of $S$ immediately implies $\mathbb{P}_\theta(h(S) = 0) = 1$, meaning $T_1^*(S) = T_2^*(S)$ almost surely.<br>
+                            Coupled with Rao-Blackwell variance domination, $T^*(S)$ achieves minimum variance among all unbiased estimators uniformly over all $	heta \in \Theta$.
+                        </div>
+                    `,
+                    'hypothesis_testing': `
+                        <h4>Hypothesis Testing, Neyman-Pearson Optimality & Wilks' Theorem</h4>
+                        <p>Mathematical derivation of optimal decision boundaries, proof of the Neyman-Pearson Lemma for likelihood ratio tests, Wilks' asymptotic Chi-Square theorem, and the classical test equivalence triangle.</p>
+
+                        <div class="math-box">
+                            <strong>1. Neyman-Pearson Lemma (Most Powerful Test for Simple Hypotheses)</strong><br>
+                            Consider testing null hypothesis $H_0: \theta = \theta_0$ versus alternative hypothesis $H_1: \theta = \theta_1$.<br>
+                            Define the likelihood ratio test critical function $\phi(x) = \mathbf{1}\{ L(x) > \eta \}$ where $L(x) = \frac{f(x; \theta_1)}{f(x; \theta_0)}$ and threshold $\eta \ge 0$ is chosen such that the test size is $\alpha = \mathbb{E}_{\theta_0}[\phi(X)] = \mathbb{P}_{\theta_0}(L(X) > \eta)$.<br>
+                            Let $\phi^*(x)$ be any competing test with size $\alpha^* = \mathbb{E}_{\theta_0}[\phi^*(X)] \le \alpha$.<br>
+                            <strong>Pointwise Inequality:</strong> Examine the quantity $(\phi(x) - \phi^*(x))(f(x; \theta_1) - \eta f(x; \theta_0))$ for all $x \in \mathcal{X}$:<br>
+                            • If $L(x) > \eta \implies f(x; \theta_1) - \eta f(x; \theta_0) > 0$. Here $\phi(x) = 1$, so $\phi(x) - \phi^*(x) = 1 - \phi^*(x) \ge 0$. The product is $\ge 0$.<br>
+                            • If $L(x) < \eta \implies f(x; \theta_1) - \eta f(x; \theta_0) < 0$. Here $\phi(x) = 0$, so $\phi(x) - \phi^*(x) = 0 - \phi^*(x) \le 0$. The product is $\ge 0$.<br>
+                            Thus $(\phi(x) - \phi^*(x))(f(x; \theta_1) - \eta f(x; \theta_0)) \ge 0$ holds point-by-point everywhere in $\mathcal{X}$.<br>
+                            <strong>Integrating over $\mathcal{X}$:</strong><br>
+                            $\int_{\mathcal{X}} (\phi(x) - \phi^*(x))(f(x; \theta_1) - \eta f(x; \theta_0)) dx \ge 0$<br>
+                            $\int \phi(x) f(x; \theta_1) dx - \int \phi^*(x) f(x; \theta_1) dx - \eta \left( \int \phi(x) f(x; \theta_0) dx - \int \phi^*(x) f(x; \theta_0) dx \right) \ge 0$<br>
+                            $\implies \operatorname{Power}(\phi) - \operatorname{Power}(\phi^*) - \eta (\alpha - \alpha^*) \ge 0$<br>
+                            Because $\alpha \ge \alpha^*$ and $\eta \ge 0$, the term $\eta(\alpha - \alpha^*) \ge 0$:<br>
+                            $\operatorname{Power}(\phi) - \operatorname{Power}(\phi^*) \ge \eta(\alpha - \alpha^*) \ge 0 \implies \operatorname{Power}(\phi) \ge \operatorname{Power}(\phi^*)$.<br>
+                            <strong>Conclusion:</strong> The Likelihood Ratio Test achieves maximum statistical power among all tests of size at most $\alpha$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Generalized Likelihood Ratio Test (GLRT) & Wilks' Theorem</strong><br>
+                            For composite hypotheses $H_0: \theta \in \Theta_0$ versus $H_1: \theta \in \Theta \setminus \Theta_0$ where $\dim(\Theta) = d$ and $\dim(\Theta_0) = d - r$ ($r$ independent constraints).<br>
+                            The GLRT statistic is $\Lambda_n = 2\left(\ell_n(\hat{\theta}) - \ell_n(\hat{\theta}_0)\right)$, where $\hat{\theta}$ is the unconstrained MLE over $\Theta$ and $\hat{\theta}_0$ is the constrained MLE over $\Theta_0$.<br>
+                            <strong>Wilks' Theorem Proof Sketch via Quadratic Expansion:</strong><br>
+                            Perform a second-order Taylor expansion of $\ell_n(\theta)$ around unconstrained MLE $\hat{\theta}$:<br>
+                            $\ell_n(\theta) \approx \ell_n(\hat{\theta}) + \nabla \ell_n(\hat{\theta})^T (\theta - \hat{\theta}) - \frac{1}{2}(\theta - \hat{\theta})^T \left[-\nabla^2 \ell_n(\hat{\theta})\right] (\theta - \hat{\theta})$<br>
+                            Since $\nabla \ell_n(\hat{\theta}) = \mathbf{0}$ and $-\frac{1}{n} \nabla^2 \ell_n(\hat{\theta}) \\xrightarrow{P} I_1(\theta^*)$:<br>
+                            $\ell_n(\theta) \approx \ell_n(\hat{\theta}) - \frac{n}{2}(\theta - \hat{\theta})^T I_1(\theta^*) (\theta - \hat{\theta})$<br>
+                            Evaluating at constrained maximizer $\hat{\theta}_0$:<br>
+                            $\Lambda_n = 2\left(\ell_n(\hat{\theta}) - \ell_n(\hat{\theta}_0)\right) \approx n (\hat{\theta}_0 - \hat{\theta})^T I_1(\theta^*) (\hat{\theta}_0 - \hat{\theta})$<br>
+                            Under $H_0$, the vector $\sqrt{n}(\hat{\theta} - \theta^*) \\xrightarrow{d} \mathcal{N}\left(\mathbf{0}, I_1(\theta^*)^{-1}\right)$. The constrained projection $(\hat{\theta} - \hat{\theta}_0)$ isolates the component orthogonal to the tangent space of $\Theta_0$, which has dimension $r = \dim(\Theta) - \dim(\Theta_0)$.<br>
+                            The quadratic form of an $r$-dimensional projected Gaussian vector weighted by its precision metric tensor is identically distributed as the sum of $r$ squared independent standard Gaussians:<br>
+                            $\Lambda_n = 2\left(\ell_n(\hat{\theta}) - \ell_n(\hat{\theta}_0)\right) \\xrightarrow{d} \chi^2(r) \quad \text{as } n \to \infty$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. The Asymptotic Equivalence Triangle: LRT, Wald & Rao Score Tests</strong><br>
+                            Three fundamental test statistics evaluate $H_0: \theta = \theta_0$ against $H_1: \theta \ne \theta_0$ in large samples:<br>
+                            • <strong>Likelihood Ratio Test (LRT):</strong> $\Lambda_{LR} = 2\left(\ell_n(\hat{\theta}) - \ell_n(\theta_0)\right)$ (vertical height comparison on log-likelihood surface).<br>
+                            • <strong>Wald Test:</strong> $W = (\hat{\theta} - \theta_0)^T [I_n(\hat{\theta})] (\hat{\theta} - \theta_0)$ (horizontal parameter distance weighted by local curvature at $\hat{\theta}$, requires only unconstrained optimization).<br>
+                            • <strong>Rao Score (Lagrange Multiplier) Test:</strong> $S = \mathcal{S}_n(\theta_0)^T [I_n(\theta_0)]^{-1} \mathcal{S}_n(\theta_0)$ (evaluates gradient deviation from zero at null $\theta_0$, requires zero optimization under alternative $H_1$).<br>
+                            <strong>Asymptotic Equivalence:</strong> Under the null hypothesis and local contiguous alternatives $\theta_n = \theta_0 + \frac{h}{\sqrt{n}}$:<br>
+                            $\Lambda_{LR} - W \\xrightarrow{P} 0 \quad \text{and} \quad \Lambda_{LR} - S \\xrightarrow{P} 0 \implies \Lambda_{LR}, W, S \\xrightarrow{d} \chi^2(d)$.
                         </div>
                     `
                 },
                 actions: `
                     <a href="https://github.com/Heisnotanimposter" target="_blank" class="btn-primary" style="font-size:0.85rem; padding:8px 16px;">
-                        Verify MITx Credential ↗
+                        Verify MITx Credential & Portfolio ↗
                     </a>
                 `
             },
             'zbdd': {
-                title: "Zero-Suppressed Decision Diagrams (ZBDDs)",
-                sub: "Discrete Combinatorial Logic Synthesis for ARC-AGI Program Generation",
+                title: "Zero-Suppressed Binary Decision Diagrams (ZBDD) & Discrete Combinatorial Logic",
+                sub: "Donald E. Knuth (TAOCP Vol 4A, Section 7.1.4) · Shin-ichi Minato (1993) · Symbolic Synthesis & ARC-AGI Engine",
                 tabs: [
-                    { id: 'minato', label: 'Minato Reduction Rules' },
-                    { id: 'compression', label: 'State Compression' }
+                    { id: 'minato_canonicity', label: '1. Minato Canonicity & Shannon Expansion' },
+                    { id: 'unate_algebra', label: '2. Unate Cube Set Algebra & Complexity' },
+                    { id: 'combinatorial_counting', label: '3. Linear Counting & Exact Cover Reduction' },
+                    { id: 'arc_compression', label: '4. High-Throughput Synthesis for ARC-AGI' }
                 ],
                 content: {
-                    'minato': `
-                        <h4>Minato's ZBDD Canonical Reduction Rules</h4>
-                        <p>Zero-suppressed BDDs (introduced by Shin-ichi Minato) represent family of sets over boolean variables:</p>
+                    'minato_canonicity': `
+                        <h4>Minato's ZBDD Canonical Reduction Rules & Decomposition</h4>
+                        <p>Formal comparison between Bryant's BDD and Minato's ZBDD, unate Shannon set decomposition, and the Canonical Representation Theorem over fixed variable orders.</p>
+
                         <div class="math-box">
-                            <strong>Reduction Rule:</strong> Eliminate a node if its 1-edge (high child) points to the 0-terminal leaf.<br>
-                            Standard BDD eliminates when low == high; ZBDD eliminates when high == 0.<br>
-                            This guarantees that variables absent from a combination do not consume memory nodes.
+                            <strong>1. Combinatorial Set Families as Characteristic Boolean Functions</strong><br>
+                            Let $V = \{x_1, x_2, \dots, x_n\}$ be a finite ground set of boolean variables with strict linear ordering $\pi: x_1 < x_2 < \dots < x_n$.<br>
+                            A combination is a subset $S \subseteq V$. A set family $\mathcal{F} \subseteq \mathcal{P}(V)$ is a collection of combinations.<br>
+                            Any family $\mathcal{F}$ is isomorphic to a characteristic boolean function $f_\mathcal{F}: \{0, 1\}^n \to \{0, 1\}$ defined such that:<br>
+                            $f_\mathcal{F}(b_1, \dots, b_n) = 1 \iff \{ x_i \in V \mid b_i = 1 \} \in \mathcal{F}$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Shannon-Minato Unate Set Family Decomposition</strong><br>
+                            For any chosen pivot variable $x \in V$, the family $\mathcal{F}$ partitions into two disjoint subfamilies:<br>
+                            $\mathcal{F} = x \cdot \mathcal{F}_{\text{high}} \cup \mathcal{F}_{\text{low}}$<br>
+                            where:<br>
+                            • $\mathcal{F}_{\text{high}} = \{ S \setminus \{x\} \mid S \in \mathcal{F}, x \in S \}$ (the 1-cofactor: set of combinations containing $x$, with $x$ stripped away).<br>
+                            • $\mathcal{F}_{\text{low}} = \{ S \in \mathcal{F} \mid x \notin S \}$ (the 0-cofactor: set of combinations that do not contain $x$).<br>
+                            Here, $x \cdot \mathcal{F}_{\text{high}}$ denotes prepending element $x$ to every subset in $\mathcal{F}_{\text{high}}$: $\{ S \cup \{x\} \mid S \in \mathcal{F}_{\text{high}} \}$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. The Elimination Rule: Bryant BDD vs. Minato ZBDD</strong><br>
+                            • <strong>Bryant Reduced Ordered BDD (1986):</strong><br>
+                            Elimination Condition: A node $v$ is eliminated if $\operatorname{low}(v) == \operatorname{high}(v)$.<br>
+                            <em>Pathological Sparsity Failure:</em> In combinatorial applications (e.g. subsets of a graph with 1,000 vertices), most items are absent ($x_i = 0$). Bryant BDDs require explicit node chains to test that every absent variable is 0. Representing a single 1-element set $\{x_1\}$ in a 1,000-variable universe consumes 999 dummy nodes!<br>
+                            • <strong>Minato Zero-Suppressed BDD (1993):</strong><br>
+                            Elimination Condition: A node $v$ is eliminated if and only if $\operatorname{high}(v) == \mathbf{0}$ (the empty set leaf $\emptyset$).<br>
+                            <em>Automatic Zero Suppression:</em> If variable $x$ does not appear in any subset of family $\mathcal{F}$, its 1-cofactor is empty ($\mathcal{F}_{\text{high}} = \emptyset$). Hence, $\operatorname{high}(v) = \mathbf{0}$, and node $v$ is automatically suppressed and bypassed! The representation size depends only on combinations present, not the universe size $|V|$.<br>
+                            <strong>Terminal Leaves:</strong><br>
+                            $\mathbf{0} = \emptyset$ (the empty family containing no combinations).<br>
+                            $\mathbf{1} = \{ \emptyset \}$ (the family containing exactly one combination: the empty combination).
+                        </div>
+
+                        <div class="math-box">
+                            <strong>4. Canonical Representation Theorem (Minato 1993 / Knuth TAOCP Vol 4A, Theorem S)</strong><br>
+                            <strong>Theorem:</strong> For any fixed strict variable ordering $\pi$, every family of subsets $\mathcal{F} \subseteq \mathcal{P}(V)$ has a uniquely determined, canonical reduced directed acyclic graph (ZBDD).<br>
+                            <strong>Corollary ($\mathcal{O}(1)$ Equivalence Checking):</strong> By utilizing a global hash-consed unique table with weak reference caching, graph nodes are maximally shared. Testing equivalence $\mathcal{F}_1 \equiv \mathcal{F}_2$ or checking whether a candidate set family is empty ($\mathcal{F} \equiv \emptyset$) executes in exactly $\mathcal{O}(1)$ time by comparing root node memory pointers: $\operatorname{ptr}(\mathcal{F}_1) == \operatorname{ptr}(\mathcal{F}_2)$.
                         </div>
                     `,
-                    'compression': `
-                        <h4>Empirical 42.8x Compression for ARC-AGI</h4>
-                        <p>In inductive program synthesis for ARC-AGI, transformation sub-expressions share extensive common sub-graphs. ZBDDs canonicalize these expressions, enabling:</p>
+                    'unate_algebra': `
+                        <h4>Unate Cube Set Algebra: Operations, Memoization & Complexity</h4>
+                        <p>Algorithmic specification of set union, intersection, difference, and cartesian product directly over canonical DAG structures with dynamic memoization.</p>
+
                         <div class="math-box">
-                            - Zero-copy subexpression equivalence verification in 𝒪(1) time.<br>
-                            - Set-family union and intersection operations via unate cube algebra in polynomial time.<br>
-                            - Fast evaluation throughput of 1.4 × 10^6 program candidates per second in Rust.
+                            <strong>1. Recursive Unate Set Operations</strong><br>
+                            Let $\mathcal{P}$ and $\mathcal{Q}$ be two ZBDDs with top variables $v_P = \operatorname{var}(P)$ and $v_Q = \operatorname{var}(Q)$.<br>
+                            Let $x = \min(v_P, v_Q)$ according to order $\pi$. Decompose $\mathcal{P}$ and $\mathcal{Q}$ with respect to $x$:<br>
+                            • If $\operatorname{var}(P) == x$: $P_1 = P.\text{high}, P_0 = P.\text{low}$; else: $P_1 = \mathbf{0}, P_0 = P$.<br>
+                            • If $\operatorname{var}(Q) == x$: $Q_1 = Q.\text{high}, Q_0 = Q.\text{low}$; else: $Q_1 = \mathbf{0}, Q_0 = Q$.<br>
+                            <strong>Fundamental Algebraic Operations:</strong><br>
+                            • <strong>Union ($\mathcal{P} \cup \mathcal{Q}$):</strong> $x \cdot (P_1 \cup Q_1) \cup (P_0 \cup Q_0)$<br>
+                            • <strong>Intersection ($\mathcal{P} \cap \mathcal{Q}$):</strong> $x \cdot (P_1 \cap Q_1) \cup (P_0 \cap Q_0)$<br>
+                            • <strong>Difference ($\mathcal{P} \setminus \mathcal{Q}$):</strong> $x \cdot (P_1 \setminus Q_1) \cup (P_0 \setminus Q_0)$<br>
+                            • <strong>Subset Join ($\mathcal{P} \bowtie \mathcal{Q}$):</strong> $(P_0 \bowtie Q_0) \cup x \cdot \left[ (P_1 \bowtie Q_0) \cup (P_0 \bowtie Q_1) \cup (P_1 \bowtie Q_1) \right]$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Boundary Base Cases & Short-Circuit Rules</strong><br>
+                            • $\mathcal{P} \cup \mathbf{0} = \mathcal{P}, \quad \mathcal{P} \cup \mathcal{P} = \mathcal{P}$<br>
+                            • $\mathcal{P} \cap \mathbf{0} = \mathbf{0}, \quad \mathcal{P} \cap \mathcal{P} = \mathcal{P}$<br>
+                            • $\mathcal{P} \setminus \mathbf{0} = \mathcal{P}, \quad \mathbf{0} \setminus \mathcal{P} = \mathbf{0}, \quad \mathcal{P} \setminus \mathcal{P} = \mathbf{0}$<br>
+                            • $\mathcal{P} \bowtie \mathbf{0} = \mathbf{0}, \quad \mathcal{P} \bowtie \mathbf{1} = \mathcal{P}$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. Node Allocation Primitive with Zero Suppression</strong><br>
+                            Constructing a canonical node $(x, \text{low}, \text{high})$ enforces the zero-suppression invariant:<br>
+                            <code>
+                            function getNode(x, low, high):<br>
+                            &nbsp;&nbsp;if high == 0:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return low; // Minato elimination rule: zero-suppression<br>
+                            &nbsp;&nbsp;key = (x, low, high);<br>
+                            &nbsp;&nbsp;if key in unique_table:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return unique_table[key];<br>
+                            &nbsp;&nbsp;node = allocate(x, low, high);<br>
+                            &nbsp;&nbsp;unique_table[key] = node;<br>
+                            &nbsp;&nbsp;return node;
+                            </code>
+                        </div>
+
+                        <div class="math-box">
+                            <strong>4. Complexity Guarantee via Computed Cache Table</strong><br>
+                            Every recursive sub-operation queries a memoized cache: <code>computed_cache.lookup(op, P_node, Q_node)</code>.<br>
+                            Because each pair of sub-DAG nodes $(u \in \mathcal{P}, v \in \mathcal{Q})$ is visited and resolved at most once:<br>
+                            <strong>Time & Space Complexity:</strong> $\mathcal{O}(|\mathcal{P}| \cdot |\mathcal{Q}|)$, bounded strictly by the product of DAG node counts, completely bypassing the exponential cardinality $2^n$ of the set family.
+                        </div>
+                    `,
+                    'combinatorial_counting': `
+                        <h4>Linear-Time Combinatorial Counting & Exact Cover Reduction</h4>
+                        <p>Computing exact configuration counts in linear time over exponential spaces, and solving NP-hard constraint satisfaction problems via ZBDD intersections.</p>
+
+                        <div class="math-box">
+                            <strong>1. Exact Cardinality Counting in Linear Time $\mathcal{O}(|V_{\text{ZBDD}}|)$</strong><br>
+                            Let $|\mathcal{F}|$ denote the exact number of distinct combinations contained in family $\mathcal{F}$.<br>
+                            By Shannon decomposition, the subsets in $\mathcal{F}_{\text{low}}$ and $x \cdot \mathcal{F}_{\text{high}}$ are disjoint. Therefore:<br>
+                            $|\mathcal{F}| = |\mathcal{F}_{\text{low}}| + |\mathcal{F}_{\text{high}}|$<br>
+                            Boundary conditions:<br>
+                            $|\mathbf{0}| = 0, \quad |\mathbf{1}| = 1$<br>
+                            <strong>Linear Evaluation:</strong> Performing a post-order traversal with memoization computes the exact size of set families exceeding $> 10^{35}$ valid states in exact $\mathcal{O}(|V_{\text{ZBDD}}|)$ linear time with 64-bit/BigInt arithmetic, requiring zero explicit combination enumeration.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. NP-Hard Exact Cover Problem (Knuth's Algorithm X via ZBDD)</strong><br>
+                            Given a boolean matrix $A \in \{0, 1\}^{m \times n}$, select a subset of rows $R \subseteq \{1, \dots, m\}$ such that every column $j \in \{1, \dots, n\}$ contains exactly one 1: $\sum_{i \in R} A_{ij} = 1 \ \forall j$.<br>
+                            <strong>ZBDD Construction via Constraint Intersection:</strong><br>
+                            1. For each column $j$, define the unit-sum constraint family: $\mathcal{C}_j = \bigcup_{i: A_{ij}=1} \{ \{r_i\} \}$.<br>
+                            2. Compute the exact cover solution space by intersecting constraints using disjoint set products:<br>
+                            $\mathcal{S}_{\text{exact}} = \mathcal{C}_1 \bowtie \mathcal{C}_2 \bowtie \dots \bowtie \mathcal{C}_n$<br>
+                            The resulting single canonical ZBDD root contains <em>all</em> valid exact cover solutions simultaneously. Each path from root to $\mathbf{1}$-leaf corresponds to an exact valid tiling/cover.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. Structural Advantages over Dancing Links (DLX)</strong><br>
+                            • <strong>Knuth's Dancing Links (DLX):</strong> Backtracking search based on circular doubly linked lists. Efficient for finding a single solution, but counting or extracting all solutions requires traversing the full search tree $\mathcal{O}(b^d)$.<br>
+                            • <strong>ZBDD Symbolic Representation:</strong> Directly constructs the compressed solution DAG. Once built:<br>
+                            - Finding total solution count takes $\mathcal{O}(|V_{\text{ZBDD}}|)$ time.<br>
+                            - Minimum/maximum cost optimization takes $\mathcal{O}(|V_{\text{ZBDD}}|)$ shortest-path DAG dynamic programming.<br>
+                            - Zero runtime penalty for dense or overlapping constraint matrices.
+                        </div>
+                    `,
+                    'arc_compression': `
+                        <h4>High-Throughput Inductive Program Synthesis & ARC-AGI Architecture</h4>
+                        <p>Application of Minato ZBDDs to combinatorial program search in the ARC Prize 2025 (Global Top 13%), achieving 42.8x memory compression and 1.4M candidate evaluations per second.</p>
+
+                        <div class="math-box">
+                            <strong>1. Combinatorial Search Space in Visual Grid Domain-Specific Languages (DSL)</strong><br>
+                            ARC-AGI tasks require synthesizing deterministic programs from small input-output grid examples. Primitive operations span:<br>
+                            • Spatial & Affine: <code>Rotate90</code>, <code>ReflectHorizontal</code>, <code>ReflectMainDiagonal</code>, <code>CropBoundingBox</code>.<br>
+                            • Morphological & Topological: <code>ExtractConnectedComponents(4-way | 8-way)</code>, <code>ContourHull</code>, <code>FloodFill(color)</code>.<br>
+                            • Cellular Automata: <code>GravityFall(direction)</code>, <code>RayCastCollision</code>, <code>ColorByAreaRank</code>.<br>
+                            For a DSL with branching factor $b \approx 140$, depth $d = 5$ explores $\approx 140^5 = 5.37 \times 10^{10}$ candidate programs.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Empirical 42.8x Hypothesis State Compression via ZBDDs</strong><br>
+                            Synthetically generated distinct AST programs frequently produce identical spatial transformation effect sets across training examples.<br>
+                            By representing candidate execution hypothesis sets as canonical ZBDD set families:<br>
+                            • <strong>42.8x Memory Reduction:</strong> Canonical DAG node sharing compresses the working hypothesis memory footprint by an empirical factor of 42.8x compared to explicit AST nodes.<br>
+                            • <strong>$\mathcal{O}(1)$ Semantic Equivalence Pruning:</strong> If two syntactically distinct programs evaluate to the same canonical ZBDD pointer ($\operatorname{ptr}(P_A) == \operatorname{ptr}(P_B)$), redundant search sub-branches are pruned immediately without further exploration.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. High-Performance Rust Synthesis Engine Architecture</strong><br>
+                            • <strong>Lock-Free Arena Allocators:</strong> Cache-aligned 64-bit packed words <code>(var: u16, low: u32, high: u32)</code> with zero dynamic heap allocations during evaluation loops.<br>
+                            • <strong>Thread-Local Computed Caches:</strong> High-speed thread-local hash tables achieving zero synchronization contention across 16 parallel worker threads.<br>
+                            • <strong>Throughput Benchmark:</strong> Achieved sustained evaluation speed of <strong>$1.4 \times 10^6$ program candidates per second</strong> on multi-core CPU architectures.<br>
+                            • <strong>Outcome:</strong> Key computational driver powering team placement at <strong>Rank #179 / 1,456 (Top 13% Globally)</strong> in ARC Prize 2025 without reliance on heavy LLM inference.
                         </div>
                     `
                 },
@@ -3478,8 +3848,133 @@
                         View ARC-AGI-HIN Rust Code ↗
                     </a>
                 `
-            }
-        };
+            },
+            'accreditation': {
+                title: "University Academic Accreditation & Foundational Rigor",
+                sub: "World Education Services (WES) Verified · 118+ University Credits Evaluated for North American University Admissions",
+                tabs: [
+                    { id: 'cs_core', label: '1. Computer Science Core (A+ Honors)' },
+                    { id: 'math_core', label: '2. Applied Mathematics & Analysis' },
+                    { id: 'systems_hw', label: '3. Systems & Low-Level Computing' },
+                    { id: 'global_benchmarks', label: '4. Global Competitive Benchmarks' }
+                ],
+                content: {
+                    'cs_core': `
+                        <h4>Computer Science Core: Data Structures, Algorithms & Computational Complexity</h4>
+                        <p>Foundational computer science curriculum evaluated and verified by World Education Services (WES), completed with top honors (A+ Grade).</p>
+
+                        <div class="math-box">
+                            <strong>1. Data Structures & Advanced ADTs (CS301 · Grade: A+)</strong><br>
+                            • <strong>Asymptotic Complexity Analysis:</strong> Formal mathematical definitions of Big-O ($\mathcal{O}$), Big-Omega ($\Omega$), and Big-Theta ($\Theta$). Recurrence relations solved via the Master Theorem: $T(n) = a T(n/b) + f(n)$ and the Akra-Bazzi method.<br>
+                            • <strong>Balanced Search Trees:</strong> Red-Black tree invariants (root black, red node with black children, uniform black-height), single and double tree rotations, and $\mathcal{O}(\log n)$ insertion/deletion guarantees. AVL tree height-balance factors $(-1, 0, 1)$.<br>
+                            • <strong>Priority Queues & Heaps:</strong> Binary heap swim/sink array operations, Binomial heaps, and Fibonacci heaps with $\mathcal{O}(1)$ amortized decrease-key operations for dense graph optimization.<br>
+                            • <strong>Disjoint-Set Forest (Union-Find):</strong> Union-by-rank and path compression heuristics proving near-linear $\mathcal{O}(m \cdot \alpha(n))$ time complexity, where $\alpha(n)$ is the inverse Ackermann function.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Graph Theory & Network Optimization</strong><br>
+                            • <strong>Traversals & Topologies:</strong> Breadth-First Search (shortest path on unweighted graphs), Depth-First Search with parenthesis theorem, discovery/finish timestamps, topological sort, and Tarjan's strongly connected components.<br>
+                            • <strong>Shortest Path Algorithms:</strong> Dijkstra's algorithm with min-priority queues ($\mathcal{O}((V + E) \log V)$), Bellman-Ford algorithm with negative-cycle detection ($\mathcal{O}(VE)$), and Floyd-Warshall dynamic programming for all-pairs shortest paths ($\mathcal{O}(V^3)$).<br>
+                            • <strong>Minimum Spanning Trees:</strong> Kruskal's algorithm with disjoint-set union ($\mathcal{O}(E \log E)$) and Prim's algorithm with indexed priority queues ($\mathcal{O}(E \log V)$). Cut Property and Cycle Property proofs.<br>
+                            • <strong>Network Flow:</strong> Max-Flow Min-Cut Theorem, Ford-Fulkerson method, and Edmonds-Karp shortest augmenting path algorithm ($\mathcal{O}(VE^2)$).
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. Algorithms, Complexity Theory & P vs NP</strong><br>
+                            • <strong>String Matching:</strong> Knuth-Morris-Pratt (KMP) deterministic finite state failure functions ($\mathcal{O}(n + m)$), Rabin-Karp polynomial rolling hash, and Aho-Corasick multi-pattern trie automatons.<br>
+                            • <strong>Computational Complexity:</strong> Deterministic vs Non-Deterministic Turing Machines, polynomial-time reductions ($A \le_P B$), Cook-Levin Theorem proving 3-SAT is NP-Complete, and Karp's 21 NP-complete reductions (Vertex Cover, Hamiltonian Cycle, Subset Sum, Independent Set).<br>
+                            • <strong>Approximation Algorithms:</strong> 2-approximation for Vertex Cover, Christofides' 1.5-approximation algorithm for metric TSP, and greedy Set Cover logarithmic factor analysis.
+                        </div>
+                    `,
+                    'math_core': `
+                        <h4>Applied Mathematics: Linear Algebra, Multivariable Calculus & Analysis</h4>
+                        <p>Rigorous undergraduate mathematical foundation covering linear operator theory, matrix decompositions, vector calculus, and differential equations.</p>
+
+                        <div class="math-box">
+                            <strong>1. Linear Algebra & Spectral Matrix Analysis</strong><br>
+                            • <strong>Fundamental Subspaces & Rank-Nullity:</strong> For matrix $A \in \mathbb{R}^{m \times n}$: Column space $\operatorname{Col}(A)$, Nullspace $\operatorname{Null}(A)$, Row space $\operatorname{Row}(A)$, and Left Nullspace $\operatorname{Null}(A^T)$. Fundamental Theorem of Linear Algebra: $\operatorname{Col}(A)^\perp = \operatorname{Null}(A^T)$ and $\operatorname{dim}(\operatorname{Col}(A)) + \operatorname{dim}(\operatorname{Null}(A)) = n$.<br>
+                            • <strong>Orthogonality & Projections:</strong> Gram-Schmidt orthogonalization process, $QR$ factorizations ($A = QR$), orthogonal projection operator $P = A(A^T A)^{-1} A^T$, and closed-form Normal Equations for least squares $(A^T A) \hat{x} = A^T b$.<br>
+                            • <strong>Spectral Theorem:</strong> Any real symmetric matrix $A = A^T \in \mathbb{R}^{n \times n}$ has purely real eigenvalues and admits an orthonormal basis of eigenvectors: $A = Q \Lambda Q^T = \sum_{i=1}^n \lambda_i q_i q_i^T$.<br>
+                            • <strong>Singular Value Decomposition (SVD):</strong> Any matrix $A \in \mathbb{R}^{m \times n}$ decomposes as $A = U \Sigma V^T$. Low-rank matrix approximation via Eckart-Young-Mirsky Theorem $\|A - A_k\|_2 = \sigma_{k+1}$, Moore-Penrose pseudoinverse $A^+ = V \Sigma^+ U^T$, and numerical condition number $\kappa(A) = \sigma_{\max} / \sigma_{\min}$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Multivariable Calculus & Vector Analysis</strong><br>
+                            • <strong>Differential Calculus in $\mathbb{R}^n$:</strong> Directional derivatives, gradient vector field $\nabla f(x)$, Jacobian matrix $J_f \in \mathbb{R}^{m \times n}$, Hessian matrix $H_f \in \mathbb{R}^{n \times n}$, and second-order multivariate Taylor expansions: $f(x+h) = f(x) + \nabla f(x)^T h + \frac{1}{2} h^T H_f(x) h + o(\|h\|^2)$.<br>
+                            • <strong>Constrained Optimization:</strong> Critical points classification via Hessian positive definiteness ($H_f \succ 0 \implies \text{local min}$), and Lagrange Multiplier Theorem for multi-constraint manifolds: $\nabla f(x^*) = \sum_{i=1}^k \lambda_i \nabla g_i(x^*)$ subject to $g_i(x^*) = 0$.<br>
+                            • <strong>Integral Theorems of Vector Analysis:</strong><br>
+                            - <strong>Green's Theorem:</strong> $\oint_{\partial D} (L dx + M dy) = \iint_D \left( \frac{\partial M}{\partial x} - \frac{\partial L}{\partial y} \right) dA$<br>
+                            - <strong>Gauss' Divergence Theorem:</strong> $\iiint_V (\nabla \cdot \mathbf{F}) dV = \iint_{\partial V} (\mathbf{F} \cdot \mathbf{n}) dS$<br>
+                            - <strong>Stokes' Theorem:</strong> $\iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S} = \oint_{\partial S} \mathbf{F} \cdot d\mathbf{r}$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. Engineering Mathematics & Differential Equations</strong><br>
+                            • <strong>Ordinary Differential Equations (ODEs):</strong> First-order separable and linear differential equations with integrating factors $\mu(x) = \exp\left(\int P(x) dx\right)$. Second-order homogeneous and non-homogeneous equations with constant coefficients via characteristic polynomial roots and method of undetermined coefficients.<br>
+                            • <strong>Laplace Transforms:</strong> Unilateral Laplace transform $\mathcal{L}\{f(t)\} = F(s) = \int_0^\infty e^{-st} f(t) dt$, derivative property $\mathcal{L}\{f'(t)\} = s F(s) - f(0)$, convolution theorem $\mathcal{L}\{f * g\} = F(s) G(s)$, and transfer function analysis for dynamical systems.<br>
+                            • <strong>Fourier Series & PDEs:</strong> Orthogonality of trigonometric systems, Fourier series expansion of piecewise continuous functions, Dirichlet conditions, and separation of variables for the canonical 1D Heat Equation $\frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2}$ and Wave Equation $\frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2}$.
+                        </div>
+                    `,
+                    'systems_hw': `
+                        <h4>Systems Architecture: Assembly, Linkers, Microprocessors & OS Internals</h4>
+                        <p>Hardware-software interface, low-level execution models, and microprocessor systems engineering completed with top honors (A+ Grade).</p>
+
+                        <div class="math-box">
+                            <strong>1. Systems Programming & Assembly (CS302 · Grade: A+)</strong><br>
+                            • <strong>Microprocessor Architecture:</strong> Intel 8086 / IA-32 execution models. General-purpose registers (<code>EAX</code>, <code>EBX</code>, <code>ECX</code>, <code>EDX</code>), pointer/index registers (<code>ESP</code>, <code>EBP</code>, <code>ESI</code>, <code>EDI</code>), segment registers (<code>CS</code>, <code>DS</code>, <code>SS</code>, <code>ES</code>), instruction pointer (<code>EIP</code>), and processor condition flags (<code>EFLAGS</code>: Carry, Zero, Sign, Overflow).<br>
+                            • <strong>Real-Mode vs Protected-Mode Memory Addressing:</strong> 20-bit physical address generation in Real Mode: $\text{Physical Address} = (\text{Segment} \times 16) + \text{Offset}$. Global Descriptor Tables (GDT) and Local Descriptor Tables (LDT) segment selectors with privilege levels (Ring 0 to Ring 3) in Protected Mode.<br>
+                            • <strong>Instruction Set & Calling Conventions:</strong> Arithmetic/logic execution (<code>MOV</code>, <code>LEA</code>, <code>ADD</code>, <code>SUB</code>, <code>IMUL</code>, <code>DIV</code>, <code>SHL</code>, <code>SHR</code>, <code>XOR</code>), condition flags manipulation (<code>CMP</code>, <code>TEST</code>), and jump tables. C standard calling conventions (<code>cdecl</code>, <code>stdcall</code>, <code>fastcall</code>), stack frame establishment (<code>push ebp; mov ebp, esp; sub esp, N</code>), callee/caller register preservation, and stack teardown.<br>
+                            • <strong>Two-Pass Assembler Architecture:</strong><br>
+                            - <em>Pass 1:</em> Symbol table construction, Location Counter (<code>LC</code>) incrementation, literal pool resolution, and external reference collection.<br>
+                            - <em>Pass 2:</em> Opcode encoding into machine code, operand addressing mode calculation, displacement resolution, and object file generation.<br>
+                            • <strong>Linkers & Loaders:</strong> Relocatable object format (ELF / COFF), symbol table resolution, cross-module reference patching via relocation dictionaries, and absolute/relocatable program loading into memory.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. Operating Systems Primitives & Concurrency</strong><br>
+                            • <strong>Hardware Interrupts & Context Switching:</strong> Interrupt Descriptor Table (IDT), Programmable Interrupt Controller (8259A PIC), hardware interrupt servicing (ISR), software interrupts (<code>INT 21h</code> / <code>syscall</code>), and register state serialization onto kernel stack during preemptive context switches.<br>
+                            • <strong>Virtual Memory & Paging:</strong> Two-level hierarchical paging (Page Directory and Page Table), 4 KB page frame mapping, Translation Lookaside Buffer (TLB) hit/miss mechanics, Page Fault interrupt handling (<code>#PF</code>), and page replacement policies (Optimal, Least Recently Used (LRU), Second-Chance Clock algorithm).<br>
+                            • <strong>Process Concurrency & Synchronization:</strong> Preemptive Round-Robin and Priority Scheduling, Process Control Blocks (PCB), mutual exclusion mechanisms (Dekker/Peterson algorithms, atomic test-and-set spinlocks, counting semaphores, mutexes, condition variables), and deadlock prevention via Dijkstra's Banker's Algorithm.
+                        </div>
+                    `,
+                    'global_benchmarks': `
+                        <h4>Global Competitive Benchmarks & Peer-Reviewed Recognition</h4>
+                        <p>Summary of international competitive rankings, research prizes, and verified academic credentials.</p>
+
+                        <div class="math-box">
+                            <strong>1. ARC Prize 2025: Global Rank #179 / 1,456 (Top 13% Worldwide)</strong><br>
+                            • <strong>Competition Scope:</strong> The premier global benchmark measuring Artificial General Intelligence (AGI) reasoning efficiency across novel abstract visual reasoning tasks.<br>
+                            • <strong>Engineering Achievement:</strong> Designed and implemented an independent neuro-symbolic program synthesis engine in Rust (<code>ARC-AGI-HIN</code>). Integrated 120+ spatial transformation primitives, cellular automata, and Minato ZBDDs for 42.8x hypothesis set compression.<br>
+                            • <strong>Performance:</strong> Evaluated $1.4 \times 10^6$ program candidates/second across 16 parallel threads with deterministic constraint propagation and zero reliance on external LLM APIs.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>2. SPIED 2024 International Conference: Grand Prize Winner</strong><br>
+                            • <strong>System Title:</strong> <em>Time Increasing Crosswalk (TIC)</em>.<br>
+                            • <strong>Technical Architecture:</strong> Edge-compute embedded intelligent safety infrastructure integrating real-time YOLO object detection, Kalman filter pedestrian trajectory prediction, and microcontroller-actuated dynamic duration modulation to eliminate collision hazards.<br>
+                            • <strong>Institutional Recognition:</strong> Awarded the Grand Prize at SPIED 2024 for technological innovation and practical embedded systems implementation.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. MITx MicroMasters in Statistics & Data Science (IDSS)</strong><br>
+                            • Completed rigorous graduate-level curriculum in probability, data analysis, statistical inference, and machine learning theory with verified credentials.<br>
+                            • Deep mathematical mastery across characteristic functions, Cramér-Rao efficiency, Neyman-Pearson lemma, and asymptotic likelihood asymptotics.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>4. Full Graduate Curriculum Implementation Suite (Stanford CS229 & CS230)</strong><br>
+                            • Author of exhaustive mathematical derivations and verified implementations covering all five Stanford CS229 problem sets (PS0–PS4) and CS230 deep learning modules.<br>
+                            • Complete coordinate-free proofs for Generalized Linear Models, Support Vector Machine Wolfe Duality, Mercer's Kernels, Expectation-Maximization, Bellman Contraction Mappings, and Vectorized Backpropagation Dynamics.
+                        </div>
+                    `
+                },
+                actions: `
+                    <button class="btn-primary" onclick="switchView('resume'); closeStudyModal();" style="font-size:0.85rem; padding:8px 16px;">
+                        Open Academic CV ↗
+                    </button>
+                    <button class="modal-close-btn" onclick="closeStudyModal()">[ Close ]</button>
+                `
+            }};
 
         let currentLang = 'en';
         let currentCategory = 'all';
