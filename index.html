@@ -1237,13 +1237,8 @@
 
         <!-- ================= VIEW 2: GRADUATE CURRICULUM & PROOFS ================= -->
         <main id="view-curriculum">
-            <div class="resume-banner aero-step step-1">
-                <a class="btn-minimal" id="curriculumBackToShowcase" data-i18n="curriculum_back_showcase">← Back to Showcase & Interactive Hub</a>
-                <button id="curriculumToResumeBtn" class="btn-minimal" data-i18n="curriculum_to_resume">Switch to Academic CV →</button>
-            </div>
-
-            <section class="section-header aero-step step-2" style="margin-bottom: 28px;">
-                <h1 class="hero-title" style="font-size: 28px; margin-bottom: 8px;" data-i18n="curriculum_hero_title">Graduate Curriculum & Mathematical Proofs</h1>
+            <section class="academic-hero aero-step step-1">
+                <h1 class="hero-title" data-i18n="curriculum_hero_title">Graduate Curriculum & Mathematical Proofs</h1>
                 <p class="section-intro" style="margin-bottom: 0;" data-i18n="curriculum_hero_desc">Rigorous algorithmic implementations, closed-form derivations, and step-by-step problem set solutions for Stanford CS229, CS230, MITx MicroMasters, and ZBDD discrete logic. Click any module to inspect step-by-step proofs and derivations.</p>
             </section>
 
@@ -1314,19 +1309,12 @@
 
         <!-- ================= VIEW 3: MULTI-LINGUAL ACADEMIC RESUME ================= -->
         <main id="view-resume">
-            <div class="resume-banner aero-step step-1">
-                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-                    <a class="btn-minimal" id="btnBackToShowcase" data-i18n="resume_back_showcase">← Back to Showcase</a>
-                    <a class="btn-minimal" id="resumeToCurriculumBtn" data-i18n="resume_back_curriculum">← View Curriculum & Proofs</a>
-                </div>
-                <div style="display:flex; align-items:center; gap:8px;">
-                    <button onclick="window.print()" class="btn-minimal" data-i18n="resume_print">🖨️ Print CV</button>
-                </div>
-            </div>
-
-            <div class="resume-container aero-step step-2">
-                <header id="summary-sec">
-                    <h1 id="header-name" data-key="header_name">Simon Lee</h1>
+            <div class="resume-container aero-step step-1">
+                <header class="resume-header">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+                        <h1 id="header-name" data-key="header_name" style="margin:0;">Simon Lee</h1>
+                        <button onclick="window.print()" class="btn-minimal" data-i18n="resume_print">🖨️ Print CV</button>
+                    </div>
                     
                     <div class="contact-info">
                         <span>Email: <a href="mailto:redcar1024@gmail.com">redcar1024@gmail.com</a></span>
@@ -3623,13 +3611,7 @@
             document.getElementById('showcaseToResumeBtn')?.addEventListener('click', () => switchView('resume'));
 
             // Curriculum view buttons
-            document.getElementById('curriculumBackToShowcase')?.addEventListener('click', () => switchView('showcase'));
-            document.getElementById('curriculumToResumeBtn')?.addEventListener('click', () => switchView('resume'));
             document.getElementById('curriculumBottomToResumeBtn')?.addEventListener('click', () => switchView('resume'));
-
-            // Resume view buttons
-            document.getElementById('btnBackToShowcase')?.addEventListener('click', () => switchView('showcase'));
-            document.getElementById('resumeToCurriculumBtn')?.addEventListener('click', () => switchView('curriculum'));
 
             // Handle anchor clicks smoothly
             document.querySelectorAll('a[href="#showcase"]').forEach(a => {
