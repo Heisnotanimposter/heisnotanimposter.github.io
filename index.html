@@ -66,7 +66,12 @@
 
         html {
             scroll-behavior: smooth;
-            background-color: var(--bg-page);
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(ellipse 85% 65% at 75% -5%, rgba(186, 230, 253, 0.45), rgba(248, 250, 252, 0) 70%),
+                radial-gradient(ellipse 65% 55% at 15% 25%, rgba(224, 242, 254, 0.55), rgba(248, 250, 252, 0) 65%),
+                radial-gradient(ellipse 80% 60% at 50% 95%, rgba(219, 234, 254, 0.32), rgba(248, 250, 252, 0) 75%);
+            background-attachment: fixed;
         }
 
         body {
@@ -3651,8 +3656,8 @@
         });
 
         // ==========================================================================
-        // Atmospheric Canvas Engine
-        // High-altitude tropospheric laminar flow & aerostat micro-particulates
+        // Atmospheric Polygonal Mesh & Sky Diffusion Engine
+        // High-altitude luminous cerulean atmosphere & interconnected geometric facets
         // ==========================================================================
         (function initAeroAtmosphere() {
             const canvas = document.getElementById('aero-canvas');
@@ -3669,30 +3674,44 @@
             let mouseY = 0;
             let targetMouseX = 0;
             let targetMouseY = 0;
+            let rawMouseX = -9999;
+            let rawMouseY = -9999;
+            let hasMouse = false;
 
             window.addEventListener('mousemove', (e) => {
+                hasMouse = true;
+                rawMouseX = e.clientX;
+                rawMouseY = e.clientY;
                 const halfW = window.innerWidth / 2;
                 const halfH = window.innerHeight / 2;
                 targetMouseX = (e.clientX - halfW) / (halfW || 1);
                 targetMouseY = (e.clientY - halfH) / (halfH || 1);
             }, { passive: true });
 
-            const PARTICLE_COUNT = 28;
-            const particles = [];
+            window.addEventListener('mouseleave', () => {
+                hasMouse = false;
+                rawMouseX = -9999;
+                rawMouseY = -9999;
+            });
 
-            function initParticles() {
-                particles.length = 0;
-                for (let i = 0; i < PARTICLE_COUNT; i++) {
-                    particles.push({
+            const nodes = [];
+
+            function initNodes() {
+                nodes.length = 0;
+                const count = width < 768 ? 26 : 52;
+                for (let i = 0; i < count; i++) {
+                    nodes.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        baseRadius: 0.6 + Math.random() * 1.2,
-                        vx: 0.08 + Math.random() * 0.16,
-                        vyAmplitude: 0.25 + Math.random() * 0.35,
+                        vx: (Math.random() - 0.5) * 0.38,
+                        vy: (Math.random() - 0.5) * 0.38,
+                        baseRadius: 1.2 + Math.random() * 1.3,
                         phase: Math.random() * Math.PI * 2,
-                        freq: 0.0012 + Math.random() * 0.0016,
-                        alpha: 0.18 + Math.random() * 0.32,
-                        depth: 0.2 + Math.random() * 0.8
+                        freq: 0.008 + Math.random() * 0.012,
+                        depth: 0.35 + Math.random() * 0.65,
+                        pulseSpeed: 0.012 + Math.random() * 0.018,
+                        projX: 0,
+                        projY: 0
                     });
                 }
             }
@@ -3704,9 +3723,7 @@
                 canvas.width = Math.floor(width * dpr);
                 canvas.height = Math.floor(height * dpr);
                 ctx.scale(dpr, dpr);
-                if (particles.length === 0) {
-                    initParticles();
-                }
+                initNodes();
             }
 
             window.addEventListener('resize', resize);
@@ -3714,29 +3731,28 @@
 
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            function drawTroposphericBand(bandYRatio, amplitude, wavelength, speed, colorStops, parallaxFactor) {
-                const baseY = height * bandYRatio + (mouseY * 18 * parallaxFactor);
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(0, height);
-                ctx.lineTo(0, baseY);
+            function drawAtmosphericSkyGlow() {
+                // Top-right cerulean luminous dome (matching graphic's azure sky & mirrored caustic reflections)
+                const g1 = ctx.createRadialGradient(
+                    width * 0.72 + mouseX * 28, height * 0.12 + mouseY * 20, 0,
+                    width * 0.72 + mouseX * 28, height * 0.12 + mouseY * 20, Math.max(width * 0.55, 450)
+                );
+                g1.addColorStop(0, 'rgba(186, 230, 253, 0.28)');
+                g1.addColorStop(0.45, 'rgba(224, 242, 254, 0.14)');
+                g1.addColorStop(1, 'rgba(248, 250, 252, 0)');
+                ctx.fillStyle = g1;
+                ctx.fillRect(0, 0, width, height);
 
-                const step = 24;
-                for (let x = 0; x <= width + step; x += step) {
-                    const wave1 = Math.sin(x * wavelength + time * speed) * amplitude;
-                    const wave2 = Math.cos(x * (wavelength * 0.45) - time * (speed * 0.7)) * (amplitude * 0.4);
-                    const y = baseY + wave1 + wave2;
-                    ctx.lineTo(x, y);
-                }
-
-                ctx.lineTo(width, height);
-                ctx.closePath();
-
-                const grad = ctx.createLinearGradient(0, baseY - amplitude, 0, baseY + amplitude * 3);
-                colorStops.forEach(stop => grad.addColorStop(stop.offset, stop.color));
-                ctx.fillStyle = grad;
-                ctx.fill();
-                ctx.restore();
+                // Mid-left subtle tropospheric light diffusion
+                const g2 = ctx.createRadialGradient(
+                    width * 0.18 - mouseX * 20, height * 0.48 - mouseY * 15, 0,
+                    width * 0.18 - mouseX * 20, height * 0.48 - mouseY * 15, Math.max(width * 0.48, 380)
+                );
+                g2.addColorStop(0, 'rgba(199, 210, 254, 0.18)');
+                g2.addColorStop(0.5, 'rgba(224, 242, 254, 0.08)');
+                g2.addColorStop(1, 'rgba(248, 250, 252, 0)');
+                ctx.fillStyle = g2;
+                ctx.fillRect(0, 0, width, height);
             }
 
             function render() {
@@ -3745,48 +3761,133 @@
 
                 ctx.clearRect(0, 0, width, height);
 
-                drawTroposphericBand(
-                    0.22, 
-                    28, 
-                    0.0022, 
-                    0.0006, 
-                    [
-                        { offset: 0, color: 'rgba(226, 232, 240, 0.07)' },
-                        { offset: 0.6, color: 'rgba(241, 245, 249, 0.03)' },
-                        { offset: 1, color: 'rgba(248, 250, 252, 0)' }
-                    ],
-                    0.4
-                );
+                // 1. Soft blurred sky diffusion layers
+                drawAtmosphericSkyGlow();
 
-                drawTroposphericBand(
-                    0.68, 
-                    36, 
-                    0.0016, 
-                    -0.00045, 
-                    [
-                        { offset: 0, color: 'rgba(219, 234, 254, 0.045)' },
-                        { offset: 0.5, color: 'rgba(226, 232, 240, 0.02)' },
-                        { offset: 1, color: 'rgba(248, 250, 252, 0)' }
-                    ],
-                    0.7
-                );
+                const R_EDGE = width < 768 ? 95 : 128;
+                const R_TRI = width < 768 ? 75 : 98;
+                const R_MOUSE = 140;
 
-                for (let i = 0; i < particles.length; i++) {
-                    const p = particles[i];
+                // 2. Update node coordinates
+                for (let i = 0; i < nodes.length; i++) {
+                    const n = nodes[i];
                     if (!prefersReducedMotion) {
-                        p.x += p.vx;
-                        p.y += Math.sin(time * p.freq + p.phase) * p.vyAmplitude;
-                        if (p.x > width + 20) p.x = -20;
-                        if (p.y > height + 20) p.y = -20;
-                        if (p.y < -20) p.y = height + 20;
+                        n.x += n.vx;
+                        n.y += n.vy;
+                        // Wrap edges smoothly
+                        if (n.x < -30) n.x = width + 30;
+                        else if (n.x > width + 30) n.x = -30;
+                        if (n.y < -30) n.y = height + 30;
+                        else if (n.y > height + 30) n.y = -30;
                     }
 
-                    const pX = p.x + mouseX * 22 * p.depth;
-                    const pY = p.y + mouseY * 22 * p.depth;
+                    let px = n.x + mouseX * 18 * n.depth;
+                    let py = n.y + mouseY * 18 * n.depth;
 
+                    // Subtle mouse deflection
+                    if (hasMouse) {
+                        const mdx = px - rawMouseX;
+                        const mdy = py - rawMouseY;
+                        const md = Math.hypot(mdx, mdy);
+                        if (md < 110 && md > 0.1) {
+                            const force = (110 - md) / 110 * 10;
+                            px += (mdx / md) * force;
+                            py += (mdy / md) * force;
+                        }
+                    }
+
+                    n.projX = px;
+                    n.projY = py;
+                }
+
+                // 3. Build neighbor graph for edge and polygon detection
+                const closeNeighbors = Array.from({ length: nodes.length }, () => []);
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dx = nodes[i].projX - nodes[j].projX;
+                        const dy = nodes[i].projY - nodes[j].projY;
+                        const distSq = dx * dx + dy * dy;
+
+                        // Edge connection candidate
+                        if (distSq < R_EDGE * R_EDGE) {
+                            const dist = Math.sqrt(distSq);
+                            const edgeAlpha = (1 - dist / R_EDGE) * 0.22;
+                            ctx.beginPath();
+                            ctx.moveTo(nodes[i].projX, nodes[i].projY);
+                            ctx.lineTo(nodes[j].projX, nodes[j].projY);
+                            ctx.strokeStyle = `rgba(56, 189, 248, ${edgeAlpha})`;
+                            ctx.lineWidth = 0.65;
+                            ctx.stroke();
+
+                            if (distSq < R_TRI * R_TRI) {
+                                closeNeighbors[i].push({ id: j, dist: dist });
+                            }
+                        }
+                    }
+                }
+
+                // 4. Draw connecting polygon facets (crystalline triangulation)
+                for (let i = 0; i < nodes.length; i++) {
+                    const nList = closeNeighbors[i];
+                    for (let a = 0; a < nList.length; a++) {
+                        const j = nList[a].id;
+                        const d_ij = nList[a].dist;
+                        for (let b = a + 1; b < nList.length; b++) {
+                            const k = nList[b].id;
+                            const d_ik = nList[b].dist;
+                            const dx_jk = nodes[j].projX - nodes[k].projX;
+                            const dy_jk = nodes[j].projY - nodes[k].projY;
+                            const dSq_jk = dx_jk * dx_jk + dy_jk * dy_jk;
+                            if (dSq_jk < R_TRI * R_TRI) {
+                                const d_jk = Math.sqrt(dSq_jk);
+                                const maxD = Math.max(d_ij, d_ik, d_jk);
+                                const facetAlpha = (1 - maxD / R_TRI) * 0.12;
+
+                                ctx.beginPath();
+                                ctx.moveTo(nodes[i].projX, nodes[i].projY);
+                                ctx.lineTo(nodes[j].projX, nodes[j].projY);
+                                ctx.lineTo(nodes[k].projX, nodes[k].projY);
+                                ctx.closePath();
+                                ctx.fillStyle = `rgba(186, 230, 253, ${facetAlpha})`;
+                                ctx.fill();
+                            }
+                        }
+                    }
+                }
+
+                // 5. Interactive cursor connectivity
+                if (hasMouse) {
+                    for (let i = 0; i < nodes.length; i++) {
+                        const dx = nodes[i].projX - rawMouseX;
+                        const dy = nodes[i].projY - rawMouseY;
+                        const d = Math.hypot(dx, dy);
+                        if (d < R_MOUSE) {
+                            const alpha = (1 - d / R_MOUSE) * 0.26;
+                            ctx.beginPath();
+                            ctx.moveTo(nodes[i].projX, nodes[i].projY);
+                            ctx.lineTo(rawMouseX, rawMouseY);
+                            ctx.strokeStyle = `rgba(14, 165, 233, ${alpha})`;
+                            ctx.lineWidth = 0.75;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // 6. Draw crystalline nodes
+                for (let i = 0; i < nodes.length; i++) {
+                    const n = nodes[i];
+                    const pulse = Math.sin(time * n.pulseSpeed + n.phase) * 0.3 + 0.7;
+
+                    // Node core
                     ctx.beginPath();
-                    ctx.arc(pX, pY, p.baseRadius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(100, 116, 139, ${p.alpha})`;
+                    ctx.arc(n.projX, n.projY, n.baseRadius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(14, 165, 233, ${0.48 * pulse})`;
+                    ctx.fill();
+
+                    // Soft aura
+                    ctx.beginPath();
+                    ctx.arc(n.projX, n.projY, n.baseRadius * 2.2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(186, 230, 253, ${0.16 * pulse})`;
                     ctx.fill();
                 }
 
