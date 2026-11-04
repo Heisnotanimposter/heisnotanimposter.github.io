@@ -11,6 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
+    <!-- KaTeX Mathematical Typography Engine -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+
+
     <style>
         /* ==========================================================================
            Atmospheric Precision Design System
@@ -753,37 +759,66 @@
 
         .modal-tabs-bar {
             display: flex;
+            align-items: center;
             border-bottom: 1px solid var(--border-primary);
-            background: rgba(15, 23, 42, 0.02);
+            background: rgba(248, 250, 252, 0.88);
             overflow-x: auto;
-            padding: 4px 12px;
-            gap: 4px;
+            overflow-y: hidden;
+            padding: 8px 16px;
+            gap: 8px;
+            min-height: 52px;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(148, 163, 184, 0.35) transparent;
+        }
+
+        .modal-tabs-bar::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .modal-tabs-bar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-tabs-bar::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.35);
+            border-radius: 4px;
+        }
+
+        .modal-tabs-bar::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 116, 139, 0.5);
         }
 
         .modal-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
             background: transparent;
-            border: none;
-            padding: 7px 13px;
+            border: 1px solid transparent;
+            padding: 7px 14px;
             font-family: var(--font-sans);
             font-size: 13px;
+            line-height: 1.4;
             font-weight: 500;
             cursor: pointer;
             color: var(--text-secondary);
-            border-radius: 6px;
+            border-radius: 8px;
             transition: all 0.16s var(--ease-out-expo);
             white-space: nowrap;
+            box-sizing: border-box;
         }
 
         .modal-tab-btn:hover {
             color: var(--text-primary);
-            background: rgba(15, 23, 42, 0.04);
+            background: rgba(15, 23, 42, 0.05);
         }
 
         .modal-tab-btn.active {
             color: var(--text-primary);
             font-weight: 600;
-            background: var(--bg-surface-solid);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            background: #ffffff;
+            border-color: rgba(226, 232, 240, 0.95);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
         }
 
         .modal-body-scroll {
@@ -1060,7 +1095,7 @@
                         </tr>
                         <tr>
                             <td><strong data-i18n="curricula_title">Graduate Curricula & Proofs</strong></td>
-                            <td data-i18n="curricula_desc">Rigorous mathematical solutions and derivations: PS0–PS4 (GLM, SVM, EM, MDP), Matrix Calculus, ZBDD reduction rules.</td>
+                            <td data-i18n="curricula_desc">Rigorous mathematical proofs: Stanford CS229 (PS0–PS4) & CS230, MITx Statistics, Knuth ZBDDs, and WES 118+ verified credits.</td>
                             <td><a href="#curriculum" data-i18n="curricula_link_text">Inspect Proofs & PS →</a></td>
                         </tr>
                         <tr>
@@ -1071,11 +1106,7 @@
                     </tbody>
                 </table>
 
-                <div class="hero-actions aero-step step-5">
-                    <a href="#services" class="btn-minimal" data-i18n="btn_hero_services">Interactive Services & Projects ↓</a>
-                    <a href="#curriculum" class="btn-minimal" data-i18n="btn_hero_curriculum">Curriculum & Mathematical Proofs →</a>
-                    <button id="heroOpenResumeBtn" class="btn-minimal" data-i18n="btn_hero_resume">View Formal Academic CV →</button>
-                </div>
+
             </section>
 
             <!-- SECTION 1: INTERACTIVE SERVICES & CORE RESEARCH -->
@@ -1313,16 +1344,7 @@
 
             </div>
 
-            <!-- Transition from Curriculum to CV -->
-            <section class="section-header aero-step step-4" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-primary);">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-                    <div>
-                        <div style="font-weight:600; color:var(--text-primary); margin-bottom:4px;" data-i18n="curriculum_bottom_title">Formal Academic Curriculum Vitae (CV)</div>
-                        <div style="font-size:13.5px; color:var(--text-secondary);" data-i18n="curriculum_bottom_sub">For university admissions committees, institutional review boards, and prospective research mentors.</div>
-                    </div>
-                    <button id="curriculumBottomToResumeBtn" class="btn-minimal" data-i18n="curriculum_bottom_to_resume">Switch to Full Academic CV →</button>
-                </div>
-            </section>
+
         </main>
 
         <!-- ================= VIEW 3: MULTI-LINGUAL ACADEMIC RESUME ================= -->
@@ -1464,7 +1486,7 @@
                 'services_desc': `Live WebGL 3D systems: Stanford CS229 Platform, SafeRoute Sense 3D spatial simulator, Protein Explorer (AlphaFold PAE).`,
                 'services_link_text': `View Running Services ↓`,
                 'curricula_title': `Graduate Curricula & Proofs`,
-                'curricula_desc': `Rigorous mathematical solutions and derivations: PS0–PS4 (GLM, SVM, EM, MDP), Matrix Calculus, ZBDD reduction rules.`,
+                'curricula_desc': `Rigorous mathematical proofs: Stanford CS229 (PS0–PS4) & CS230, MITx Statistics, Knuth ZBDDs, and WES 118+ verified credits.`,
                 'curricula_link_text': `Inspect Proofs & PS →`,
                 'cv_title': `Curriculum Vitae`,
                 'cv_desc': `4-Language verified academic resume (English, Korean, Japanese, Chinese) for university admissions and institutional review.`,
@@ -1870,7 +1892,7 @@
                 'services_desc': `라이브 WebGL 3D 시스템: 스탠포드 CS229 플랫폼, SafeRoute Sense 3D 공간 시뮬레이터, 단백질 구조 분석기(AlphaFold PAE).`,
                 'services_link_text': `실행 중인 서비스 보기 ↓`,
                 'curricula_title': `대학원 커리큘럼 및 수식 증명`,
-                'curricula_desc': `엄밀한 수식 유도 및 해답: 스탠포드 PS0~PS4(GLM, SVM, EM, MDP), 행렬 미적분학, ZBDD 축소 규칙.`,
+                'curricula_desc': `엄밀한 수리적 증명 및 해답: 스탠포드 CS229(PS0~PS4) 및 CS230, MITx 통계학, 크누스 ZBDD, WES 118+ 학점 공인.`,
                 'curricula_link_text': `수식 증명 및 풀이 확인 →`,
                 'cv_title': `학술 이력서 (CV)`,
                 'cv_desc': `해외 대학원 어드미션 커미티 및 연구 기관 심사를 위한 4개국어(영어, 한국어, 일본어, 중국어) 공인 학술 이력서.`,
@@ -2276,7 +2298,7 @@
                 'services_desc': `リアルタイムWebGL 3Dシステム：スタンフォードCS229プラットフォーム、SafeRoute Sense 3D空間シミュレータ、タンパク質解析ツール（AlphaFold PAE）。`,
                 'services_link_text': `稼働中サービスを見る ↓`,
                 'curricula_title': `大学院カリキュラム＆数理証明`,
-                'curricula_desc': `厳密な数式導出および解答：スタンフォードPS0〜PS4（GLM、SVM、EM、MDP）、行列微積分、ZBDD簡約則。`,
+                'curricula_desc': `厳密な数理証明および解答：スタンフォードCS229（PS0〜PS4）＆CS230、MITx統計学、Knuth ZBDD、WES 118単位公認。`,
                 'curricula_link_text': `証明と課題解答を見る →`,
                 'cv_title': `学術履歴書 (CV)`,
                 'cv_desc': `大学院審査委員会および研究機関提出用の4言語（英語・韓国語・日本語・中国語）認証済み学術履歴書。`,
@@ -2682,7 +2704,7 @@
                 'services_desc': `实时 WebGL 3D 系统：斯坦福 CS229 平台、SafeRoute Sense 3D 空间避障仿真器、蛋白质结构探索器（AlphaFold PAE）。`,
                 'services_link_text': `查看在线服务 ↓`,
                 'curricula_title': `研究生课程与数理推导`,
-                'curricula_desc': `严谨的数学推导与解答：斯坦福 PS0~PS4（GLM、SVM、EM、MDP）、矩阵微积分、ZBDD 约简规则。`,
+                'curricula_desc': `严谨的数学证明与解答：斯坦福 CS229 (PS0~PS4) 与 CS230、MITx 统计学、Knuth ZBDD、WES 118+ 认证学分。`,
                 'curricula_link_text': `查看数理推导与作业 →`,
                 'cv_title': `学术简历 (CV)`,
                 'cv_desc': `适用于高校招生委员会及学术评审机构的四语种（英、韩、日、中）认证学术简历。`,
@@ -3084,163 +3106,163 @@
                         
                         <div class="math-box">
                             <strong>1. Gradient and Hessian of Symmetric Quadratic Forms</strong><br>
-                            Let $f(x) = \frac{1}{2} x^T A x + b^T x$ where $x, b \in \mathbb{R}^n$ and $A \in \mathbb{R}^{n \times n}$ is symmetric ($A = A^T$).<br>
+                            Let $f(x) = \\frac{1}{2} x^T A x + b^T x$ where $x, b \\in \\mathbb{R}^n$ and $A \\in \\mathbb{R}^{n \\times n}$ is symmetric ($A = A^T$).<br>
                             <strong>Step-by-step Index Derivation:</strong> Expanding in summation notation:<br>
-                            $f(x) = \frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n A_{ij} x_i x_j + \sum_{i=1}^n b_i x_i$<br>
+                            $f(x) = \\frac{1}{2} \\sum_{i=1}^n \\sum_{j=1}^n A_{ij} x_i x_j + \\sum_{i=1}^n b_i x_i$<br>
                             Taking the partial derivative with respect to coordinate $x_k$ using the product rule:<br>
-                            $\frac{\partial f}{\partial x_k} = \frac{1}{2} \left[ \sum_{j=1}^n A_{kj} x_j + \sum_{i=1}^n A_{ik} x_i \right] + b_k$<br>
+                            $\\frac{\\partial f}{\\partial x_k} = \\frac{1}{2} \\left[ \\sum_{j=1}^n A_{kj} x_j + \\sum_{i=1}^n A_{ik} x_i \\right] + b_k$<br>
                             Since $A_{ik} = A_{ki}$ by symmetry:<br>
-                            $\frac{\partial f}{\partial x_k} = \sum_{j=1}^n A_{kj} x_j + b_k = (Ax)_k + b_k \implies \nabla_x f(x) = Ax + b$<br>
-                            Differentiating again with respect to $x_l$: $\frac{\partial^2 f}{\partial x_l \partial x_k} = A_{kl} \implies \nabla^2 f(x) = A$.
+                            $\\frac{\\partial f}{\\partial x_k} = \\sum_{j=1}^n A_{kj} x_j + b_k = (Ax)_k + b_k \\implies \\nabla_x f(x) = Ax + b$<br>
+                            Differentiating again with respect to $x_l$: $\\frac{\\partial^2 f}{\\partial x_l \\partial x_k} = A_{kl} \\implies \\nabla^2 f(x) = A$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Spectral Theorem & The Rayleigh Quotient Bounds</strong><br>
-                            <strong>Theorem:</strong> For any real symmetric matrix $A \in \mathbb{R}^{n \times n}$, there exists an orthogonal matrix $Q = [q_1, \dots, q_n]$ ($Q^T Q = I$) such that:<br>
-                            $A = Q \Lambda Q^T = \sum_{i=1}^n \lambda_i q_i q_i^T, \quad \text{where } \lambda_1 \le \lambda_2 \le \dots \le \lambda_n$<br>
-                            <strong>Rayleigh Quotient:</strong> For any non-zero vector $x \ne 0$, let $y = Q^T x$ ($x = Qy$). Then $\|x\|_2^2 = \|y\|_2^2 = \sum y_i^2$, and:<br>
-                            $R_A(x) = \frac{x^T A x}{x^T x} = \frac{y^T \Lambda y}{y^T y} = \frac{\sum_{i=1}^n \lambda_i y_i^2}{\sum_{i=1}^n y_i^2}$<br>
-                            Since $\lambda_1 \sum y_i^2 \le \sum \lambda_i y_i^2 \le \lambda_n \sum y_i^2$, we have the tight spectral bounds:<br>
-                            $\lambda_{\min}(A) \le \frac{x^T A x}{x^T x} \le \lambda_{\max}(A), \quad \text{with equality attained at } x = q_1 \text{ and } x = q_n$.
+                            <strong>Theorem:</strong> For any real symmetric matrix $A \\in \\mathbb{R}^{n \\times n}$, there exists an orthogonal matrix $Q = [q_1, \\dots, q_n]$ ($Q^T Q = I$) such that:<br>
+                            $A = Q \\Lambda Q^T = \\sum_{i=1}^n \\lambda_i q_i q_i^T, \\quad \\text{where } \\lambda_1 \\le \\lambda_2 \\le \\dots \\le \\lambda_n$<br>
+                            <strong>Rayleigh Quotient:</strong> For any non-zero vector $x \\ne 0$, let $y = Q^T x$ ($x = Qy$). Then $\\|x\\|_2^2 = \\|y\\|_2^2 = \\sum y_i^2$, and:<br>
+                            $R_A(x) = \\frac{x^T A x}{x^T x} = \\frac{y^T \\Lambda y}{y^T y} = \\frac{\\sum_{i=1}^n \\lambda_i y_i^2}{\\sum_{i=1}^n y_i^2}$<br>
+                            Since $\\lambda_1 \\sum y_i^2 \\le \\sum \\lambda_i y_i^2 \\le \\lambda_n \\sum y_i^2$, we have the tight spectral bounds:<br>
+                            $\\lambda_{\\min}(A) \\le \\frac{x^T A x}{x^T x} \\le \\lambda_{\\max}(A), \\quad \\text{with equality attained at } x = q_1 \\text{ and } x = q_n$.
                         </div>
 
                         <div class="math-box">
                             <strong>3. Positive Definite Geometry & Matrix Differential Identities</strong><br>
-                            - A symmetric matrix $A$ is positive definite ($A \succ 0$) iff all eigenvalues $\lambda_i > 0$.<br>
-                            - $A \succ 0$ induces a valid inner product $\langle x, y \rangle_A = x^T A y$ and Mahalanobis metric $\|x\|_A = \sqrt{x^T A x}$, proving that level curves of quadratic objectives are hyper-ellipsoids with strictly positive curvature.<br>
+                            - A symmetric matrix $A$ is positive definite ($A \\succ 0$) iff all eigenvalues $\\lambda_i > 0$.<br>
+                            - $A \\succ 0$ induces a valid inner product $\\langle x, y \\rangle_A = x^T A y$ and Mahalanobis metric $\\|x\\|_A = \\sqrt{x^T A x}$, proving that level curves of quadratic objectives are hyper-ellipsoids with strictly positive curvature.<br>
                             - <strong>Essential Matrix Differentials:</strong><br>
-                            $\nabla_X \operatorname{tr}(AXB) = A^T B^T, \quad \nabla_X \log \det(X) = X^{-T}, \quad \nabla_X \operatorname{tr}(X^{-1} A) = - X^{-T} A^T X^{-T}$.
+                            $\\nabla_X \\operatorname{tr}(AXB) = A^T B^T, \\quad \\nabla_X \\log \\det(X) = X^{-T}, \\quad \\nabla_X \\operatorname{tr}(X^{-1} A) = - X^{-T} A^T X^{-T}$.
                         </div>
                     `,
                     'ps1': `
                         <h4>Problem Set 1: Supervised Learning, GLMs & Locally Weighted Regression</h4>
                         <div class="math-box">
                             <strong>1. Second-Order Optimization: Newton-Raphson vs Gradient Ascent</strong><br>
-                            For log-likelihood $\ell(\theta)$, the Newton-Raphson update is: $\theta^{(t+1)} = \theta^{(t)} - H^{-1} \nabla_\theta \ell(\theta^{(t)})$.<br>
-                            For logistic regression with sigmoid $h_\theta(x) = \frac{1}{1 + \exp(-\theta^T x)}$:<br>
-                            Gradient: $\nabla_\theta \ell(\theta) = X^T (y - h_\theta(X))$<br>
-                            Hessian: $H = \nabla_\theta^2 \ell(\theta) = - X^T D X$, where $D = \operatorname{diag}(h_\theta(x^{(i)})(1 - h_\theta(x^{(i)}))) \succ 0$.<br>
-                            Since $D$ is strictly positive for non-degenerate probabilities, $H \prec 0$ everywhere, guaranteeing quadratic asymptotic convergence rate: $\|\theta^{(t+1)} - \theta^*\| \le M \|\theta^{(t)} - \theta^*\|^2$.
+                            For log-likelihood $\\ell(\\theta)$, the Newton-Raphson update is: $\\theta^{(t+1)} = \\theta^{(t)} - H^{-1} \\nabla_\\theta \\ell(\\theta^{(t)})$.<br>
+                            For logistic regression with sigmoid $h_\\theta(x) = \\frac{1}{1 + \\exp(-\\theta^T x)}$:<br>
+                            Gradient: $\\nabla_\\theta \\ell(\\theta) = X^T (y - h_\\theta(X))$<br>
+                            Hessian: $H = \\nabla_\\theta^2 \\ell(\\theta) = - X^T D X$, where $D = \\operatorname{diag}(h_\\theta(x^{(i)})(1 - h_\\theta(x^{(i)}))) \\succ 0$.<br>
+                            Since $D$ is strictly positive for non-degenerate probabilities, $H \\prec 0$ everywhere, guaranteeing quadratic asymptotic convergence rate: $\\|\\theta^{(t+1)} - \\theta^*\\| \\le M \\|\\theta^{(t)} - \\theta^*\\|^2$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Generative GDA vs Discriminative Logistic Regression</strong><br>
-                            Under Gaussian Discriminant Analysis (GDA): $y \sim \operatorname{Bernoulli}(\phi)$, $x|y=0 \sim \mathcal{N}(\mu_0, \Sigma)$, $x|y=1 \sim \mathcal{N}(\mu_1, \Sigma)$.<br>
+                            Under Gaussian Discriminant Analysis (GDA): $y \\sim \\operatorname{Bernoulli}(\\phi)$, $x|y=0 \\sim \\mathcal{N}(\\mu_0, \\Sigma)$, $x|y=1 \\sim \\mathcal{N}(\\mu_1, \\Sigma)$.<br>
                             <strong>Posterior Derivation:</strong> By Bayes' rule:<br>
-                            $p(y=1|x) = \frac{p(x|y=1)p(y=1)}{p(x|y=0)p(y=0) + p(x|y=1)p(y=1)} = \frac{1}{1 + \exp\left(-\left[ \theta^T x + \theta_0 \right]\right)}$<br>
-                            where $\theta = \Sigma^{-1}(\mu_1 - \mu_0)$ and $\theta_0 = \frac{1}{2}\mu_0^T \Sigma^{-1} \mu_0 - \frac{1}{2}\mu_1^T \Sigma^{-1} \mu_1 + \log\frac{\phi}{1-\phi}$.<br>
+                            $p(y=1|x) = \\frac{p(x|y=1)p(y=1)}{p(x|y=0)p(y=0) + p(x|y=1)p(y=1)} = \\frac{1}{1 + \\exp\\left(-\\left[ \\theta^T x + \\theta_0 \\right]\\right)}$<br>
+                            where $\\theta = \\Sigma^{-1}(\\mu_1 - \\mu_0)$ and $\\theta_0 = \\frac{1}{2}\\mu_0^T \\Sigma^{-1} \\mu_0 - \\frac{1}{2}\\mu_1^T \\Sigma^{-1} \\mu_1 + \\log\\frac{\\phi}{1-\\phi}$.<br>
                             <strong>Theoretical Consequence:</strong> GDA achieves asymptotic statistical efficiency (Cramér-Rao lower bound) when normality holds. Logistic regression makes strictly weaker assumptions and remains consistent under arbitrary non-Gaussian exponential families.
                         </div>
 
                         <div class="math-box">
                             <strong>3. General Exponential Family & Strict Convexity of GLMs</strong><br>
-                            Natural exponential family density: $p(y; \eta) = b(y) \exp(\eta^T T(y) - a(\eta))$.<br>
-                            Normalizing $\int p(y; \eta) dy = 1 \implies a(\eta) = \log \int b(y) \exp(\eta^T T(y)) dy$. Differentiating under the integral:<br>
-                            $\nabla_\eta a(\eta) = \mathbb{E}[T(y)], \quad \nabla_\eta^2 a(\eta) = \operatorname{Var}(T(y)) \succeq 0$.<br>
-                            For natural link $\eta = \theta^T x$, the negative log-likelihood Hessian is:<br>
-                            $\nabla_\theta^2 (-\ell(\theta)) = \sum_{i=1}^m \nabla_\eta^2 a(\eta^{(i)}) x^{(i)} (x^{(i)})^T = \sum_{i=1}^m \operatorname{Var}(y|x^{(i)}) x^{(i)} (x^{(i)})^T \succeq 0$.<br>
+                            Natural exponential family density: $p(y; \\eta) = b(y) \\exp(\\eta^T T(y) - a(\\eta))$.<br>
+                            Normalizing $\\int p(y; \\eta) dy = 1 \\implies a(\\eta) = \\log \\int b(y) \\exp(\\eta^T T(y)) dy$. Differentiating under the integral:<br>
+                            $\\nabla_\\eta a(\\eta) = \\mathbb{E}[T(y)], \\quad \\nabla_\\eta^2 a(\\eta) = \\operatorname{Var}(T(y)) \\succeq 0$.<br>
+                            For natural link $\\eta = \\theta^T x$, the negative log-likelihood Hessian is:<br>
+                            $\\nabla_\\theta^2 (-\\ell(\\theta)) = \\sum_{i=1}^m \\nabla_\\eta^2 a(\\eta^{(i)}) x^{(i)} (x^{(i)})^T = \\sum_{i=1}^m \\operatorname{Var}(y|x^{(i)}) x^{(i)} (x^{(i)})^T \\succeq 0$.<br>
                             Proving all Generalized Linear Models under canonical link are <strong>globally convex</strong> with no non-global local extrema.
                         </div>
 
                         <div class="math-box">
                             <strong>4. Locally Weighted Linear Regression (LWR)</strong><br>
-                            Objective: $J(\theta) = \sum_{i=1}^m w^{(i)} (y^{(i)} - \theta^T x^{(i)})^2 = (X\theta - y)^T W (X\theta - y)$, with weights $w^{(i)} = \exp\left(-\frac{\|x^{(i)} - x\|^2}{2\tau^2}\right)$.<br>
-                            Analytical solution via weighted normal equations: $\theta^* = (X^T W X)^{-1} X^T W y$.
+                            Objective: $J(\\theta) = \\sum_{i=1}^m w^{(i)} (y^{(i)} - \\theta^T x^{(i)})^2 = (X\\theta - y)^T W (X\\theta - y)$, with weights $w^{(i)} = \\exp\\left(-\\frac{\\|x^{(i)} - x\\|^2}{2\\tau^2}\\right)$.<br>
+                            Analytical solution via weighted normal equations: $\\theta^* = (X^T W X)^{-1} X^T W y$.
                         </div>
                     `,
                     'ps2': `
                         <h4>Problem Set 2: Model Calibration, Support Vector Machines & Kernel Theory</h4>
                         <div class="math-box">
                             <strong>1. MLE Divergence on Linearly Separable Datasets</strong><br>
-                            If $\exists \theta$ such that $y^{(i)} \theta^T x^{(i)} > 0, \forall i$ (separable data), scaling $\theta \to c \theta$ with $c \to \infty$ yields:<br>
-                            $\ell(c\theta) = - \sum_{i=1}^m \log(1 + \exp(-c y^{(i)} \theta^T x^{(i)})) \to 0$.<br>
-                            The maximum likelihood objective has no finite maximizer ($\|\theta^*\|_2 \to \infty$).<br>
-                            <strong>Resolution:</strong> Adding an $L_2$ Tikhonov penalty $\frac{\lambda}{2} \|\theta\|_2^2$ makes the objective strongly convex with parameter $\lambda$, guaranteeing a unique, strictly bounded finite solution: $\|\theta^*\|_2 \le \frac{m}{\lambda} \max_i \|x^{(i)}\|_2$.
+                            If $\\exists \\theta$ such that $y^{(i)} \\theta^T x^{(i)} > 0, \\forall i$ (separable data), scaling $\\theta \\to c \\theta$ with $c \\to \\infty$ yields:<br>
+                            $\\ell(c\\theta) = - \\sum_{i=1}^m \\log(1 + \\exp(-c y^{(i)} \\theta^T x^{(i)})) \\to 0$.<br>
+                            The maximum likelihood objective has no finite maximizer ($\\|\\theta^*\\|_2 \\to \\infty$).<br>
+                            <strong>Resolution:</strong> Adding an $L_2$ Tikhonov penalty $\\frac{\\lambda}{2} \\|\\theta\\|_2^2$ makes the objective strongly convex with parameter $\\lambda$, guaranteeing a unique, strictly bounded finite solution: $\\|\\theta^*\\|_2 \\le \\frac{m}{\\lambda} \\max_i \\|x^{(i)}\\|_2$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Support Vector Machines: Primal to Wolfe Dual via KKT Conditions</strong><br>
-                            Primal formulation: $\min_{w, b} \frac{1}{2} \|w\|^2$ subject to $y^{(i)}(w^T x^{(i)} + b) \ge 1, \forall i$.<br>
-                            Lagrangian: $\mathcal{L}(w, b, \alpha) = \frac{1}{2} \|w\|^2 - \sum_{i=1}^m \alpha_i [y^{(i)}(w^T x^{(i)} + b) - 1], \quad \alpha_i \ge 0$.<br>
+                            Primal formulation: $\\min_{w, b} \\frac{1}{2} \\|w\\|^2$ subject to $y^{(i)}(w^T x^{(i)} + b) \\ge 1, \\forall i$.<br>
+                            Lagrangian: $\\mathcal{L}(w, b, \\alpha) = \\frac{1}{2} \\|w\\|^2 - \\sum_{i=1}^m \\alpha_i [y^{(i)}(w^T x^{(i)} + b) - 1], \\quad \\alpha_i \\ge 0$.<br>
                             <strong>Stationary Conditions:</strong><br>
-                            $\nabla_w \mathcal{L} = w - \sum_{i=1}^m \alpha_i y^{(i)} x^{(i)} = 0 \implies w = \sum_{i=1}^m \alpha_i y^{(i)} x^{(i)}$<br>
-                            $\frac{\partial \mathcal{L}}{\partial b} = - \sum_{i=1}^m \alpha_i y^{(i)} = 0 \implies \sum_{i=1}^m \alpha_i y^{(i)} = 0$<br>
-                            Substituting $w$ back into $\mathcal{L}$ yields the Wolfe Dual:<br>
-                            $\max_\alpha W(\alpha) = \sum_{i=1}^m \alpha_i - \frac{1}{2} \sum_{i=1}^m \sum_{j=1}^m \alpha_i \alpha_j y^{(i)} y^{(j)} \langle x^{(i)}, x^{(j)} \rangle \quad \text{s.t.} \quad \alpha_i \ge 0, \sum_{i=1}^m \alpha_i y^{(i)} = 0$.<br>
-                            <strong>KKT Complementary Slackness:</strong> $\alpha_i [y^{(i)}(w^T x^{(i)} + b) - 1] = 0$.<br>
-                            Only points on the margin hyperplanes have $\alpha_i > 0$ (Support Vectors).
+                            $\\nabla_w \\mathcal{L} = w - \\sum_{i=1}^m \\alpha_i y^{(i)} x^{(i)} = 0 \\implies w = \\sum_{i=1}^m \\alpha_i y^{(i)} x^{(i)}$<br>
+                            $\\frac{\\partial \\mathcal{L}}{\\partial b} = - \\sum_{i=1}^m \\alpha_i y^{(i)} = 0 \\implies \\sum_{i=1}^m \\alpha_i y^{(i)} = 0$<br>
+                            Substituting $w$ back into $\\mathcal{L}$ yields the Wolfe Dual:<br>
+                            $\\max_\\alpha W(\\alpha) = \\sum_{i=1}^m \\alpha_i - \\frac{1}{2} \\sum_{i=1}^m \\sum_{j=1}^m \\alpha_i \\alpha_j y^{(i)} y^{(j)} \\langle x^{(i)}, x^{(j)} \\rangle \\quad \\text{s.t.} \\quad \\alpha_i \\ge 0, \\sum_{i=1}^m \\alpha_i y^{(i)} = 0$.<br>
+                            <strong>KKT Complementary Slackness:</strong> $\\alpha_i [y^{(i)}(w^T x^{(i)} + b) - 1] = 0$.<br>
+                            Only points on the margin hyperplanes have $\\alpha_i > 0$ (Support Vectors).
                         </div>
 
                         <div class="math-box">
                             <strong>3. Mercer's Theorem & Reproducing Kernel Hilbert Spaces (RKHS)</strong><br>
-                            A symmetric function $K(x, z)$ is a valid Mercer kernel iff the Gram matrix $K_{ij} = K(x^{(i)}, x^{(j)})$ is positive semi-definite ($K \succeq 0$) for any finite set.<br>
-                            <strong>Closure Properties:</strong> Valid kernels are closed under positive linear combinations ($c_1 K_1 + c_2 K_2$), Hadamard products ($K_1 \odot K_2$, via Schur Product Theorem), polynomial maps ($p(K)$), and exponentiation $K'(x, z) = \exp(K(x, z))$.
+                            A symmetric function $K(x, z)$ is a valid Mercer kernel iff the Gram matrix $K_{ij} = K(x^{(i)}, x^{(j)})$ is positive semi-definite ($K \\succeq 0$) for any finite set.<br>
+                            <strong>Closure Properties:</strong> Valid kernels are closed under positive linear combinations ($c_1 K_1 + c_2 K_2$), Hadamard products ($K_1 \\odot K_2$, via Schur Product Theorem), polynomial maps ($p(K)$), and exponentiation $K'(x, z) = \\exp(K(x, z))$.
                         </div>
 
                         <div class="math-box">
                             <strong>4. Bayesian Prior Interpretation of Regularization</strong><br>
-                            - <strong>Gaussian Prior</strong> $p(\theta) \sim \mathcal{N}(0, \sigma^2 I) \iff L_2$ Regularization (Ridge / Weight Decay) with $\lambda = \frac{\sigma_\epsilon^2}{\sigma^2}$.<br>
-                            - <strong>Laplace Prior</strong> $p(\theta) = \prod_j \frac{1}{2b} \exp\left(-\frac{|\theta_j|}{b}\right) \iff L_1$ Regularization (Lasso) with $\lambda = \frac{\sigma_\epsilon^2}{b}$.<br>
-                            The non-differentiable corner of the $L_1$ ball at $\theta_j = 0$ forces subgradients to set parameters exactly to zero, yielding sparse representations.
+                            - <strong>Gaussian Prior</strong> $p(\\theta) \\sim \\mathcal{N}(0, \\sigma^2 I) \\iff L_2$ Regularization (Ridge / Weight Decay) with $\\lambda = \\frac{\\sigma_\\epsilon^2}{\\sigma^2}$.<br>
+                            - <strong>Laplace Prior</strong> $p(\\theta) = \\prod_j \\frac{1}{2b} \\exp\\left(-\\frac{|\\theta_j|}{b}\\right) \\iff L_1$ Regularization (Lasso) with $\\lambda = \\frac{\\sigma_\\epsilon^2}{b}$.<br>
+                            The non-differentiable corner of the $L_1$ ball at $\\theta_j = 0$ forces subgradients to set parameters exactly to zero, yielding sparse representations.
                         </div>
                     `,
                     'ps3': `
                         <h4>Problem Set 3: Information Theory, MLE Equivalence & Natural Gradients</h4>
                         <div class="math-box">
                             <strong>1. Equivalence of Empirical KL Divergence & Maximum Likelihood</strong><br>
-                            Let $\hat{P}_{\text{data}}(x) = \frac{1}{m} \sum_{i=1}^m \delta(x - x^{(i)})$ be the empirical data distribution.<br>
-                            $D_{KL}(\hat{P}_{\text{data}} \parallel P_\theta) = \sum_{x} \hat{P}_{\text{data}}(x) \log \frac{\hat{P}_{\text{data}}(x)}{P_\theta(x)} = - H(\hat{P}_{\text{data}}) - \frac{1}{m} \sum_{i=1}^m \log P_\theta(x^{(i)})$.<br>
-                            Since empirical entropy $H(\hat{P}_{\text{data}})$ is independent of $\theta$:<br>
-                            $\operatorname{argmin}_\theta D_{KL}(\hat{P}_{\text{data}} \parallel P_\theta) \equiv \operatorname{argmax}_\theta \sum_{i=1}^m \log P_\theta(x^{(i)}) = \operatorname{argmax}_\theta \ell(\theta)$.<br>
+                            Let $\\hat{P}_{\\text{data}}(x) = \\frac{1}{m} \\sum_{i=1}^m \\delta(x - x^{(i)})$ be the empirical data distribution.<br>
+                            $D_{KL}(\\hat{P}_{\\text{data}} \\parallel P_\\theta) = \\sum_{x} \\hat{P}_{\\text{data}}(x) \\log \\frac{\\hat{P}_{\\text{data}}(x)}{P_\\theta(x)} = - H(\\hat{P}_{\\text{data}}) - \\frac{1}{m} \\sum_{i=1}^m \\log P_\\theta(x^{(i)})$.<br>
+                            Since empirical entropy $H(\\hat{P}_{\\text{data}})$ is independent of $\\theta$:<br>
+                            $\\operatorname{argmin}_\\theta D_{KL}(\\hat{P}_{\\text{data}} \\parallel P_\\theta) \\equiv \\operatorname{argmax}_\\theta \\sum_{i=1}^m \\log P_\\theta(x^{(i)}) = \\operatorname{argmax}_\\theta \\ell(\\theta)$.<br>
                             Minimizing information-theoretic divergence is algebraically identical to maximum likelihood estimation.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Fisher Information Matrix as Riemannian Metric Tensor</strong><br>
                             The Fisher Information Matrix is defined as:<br>
-                            $F(\theta) = \mathbb{E}_{x \sim P_\theta} \left[ \nabla_\theta \log P_\theta(x) (\nabla_\theta \log P_\theta(x))^T \right] = - \mathbb{E}_{x \sim P_\theta} \left[ \nabla_\theta^2 \log P_\theta(x) \right]$.<br>
-                            $F(\theta)$ acts as the Riemannian metric tensor on the manifold of probability distributions, measuring distance via the infinitesimal KL divergence: $D_{KL}(P_\theta \parallel P_{\theta + d\theta}) = \frac{1}{2} d\theta^T F(\theta) d\theta + \mathcal{O}(\|d\theta\|^3)$.
+                            $F(\\theta) = \\mathbb{E}_{x \\sim P_\\theta} \\left[ \\nabla_\\theta \\log P_\\theta(x) (\\nabla_\\theta \\log P_\\theta(x))^T \\right] = - \\mathbb{E}_{x \\sim P_\\theta} \\left[ \\nabla_\\theta^2 \\log P_\\theta(x) \\right]$.<br>
+                            $F(\\theta)$ acts as the Riemannian metric tensor on the manifold of probability distributions, measuring distance via the infinitesimal KL divergence: $D_{KL}(P_\\theta \\parallel P_{\\theta + d\\theta}) = \\frac{1}{2} d\\theta^T F(\\theta) d\\theta + \\mathcal{O}(\\|d\\theta\\|^3)$.
                         </div>
 
                         <div class="math-box">
                             <strong>3. Natural Gradient Descent (Amari 1998)</strong><br>
-                            Standard Euclidean gradient $\Delta \theta = -\eta \nabla \ell(\theta)$ is coordinate-dependent: reparameterizing $\phi = g(\theta)$ distorts optimization trajectories.<br>
+                            Standard Euclidean gradient $\\Delta \\theta = -\\eta \\nabla \\ell(\\theta)$ is coordinate-dependent: reparameterizing $\\phi = g(\\theta)$ distorts optimization trajectories.<br>
                             The natural gradient defines steepest descent with respect to invariant distribution distance:<br>
-                            $\Delta \theta_{\text{nat}} = - \eta F(\theta)^{-1} \nabla_\theta \ell(\theta)$, achieving parameterization-invariance and immunity to pathological curvature.
+                            $\\Delta \\theta_{\\text{nat}} = - \\eta F(\\theta)^{-1} \\nabla_\\theta \\ell(\\theta)$, achieving parameterization-invariance and immunity to pathological curvature.
                         </div>
                     `,
                     'ps4': `
                         <h4>Problem Set 4: Reinforcement Learning, PCA & Independent Component Analysis</h4>
                         <div class="math-box">
                             <strong>1. Bellman Operator Contraction Mapping Proof</strong><br>
-                            Define the Bellman optimality operator $B: \mathbb{R}^{|\mathcal{S}|} \to \mathbb{R}^{|\mathcal{S}|}$ on value functions:<br>
-                            $(B V)(s) = R(s) + \gamma \max_{a \in \mathcal{A}} \sum_{s' \in \mathcal{S}} P_{sa}(s') V(s')$.<br>
+                            Define the Bellman optimality operator $B: \\mathbb{R}^{|\\mathcal{S}|} \\to \\mathbb{R}^{|\\mathcal{S}|}$ on value functions:<br>
+                            $(B V)(s) = R(s) + \\gamma \\max_{a \\in \\mathcal{A}} \\sum_{s' \\in \\mathcal{S}} P_{sa}(s') V(s')$.<br>
                             For any two value functions $V_1, V_2$ and any state $s$:<br>
-                            $|(B V_1)(s) - (B V_2)(s)| = \gamma \left| \max_a \sum_{s'} P_{sa}(s') V_1(s') - \max_{a'} \sum_{s'} P_{s a'}(s') V_2(s') \right|$<br>
-                            Using the algebraic inequality $|\max_a f(a) - \max_a g(a)| \le \max_a |f(a) - g(a)|$:<br>
-                            $|(B V_1)(s) - (B V_2)(s)| \le \gamma \max_a \sum_{s'} P_{sa}(s') |V_1(s') - V_2(s')| \le \gamma \max_a \sum_{s'} P_{sa}(s') \|V_1 - V_2\|_\infty = \gamma \|V_1 - V_2\|_\infty$.<br>
-                            Taking the supremum over all states $s \in \mathcal{S}$ yields:<br>
-                            $\|B V_1 - B V_2\|_\infty \le \gamma \|V_1 - V_2\|_\infty$.<br>
-                            Since $\gamma < 1$, $B$ is a $\gamma$-contraction mapping on the complete metric space $(\mathbb{R}^{|\mathcal{S}|}, \|\cdot\|_\infty)$.<br>
-                            <strong>Conclusion:</strong> By the <strong>Banach Fixed-Point Theorem</strong>, Value Iteration $V_{k+1} = B V_k$ converges geometrically at rate $\mathcal{O}(\gamma^k)$ to a unique optimal value function $V^* = B V^*$.
+                            $|(B V_1)(s) - (B V_2)(s)| = \\gamma \\left| \\max_a \\sum_{s'} P_{sa}(s') V_1(s') - \\max_{a'} \\sum_{s'} P_{s a'}(s') V_2(s') \\right|$<br>
+                            Using the algebraic inequality $|\\max_a f(a) - \\max_a g(a)| \\le \\max_a |f(a) - g(a)|$:<br>
+                            $|(B V_1)(s) - (B V_2)(s)| \\le \\gamma \\max_a \\sum_{s'} P_{sa}(s') |V_1(s') - V_2(s')| \\le \\gamma \\max_a \\sum_{s'} P_{sa}(s') \\|V_1 - V_2\\|_\\infty = \\gamma \\|V_1 - V_2\\|_\\infty$.<br>
+                            Taking the supremum over all states $s \\in \\mathcal{S}$ yields:<br>
+                            $\\|B V_1 - B V_2\\|_\\infty \\le \\gamma \\|V_1 - V_2\\|_\\infty$.<br>
+                            Since $\\gamma < 1$, $B$ is a $\\gamma$-contraction mapping on the complete metric space $(\\mathbb{R}^{|\\mathcal{S}|}, \\|\\cdot\\|_\\infty)$.<br>
+                            <strong>Conclusion:</strong> By the <strong>Banach Fixed-Point Theorem</strong>, Value Iteration $V_{k+1} = B V_k$ converges geometrically at rate $\\mathcal{O}(\\gamma^k)$ to a unique optimal value function $V^* = B V^*$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Principal Component Analysis (PCA) via Rayleigh Quotient</strong><br>
-                            For centered data matrix $X \in \mathbb{R}^{m \times n}$ with sample covariance $\Sigma = \frac{1}{m} X^T X$, the first principal component maximizes empirical variance: $\max_{u : \|u\|_2=1} u^T \Sigma u$.<br>
-                            Formulating the Lagrangian: $\mathcal{L}(u, \lambda) = u^T \Sigma u - \lambda (u^T u - 1)$.<br>
-                            $\nabla_u \mathcal{L} = 2 \Sigma u - 2 \lambda u = 0 \implies \Sigma u = \lambda u$.<br>
-                            The variance captured is $u^T \Sigma u = \lambda u^T u = \lambda$. Hence, variance is maximized by choosing the eigenvector corresponding to $\lambda_{\max}(\Sigma)$.
+                            For centered data matrix $X \\in \\mathbb{R}^{m \\times n}$ with sample covariance $\\Sigma = \\frac{1}{m} X^T X$, the first principal component maximizes empirical variance: $\\max_{u : \\|u\\|_2=1} u^T \\Sigma u$.<br>
+                            Formulating the Lagrangian: $\\mathcal{L}(u, \\lambda) = u^T \\Sigma u - \\lambda (u^T u - 1)$.<br>
+                            $\\nabla_u \\mathcal{L} = 2 \\Sigma u - 2 \\lambda u = 0 \\implies \\Sigma u = \\lambda u$.<br>
+                            The variance captured is $u^T \\Sigma u = \\lambda u^T u = \\lambda$. Hence, variance is maximized by choosing the eigenvector corresponding to $\\lambda_{\\max}(\\Sigma)$.
                         </div>
 
                         <div class="math-box">
                             <strong>3. Independent Component Analysis (ICA) via Infomax</strong><br>
-                            Linear mixture model: $x = A s \implies s = W x$ where $W = A^{-1}$.<br>
-                            Nonlinear sigmoid output: $y_i = g(w_i^T x) = \frac{1}{1 + \exp(-w_i^T x)}$.<br>
-                            Output entropy maximization: $H(y) = H(x) + \mathbb{E}[\log |\det J|]$, with Jacobian $J_{ij} = \frac{\partial y_i}{\partial x_j} = g'(w_i^T x) W_{ij}$.<br>
-                            Log-likelihood: $\ell(W) = \log |\det W| + \sum_{i=1}^n \log g'(w_i^T x)$.<br>
-                            Using natural gradient on the parameter matrix $\Delta W \propto \nabla_W \ell(W) W^T W$ yields Bell-Sejnowski update:<br>
-                            $\Delta W \propto \left[ I - 2 y x^T W^T \right] W = \left[ I - 2 g(Wx) (Wx)^T \right] W$.
+                            Linear mixture model: $x = A s \\implies s = W x$ where $W = A^{-1}$.<br>
+                            Nonlinear sigmoid output: $y_i = g(w_i^T x) = \\frac{1}{1 + \\exp(-w_i^T x)}$.<br>
+                            Output entropy maximization: $H(y) = H(x) + \\mathbb{E}[\\log |\\det J|]$, with Jacobian $J_{ij} = \\frac{\\partial y_i}{\\partial x_j} = g'(w_i^T x) W_{ij}$.<br>
+                            Log-likelihood: $\\ell(W) = \\log |\\det W| + \\sum_{i=1}^n \\log g'(w_i^T x)$.<br>
+                            Using natural gradient on the parameter matrix $\\Delta W \\propto \\nabla_W \\ell(W) W^T W$ yields Bell-Sejnowski update:<br>
+                            $\\Delta W \\propto \\left[ I - 2 y x^T W^T \\right] W = \\left[ I - 2 g(Wx) (Wx)^T \\right] W$.
                         </div>
                     `
                 },
@@ -3269,41 +3291,41 @@
                         
                         <div class="math-box">
                             <strong>Layer Forward Equation & Dimension Compatibility:</strong><br>
-                            Let layer $l \in \{1, \dots, L\}$ have $n^{[l]}$ hidden units, with mini-batch size $m$.<br>
-                            Input batch: $X = A^{[0]} \in \mathbb{R}^{n^{[0]} \times m}$.<br>
-                            Linear pre-activation: $Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}$, where $W^{[l]} \in \mathbb{R}^{n^{[l]} \times n^{[l-1]}}$ and $b^{[l]} \in \mathbb{R}^{n^{[l]} \times 1}$.<br>
-                            Post-activation: $A^{[l]} = g^{[l]}(Z^{[l]}) \in \mathbb{R}^{n^{[l]} \times m}$.<br>
+                            Let layer $l \\in \\{1, \\dots, L\\}$ have $n^{[l]}$ hidden units, with mini-batch size $m$.<br>
+                            Input batch: $X = A^{[0]} \\in \\mathbb{R}^{n^{[0]} \\times m}$.<br>
+                            Linear pre-activation: $Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}$, where $W^{[l]} \\in \\mathbb{R}^{n^{[l]} \\times n^{[l-1]}}$ and $b^{[l]} \\in \\mathbb{R}^{n^{[l]} \\times 1}$.<br>
+                            Post-activation: $A^{[l]} = g^{[l]}(Z^{[l]}) \\in \\mathbb{R}^{n^{[l]} \\times m}$.<br>
                             <strong>Shape Invariance Principle:</strong> Invariance under batch dimension $m$ guarantees that matrix multiplications perform simultaneous forward propagation over the entire batch tensor without explicit loops.
                         </div>
 
                         <div class="math-box">
                             <strong>Activation Dynamics:</strong><br>
-                            - <strong>ReLU:</strong> $g(z) = \max(0, z)$, subgradient $g'(z) = \mathbf{1}_{\{z > 0\}}$. Eliminates vanishing gradients for positive activations.<br>
-                            - <strong>Sigmoid:</strong> $g(z) = \frac{1}{1 + e^{-z}}$, derivative $g'(z) = g(z)(1 - g(z))$. Bounded in $(0, 1)$, ideal for binary Bernoulli likelihoods.<br>
-                            - <strong>Softmax:</strong> $g(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}$, Jacobian $J_{ij} = \frac{\partial a_i}{\partial z_j} = a_i (\delta_{ij} - a_j)$.
+                            - <strong>ReLU:</strong> $g(z) = \\max(0, z)$, subgradient $g'(z) = \\mathbf{1}_{\\{z > 0\\}}$. Eliminates vanishing gradients for positive activations.<br>
+                            - <strong>Sigmoid:</strong> $g(z) = \\frac{1}{1 + e^{-z}}$, derivative $g'(z) = g(z)(1 - g(z))$. Bounded in $(0, 1)$, ideal for binary Bernoulli likelihoods.<br>
+                            - <strong>Softmax:</strong> $g(z_i) = \\frac{e^{z_i}}{\\sum_j e^{z_j}}$, Jacobian $J_{ij} = \\frac{\\partial a_i}{\\partial z_j} = a_i (\\delta_{ij} - a_j)$.
                         </div>
                     `,
                     'backprop_proof': `
                         <h4>Vectorized Error Backpropagation & Analytical Gradient Checking</h4>
                         <div class="math-box">
                             <strong>Coordinate-Free Matrix Backpropagation:</strong><br>
-                            For cross-entropy loss $\mathcal{L} = - \frac{1}{m} \sum_{i=1}^m [Y \odot \log A^{[L]} + (1-Y) \odot \log(1 - A^{[L]})]$:<br>
+                            For cross-entropy loss $\\mathcal{L} = - \\frac{1}{m} \\sum_{i=1}^m [Y \\odot \\log A^{[L]} + (1-Y) \\odot \\log(1 - A^{[L]})]$:<br>
                             <strong>Output Layer Error:</strong><br>
-                            $dZ^{[L]} = \frac{\partial \mathcal{L}}{\partial Z^{[L]}} = A^{[L]} - Y \in \mathbb{R}^{n^{[L]} \times m}$<br>
-                            <strong>Hidden Layer Recurrence (for $l = L-1, \dots, 1$):</strong><br>
-                            $dA^{[l]} = (W^{[l+1]})^T dZ^{[l+1]} \in \mathbb{R}^{n^{[l]} \times m}$<br>
-                            $dZ^{[l]} = dA^{[l]} \odot g'^{[l]}(Z^{[l]}) \in \mathbb{R}^{n^{[l]} \times m}$<br>
+                            $dZ^{[L]} = \\frac{\\partial \\mathcal{L}}{\\partial Z^{[L]}} = A^{[L]} - Y \\in \\mathbb{R}^{n^{[L]} \\times m}$<br>
+                            <strong>Hidden Layer Recurrence (for $l = L-1, \\dots, 1$):</strong><br>
+                            $dA^{[l]} = (W^{[l+1]})^T dZ^{[l+1]} \\in \\mathbb{R}^{n^{[l]} \\times m}$<br>
+                            $dZ^{[l]} = dA^{[l]} \\odot g'^{[l]}(Z^{[l]}) \\in \\mathbb{R}^{n^{[l]} \\times m}$<br>
                             <strong>Parameter Gradients:</strong><br>
-                            $dW^{[l]} = \frac{\partial \mathcal{L}}{\partial W^{[l]}} = \frac{1}{m} dZ^{[l]} (A^{[l-1]})^T \in \mathbb{R}^{n^{[l]} \times n^{[l-1]}}$<br>
-                            $db^{[l]} = \frac{\partial \mathcal{L}}{\partial b^{[l]}} = \frac{1}{m} \sum_{i=1}^m dZ^{[l](i)} \in \mathbb{R}^{n^{[l]} \times 1}$
+                            $dW^{[l]} = \\frac{\\partial \\mathcal{L}}{\\partial W^{[l]}} = \\frac{1}{m} dZ^{[l]} (A^{[l-1]})^T \\in \\mathbb{R}^{n^{[l]} \\times n^{[l-1]}}$<br>
+                            $db^{[l]} = \\frac{\\partial \\mathcal{L}}{\\partial b^{[l]}} = \\frac{1}{m} \\sum_{i=1}^m dZ^{[l](i)} \\in \\mathbb{R}^{n^{[l]} \\times 1}$
                         </div>
 
                         <div class="math-box">
                             <strong>Finite Difference Gradient Verification Protocol:</strong><br>
                             To formally verify that analytical Jacobian gradients match true function slopes, we implement two-sided central difference quotients:<br>
-                            $\frac{\partial J}{\partial \theta_k} \approx \frac{J(\theta + \epsilon e_k) - J(\theta - \epsilon e_k)}{2\epsilon}, \quad \text{with } \epsilon = 10^{-7}$.<br>
+                            $\\frac{\\partial J}{\\partial \\theta_k} \\approx \\frac{J(\\theta + \\epsilon e_k) - J(\\theta - \\epsilon e_k)}{2\\epsilon}, \\quad \\text{with } \\epsilon = 10^{-7}$.<br>
                             Normalized Relative Error Criterion:<br>
-                            $\operatorname{RelError} = \frac{\|d\theta_{\text{analytical}} - d\theta_{\text{numerical}}\|_2}{\|d\theta_{\text{analytical}}\|_2 + \|d\theta_{\text{numerical}}\|_2} < 10^{-7}$.<br>
+                            $\\operatorname{RelError} = \\frac{\\|d\\theta_{\\text{analytical}} - d\\theta_{\\text{numerical}}\\|_2}{\\|d\\theta_{\\text{analytical}}\\|_2 + \\|d\\theta_{\\text{numerical}}\\|_2} < 10^{-7}$.<br>
                             Conducted across all hidden layers to mathematically prove zero backpropagation error.
                         </div>
                     `,
@@ -3311,34 +3333,34 @@
                         <h4>Adam (Adaptive Moment Estimation) Dynamics & Bias Correction Proof</h4>
                         <div class="math-box">
                             <strong>Optimization Equations:</strong><br>
-                            Let gradient at step $t$ be $g_t = \nabla_\theta \mathcal{L}(\theta_t)$.<br>
-                            First moment (momentum): $m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t$<br>
-                            Second raw moment (RMSprop): $v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2$<br>
+                            Let gradient at step $t$ be $g_t = \\nabla_\\theta \\mathcal{L}(\\theta_t)$.<br>
+                            First moment (momentum): $m_t = \\beta_1 m_{t-1} + (1 - \\beta_1) g_t$<br>
+                            Second raw moment (RMSprop): $v_t = \\beta_2 v_{t-1} + (1 - \\beta_2) g_t^2$<br>
                             <strong>Analytical Proof of Bias Correction:</strong><br>
                             Expanding $m_t$ recursively from $m_0 = 0$:<br>
-                            $m_t = (1 - \beta_1) \sum_{i=1}^t \beta_1^{t-i} g_i$<br>
-                            Taking mathematical expectations under stationarity $\mathbb{E}[g_i] = \mathbb{E}[g_t]$:<br>
-                            $\mathbb{E}[m_t] = \mathbb{E}\left[(1 - \beta_1) \sum_{i=1}^t \beta_1^{t-i} g_i\right] = \mathbb{E}[g_t] (1 - \beta_1) \sum_{k=0}^{t-1} \beta_1^k = \mathbb{E}[g_t] (1 - \beta_1) \frac{1 - \beta_1^t}{1 - \beta_1} = \mathbb{E}[g_t] (1 - \beta_1^t)$.<br>
-                            Therefore, to ensure an asymptotically unbiased estimator $\mathbb{E}[\hat{m}_t] = \mathbb{E}[g_t]$, we must divide by $(1 - \beta_1^t)$:<br>
-                            $\hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}$<br>
+                            $m_t = (1 - \\beta_1) \\sum_{i=1}^t \\beta_1^{t-i} g_i$<br>
+                            Taking mathematical expectations under stationarity $\\mathbb{E}[g_i] = \\mathbb{E}[g_t]$:<br>
+                            $\\mathbb{E}[m_t] = \\mathbb{E}\\left[(1 - \\beta_1) \\sum_{i=1}^t \\beta_1^{t-i} g_i\\right] = \\mathbb{E}[g_t] (1 - \\beta_1) \\sum_{k=0}^{t-1} \\beta_1^k = \\mathbb{E}[g_t] (1 - \\beta_1) \\frac{1 - \\beta_1^t}{1 - \\beta_1} = \\mathbb{E}[g_t] (1 - \\beta_1^t)$.<br>
+                            Therefore, to ensure an asymptotically unbiased estimator $\\mathbb{E}[\\hat{m}_t] = \\mathbb{E}[g_t]$, we must divide by $(1 - \\beta_1^t)$:<br>
+                            $\\hat{m}_t = \\frac{m_t}{1 - \\beta_1^t}, \\quad \\hat{v}_t = \\frac{v_t}{1 - \\beta_2^t}$<br>
                             <strong>Parameter Update Rule:</strong><br>
-                            $\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t$.
+                            $\\theta_{t+1} = \\theta_t - \\frac{\\alpha}{\\sqrt{\\hat{v}_t} + \\epsilon} \\hat{m}_t$.
                         </div>
                     `,
                     'batch_norm': `
                         <h4>Batch Normalization Backward Calculus (Ioffe & Szegedy 2015)</h4>
                         <div class="math-box">
-                            <strong>Forward Transformation on Mini-Batch $\mathcal{B} = \{x_1, \dots, x_m\}$:</strong><br>
-                            $\mu_\mathcal{B} = \frac{1}{m} \sum_{i=1}^m x_i, \quad \sigma_\mathcal{B}^2 = \frac{1}{m} \sum_{i=1}^m (x_i - \mu_\mathcal{B})^2$<br>
-                            Normalized input: $\hat{x}_i = \frac{x_i - \mu_\mathcal{B}}{\sqrt{\sigma_\mathcal{B}^2 + \epsilon}}, \quad y_i = \gamma \hat{x}_i + \beta$.<br>
+                            <strong>Forward Transformation on Mini-Batch $\\mathcal{B} = \\{x_1, \\dots, x_m\\}$:</strong><br>
+                            $\\mu_\\mathcal{B} = \\frac{1}{m} \\sum_{i=1}^m x_i, \\quad \\sigma_\\mathcal{B}^2 = \\frac{1}{m} \\sum_{i=1}^m (x_i - \\mu_\\mathcal{B})^2$<br>
+                            Normalized input: $\\hat{x}_i = \\frac{x_i - \\mu_\\mathcal{B}}{\\sqrt{\\sigma_\\mathcal{B}^2 + \\epsilon}}, \\quad y_i = \\gamma \\hat{x}_i + \\beta$.<br>
                             <strong>Exact Backward Chain Rule Derivation:</strong><br>
-                            Given incoming gradient $\frac{\partial \mathcal{L}}{\partial y_i}$:<br>
-                            $\frac{\partial \mathcal{L}}{\partial \gamma} = \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial y_i} \hat{x}_i, \quad \frac{\partial \mathcal{L}}{\partial \beta} = \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial y_i}$<br>
-                            $\frac{\partial \mathcal{L}}{\partial \hat{x}_i} = \frac{\partial \mathcal{L}}{\partial y_i} \gamma$<br>
-                            $\frac{\partial \mathcal{L}}{\partial \sigma_\mathcal{B}^2} = \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial \hat{x}_i} (x_i - \mu_\mathcal{B}) \left(-\frac{1}{2} (\sigma_\mathcal{B}^2 + \epsilon)^{-3/2}\right)$<br>
-                            $\frac{\partial \mathcal{L}}{\partial \mu_\mathcal{B}} = \left( \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial \hat{x}_i} \frac{-1}{\sqrt{\sigma_\mathcal{B}^2 + \epsilon}} \right) + \frac{\partial \mathcal{L}}{\partial \sigma_\mathcal{B}^2} \frac{\sum_{i=1}^m -2(x_i - \mu_\mathcal{B})}{m} = - \frac{1}{\sqrt{\sigma_\mathcal{B}^2 + \epsilon}} \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial \hat{x}_i}$<br>
+                            Given incoming gradient $\\frac{\\partial \\mathcal{L}}{\\partial y_i}$:<br>
+                            $\\frac{\\partial \\mathcal{L}}{\\partial \\gamma} = \\sum_{i=1}^m \\frac{\\partial \\mathcal{L}}{\\partial y_i} \\hat{x}_i, \\quad \\frac{\\partial \\mathcal{L}}{\\partial \\beta} = \\sum_{i=1}^m \\frac{\\partial \\mathcal{L}}{\\partial y_i}$<br>
+                            $\\frac{\\partial \\mathcal{L}}{\\partial \\hat{x}_i} = \\frac{\\partial \\mathcal{L}}{\\partial y_i} \\gamma$<br>
+                            $\\frac{\\partial \\mathcal{L}}{\\partial \\sigma_\\mathcal{B}^2} = \\sum_{i=1}^m \\frac{\\partial \\mathcal{L}}{\\partial \\hat{x}_i} (x_i - \\mu_\\mathcal{B}) \\left(-\\frac{1}{2} (\\sigma_\\mathcal{B}^2 + \\epsilon)^{-3/2}\\right)$<br>
+                            $\\frac{\\partial \\mathcal{L}}{\\partial \\mu_\\mathcal{B}} = \\left( \\sum_{i=1}^m \\frac{\\partial \\mathcal{L}}{\\partial \\hat{x}_i} \\frac{-1}{\\sqrt{\\sigma_\\mathcal{B}^2 + \\epsilon}} \\right) + \\frac{\\partial \\mathcal{L}}{\\partial \\sigma_\\mathcal{B}^2} \\frac{\\sum_{i=1}^m -2(x_i - \\mu_\\mathcal{B})}{m} = - \\frac{1}{\\sqrt{\\sigma_\\mathcal{B}^2 + \\epsilon}} \\sum_{i=1}^m \\frac{\\partial \\mathcal{L}}{\\partial \\hat{x}_i}$<br>
                             <strong>Combined Input Gradient Formulation:</strong><br>
-                            $\frac{\partial \mathcal{L}}{\partial x_i} = \frac{\gamma}{m \sqrt{\sigma_\mathcal{B}^2 + \epsilon}} \left[ m \frac{\partial \mathcal{L}}{\partial y_i} - \sum_{k=1}^m \frac{\partial \mathcal{L}}{\partial y_k} - \hat{x}_i \sum_{k=1}^m \frac{\partial \mathcal{L}}{\partial y_k} \hat{x}_k \right]$.
+                            $\\frac{\\partial \\mathcal{L}}{\\partial x_i} = \\frac{\\gamma}{m \\sqrt{\\sigma_\\mathcal{B}^2 + \\epsilon}} \\left[ m \\frac{\\partial \\mathcal{L}}{\\partial y_i} - \\sum_{k=1}^m \\frac{\\partial \\mathcal{L}}{\\partial y_k} - \\hat{x}_i \\sum_{k=1}^m \\frac{\\partial \\mathcal{L}}{\\partial y_k} \\hat{x}_k \\right]$.
                         </div>
                     `
                 },
@@ -3364,52 +3386,52 @@
                         
                         <div class="math-box">
                             <strong>1. Hierarchy and Definitions of Stochastic Convergence</strong><br>
-                            Let $(X_n)_{n \ge 1}$ be a sequence of random variables and $X$ a target random variable on probability space $(\Omega, \mathcal{F}, \mathbb{P})$:<br>
-                            • <strong>Convergence in Probability ($X_n \\xrightarrow{P} X$):</strong> $\forall \epsilon > 0, \lim_{n \to \infty} \mathbb{P}(|X_n - X| \ge \epsilon) = 0$.<br>
-                            • <strong>Almost Sure Convergence ($X_n \\xrightarrow{a.s.} X$):</strong> $\mathbb{P}\left(\left\{ \omega \in \Omega : \lim_{n \to \infty} X_n(\omega) = X(\omega) \right\}\right) = 1$, equivalent to $\lim_{N \to \infty} \mathbb{P}\left(\sup_{n \ge N} |X_n - X| \ge \epsilon\right) = 0$.<br>
-                            • <strong>Convergence in $L^p$ Norm ($X_n \\xrightarrow{L^p} X$):</strong> $\lim_{n \to \infty} \mathbb{E}[|X_n - X|^p] = 0$ for $p \ge 1$.<br>
-                            • <strong>Convergence in Distribution ($X_n \\xrightarrow{d} X$):</strong> $\lim_{n \to \infty} F_{X_n}(t) = F_X(t)$ for all points $t \in \mathbb{R}$ where cumulative distribution $F_X$ is continuous.<br>
+                            Let $(X_n)_{n \\ge 1}$ be a sequence of random variables and $X$ a target random variable on probability space $(\\Omega, \\mathcal{F}, \\mathbb{P})$:<br>
+                            • <strong>Convergence in Probability ($X_n \\xrightarrow{P} X$):</strong> $\\forall \\epsilon > 0, \\lim_{n \\to \\infty} \\mathbb{P}(|X_n - X| \\ge \\epsilon) = 0$.<br>
+                            • <strong>Almost Sure Convergence ($X_n \\xrightarrow{a.s.} X$):</strong> $\\mathbb{P}\\left(\\left\\{ \\omega \\in \\Omega : \\lim_{n \\to \\infty} X_n(\\omega) = X(\\omega) \\right\\}\\right) = 1$, equivalent to $\\lim_{N \\to \\infty} \\mathbb{P}\\left(\\sup_{n \\ge N} |X_n - X| \\ge \\epsilon\\right) = 0$.<br>
+                            • <strong>Convergence in $L^p$ Norm ($X_n \\xrightarrow{L^p} X$):</strong> $\\lim_{n \\to \\infty} \\mathbb{E}[|X_n - X|^p] = 0$ for $p \\ge 1$.<br>
+                            • <strong>Convergence in Distribution ($X_n \\xrightarrow{d} X$):</strong> $\\lim_{n \\to \\infty} F_{X_n}(t) = F_X(t)$ for all points $t \\in \\mathbb{R}$ where cumulative distribution $F_X$ is continuous.<br>
                             <strong>Implication Hierarchy:</strong><br>
-                            $X_n \\xrightarrow{a.s.} X \implies X_n \\xrightarrow{P} X \implies X_n \\xrightarrow{d} X$<br>
-                            $X_n \\xrightarrow{L^p} X \implies X_n \\xrightarrow{L^q} X \ (p > q \ge 1) \quad \text{and} \quad X_n \\xrightarrow{L^p} X \implies X_n \\xrightarrow{P} X$.
+                            $X_n \\xrightarrow{a.s.} X \\implies X_n \\xrightarrow{P} X \\implies X_n \\xrightarrow{d} X$<br>
+                            $X_n \\xrightarrow{L^p} X \\implies X_n \\xrightarrow{L^q} X \\ (p > q \\ge 1) \\quad \\text{and} \\quad X_n \\xrightarrow{L^p} X \\implies X_n \\xrightarrow{P} X$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Weak Law of Large Numbers (WLLN) via Markov & Chebyshev Inequalities</strong><br>
-                            <strong>Markov's Inequality:</strong> For any non-negative random variable $Y \ge 0$ and constant $\epsilon > 0$:<br>
-                            $\mathbb{E}[Y] = \int_0^\infty y f_Y(y) dy \ge \int_\epsilon^\infty y f_Y(y) dy \ge \epsilon \int_\epsilon^\infty f_Y(y) dy = \epsilon \, \mathbb{P}(Y \ge \epsilon) \implies \mathbb{P}(Y \ge \epsilon) \le \frac{\mathbb{E}[Y]}{\epsilon}$<br>
-                            <strong>Chebyshev's Inequality:</strong> Substituting $Y = (X - \mu)^2$ and threshold $\epsilon^2$ for $\mu = \mathbb{E}[X]$ and $\sigma^2 = \operatorname{Var}(X) < \infty$:<br>
-                            $\mathbb{P}(|X - \mu| \ge \epsilon) = \mathbb{P}\left((X - \mu)^2 \ge \epsilon^2\right) \le \frac{\mathbb{E}[(X - \mu)^2]}{\epsilon^2} = \frac{\sigma^2}{\epsilon^2}$<br>
-                            <strong>Proof of WLLN:</strong> For i.i.d. $X_1, \dots, X_n$ with mean $\mu$ and finite variance $\sigma^2$, sample mean $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$. Linearity gives $\mathbb{E}[\bar{X}_n] = \mu$ and independence gives $\operatorname{Var}(\bar{X}_n) = \frac{\sigma^2}{n}$. Applying Chebyshev:<br>
-                            $\mathbb{P}(|\bar{X}_n - \mu| \ge \epsilon) \le \frac{\operatorname{Var}(\bar{X}_n)}{\epsilon^2} = \frac{\sigma^2}{n \epsilon^2} \\xrightarrow{n \to \infty} 0 \implies \bar{X}_n \\xrightarrow{P} \mu$.
+                            <strong>Markov's Inequality:</strong> For any non-negative random variable $Y \\ge 0$ and constant $\\epsilon > 0$:<br>
+                            $\\mathbb{E}[Y] = \\int_0^\\infty y f_Y(y) dy \\ge \\int_\\epsilon^\\infty y f_Y(y) dy \\ge \\epsilon \\int_\\epsilon^\\infty f_Y(y) dy = \\epsilon \\, \\mathbb{P}(Y \\ge \\epsilon) \\implies \\mathbb{P}(Y \\ge \\epsilon) \\le \\frac{\\mathbb{E}[Y]}{\\epsilon}$<br>
+                            <strong>Chebyshev's Inequality:</strong> Substituting $Y = (X - \\mu)^2$ and threshold $\\epsilon^2$ for $\\mu = \\mathbb{E}[X]$ and $\\sigma^2 = \\operatorname{Var}(X) < \\infty$:<br>
+                            $\\mathbb{P}(|X - \\mu| \\ge \\epsilon) = \\mathbb{P}\\left((X - \\mu)^2 \\ge \\epsilon^2\\right) \\le \\frac{\\mathbb{E}[(X - \\mu)^2]}{\\epsilon^2} = \\frac{\\sigma^2}{\\epsilon^2}$<br>
+                            <strong>Proof of WLLN:</strong> For i.i.d. $X_1, \\dots, X_n$ with mean $\\mu$ and finite variance $\\sigma^2$, sample mean $\\bar{X}_n = \\frac{1}{n} \\sum_{i=1}^n X_i$. Linearity gives $\\mathbb{E}[\\bar{X}_n] = \\mu$ and independence gives $\\operatorname{Var}(\\bar{X}_n) = \\frac{\\sigma^2}{n}$. Applying Chebyshev:<br>
+                            $\\mathbb{P}(|\\bar{X}_n - \\mu| \\ge \\epsilon) \\le \\frac{\\operatorname{Var}(\\bar{X}_n)}{\\epsilon^2} = \\frac{\\sigma^2}{n \\epsilon^2} \\xrightarrow{n \\to \\infty} 0 \\implies \\bar{X}_n \\xrightarrow{P} \\mu$.
                         </div>
 
                         <div class="math-box">
                             <strong>3. Central Limit Theorem (CLT) Proof via Characteristic Functions</strong><br>
-                            Let $Y_i = \frac{X_i - \mu}{\sigma}$ be standardized i.i.d. variables with $\mathbb{E}[Y_i] = 0$ and $\mathbb{E}[Y_i^2] = 1$. The standardized sum is:<br>
-                            $Z_n = \frac{\sqrt{n}(\bar{X}_n - \mu)}{\sigma} = \frac{1}{\sqrt{n}} \sum_{i=1}^n Y_i$<br>
+                            Let $Y_i = \\frac{X_i - \\mu}{\\sigma}$ be standardized i.i.d. variables with $\\mathbb{E}[Y_i] = 0$ and $\\mathbb{E}[Y_i^2] = 1$. The standardized sum is:<br>
+                            $Z_n = \\frac{\\sqrt{n}(\\bar{X}_n - \\mu)}{\\sigma} = \\frac{1}{\\sqrt{n}} \\sum_{i=1}^n Y_i$<br>
                             <strong>Step 1 (Taylor expansion of characteristic function):</strong> The characteristic function of $Y_1$ around $t = 0$ is:<br>
-                            $\phi_Y(t) = \mathbb{E}\left[e^{itY_1}\right] = \mathbb{E}\left[ 1 + itY_1 - \frac{t^2}{2} Y_1^2 + R(t, Y_1) \right]$<br>
-                            where $|R(t, Y_1)| \le \min\left( |t|^2 Y_1^2, \frac{|t|^3 |Y_1|^3}{6} \right)$, so $\mathbb{E}[R] = o(t^2)$ as $t \to 0$.<br>
-                            $\phi_Y(t) = 1 + it \mathbb{E}[Y_1] - \frac{t^2}{2} \mathbb{E}[Y_1^2] + o(t^2) = 1 - \frac{t^2}{2} + o(t^2)$<br>
+                            $\\phi_Y(t) = \\mathbb{E}\\left[e^{itY_1}\\right] = \\mathbb{E}\\left[ 1 + itY_1 - \\frac{t^2}{2} Y_1^2 + R(t, Y_1) \\right]$<br>
+                            where $|R(t, Y_1)| \\le \\min\\left( |t|^2 Y_1^2, \\frac{|t|^3 |Y_1|^3}{6} \\right)$, so $\\mathbb{E}[R] = o(t^2)$ as $t \\to 0$.<br>
+                            $\\phi_Y(t) = 1 + it \\mathbb{E}[Y_1] - \\frac{t^2}{2} \\mathbb{E}[Y_1^2] + o(t^2) = 1 - \\frac{t^2}{2} + o(t^2)$<br>
                             <strong>Step 2 (Characteristic function of scaled sum):</strong> By independence of $Y_i$:<br>
-                            $\phi_{Z_n}(t) = \mathbb{E}\left[ \exp\left(it \frac{1}{\sqrt{n}} \sum_{i=1}^n Y_i\right) \right] = \prod_{i=1}^n \phi_Y\left(\frac{t}{\sqrt{n}}\right) = \left[ 1 - \frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right]^n$<br>
-                            <strong>Step 3 (Limit evaluation):</strong> Taking the logarithm and expanding via $\log(1 + u) = u + \mathcal{O}(u^2)$:<br>
-                            $\log \phi_{Z_n}(t) = n \log\left( 1 - \frac{t^2}{2n} + o\left(\frac{1}{n}\right) \right) = n \left[ -\frac{t^2}{2n} + o\left(\frac{1}{n}\right) \right] = -\frac{t^2}{2} + o(1) \\xrightarrow{n \to \infty} -\frac{t^2}{2}$<br>
-                            Exponentiating yields $\lim_{n \to \infty} \phi_{Z_n}(t) = e^{-t^2/2}$, the exact characteristic function of standard normal $\mathcal{N}(0, 1)$.<br>
-                            <strong>Step 4 (Lévy's Continuity Theorem):</strong> Because $\lim_{n \to \infty} \phi_{Z_n}(t) = e^{-t^2/2}$ pointwise and $e^{-t^2/2}$ is continuous at $t = 0$, convergence in distribution is guaranteed: $Z_n \\xrightarrow{d} \mathcal{N}(0, 1)$.
+                            $\\phi_{Z_n}(t) = \\mathbb{E}\\left[ \\exp\\left(it \\frac{1}{\\sqrt{n}} \\sum_{i=1}^n Y_i\\right) \\right] = \\prod_{i=1}^n \\phi_Y\\left(\\frac{t}{\\sqrt{n}}\\right) = \\left[ 1 - \\frac{t^2}{2n} + o\\left(\\frac{t^2}{n}\\right) \\right]^n$<br>
+                            <strong>Step 3 (Limit evaluation):</strong> Taking the logarithm and expanding via $\\log(1 + u) = u + \\mathcal{O}(u^2)$:<br>
+                            $\\log \\phi_{Z_n}(t) = n \\log\\left( 1 - \\frac{t^2}{2n} + o\\left(\\frac{1}{n}\\right) \\right) = n \\left[ -\\frac{t^2}{2n} + o\\left(\\frac{1}{n}\\right) \\right] = -\\frac{t^2}{2} + o(1) \\xrightarrow{n \\to \\infty} -\\frac{t^2}{2}$<br>
+                            Exponentiating yields $\\lim_{n \\to \\infty} \\phi_{Z_n}(t) = e^{-t^2/2}$, the exact characteristic function of standard normal $\\mathcal{N}(0, 1)$.<br>
+                            <strong>Step 4 (Lévy's Continuity Theorem):</strong> Because $\\lim_{n \\to \\infty} \\phi_{Z_n}(t) = e^{-t^2/2}$ pointwise and $e^{-t^2/2}$ is continuous at $t = 0$, convergence in distribution is guaranteed: $Z_n \\xrightarrow{d} \\mathcal{N}(0, 1)$.
                         </div>
 
                         <div class="math-box">
                             <strong>4. Slutsky's Theorem & The Univariate/Multivariate Delta Method</strong><br>
                             <strong>Slutsky's Theorem:</strong> If $X_n \\xrightarrow{d} X$ and $Y_n \\xrightarrow{P} c$ (constant), then:<br>
-                            $X_n + Y_n \\xrightarrow{d} X + c, \quad X_n Y_n \\xrightarrow{d} cX, \quad \text{and} \quad \frac{X_n}{Y_n} \\xrightarrow{d} \frac{X}{c} \quad (c \ne 0)$<br>
-                            <strong>Univariate Delta Method:</strong> Let $\sqrt{n}(T_n - \theta) \\xrightarrow{d} \mathcal{N}(0, \sigma^2)$ and let $g: \mathbb{R} \to \mathbb{R}$ be continuously differentiable at $\theta$ with $g'(\theta) \ne 0$.<br>
-                            First-order Taylor expansion around $\theta$: $g(T_n) = g(\theta) + g'(\theta)(T_n - \theta) + R_n$ where $\frac{R_n}{T_n - \theta} \\xrightarrow{P} 0$.<br>
-                            Scaling by $\sqrt{n}$: $\sqrt{n}(g(T_n) - g(\theta)) = g'(\theta) \sqrt{n}(T_n - \theta) + \sqrt{n} R_n$. Since $\sqrt{n} R_n \\xrightarrow{P} 0$ by Slutsky's Theorem:<br>
-                            $\sqrt{n}(g(T_n) - g(\theta)) \\xrightarrow{d} \mathcal{N}\left(0, [g'(\theta)]^2 \sigma^2\right)$<br>
-                            <strong>Multivariate Delta Method:</strong> For $T_n \in \mathbb{R}^k$ with $\sqrt{n}(T_n - \theta) \\xrightarrow{d} \mathcal{N}(0, \Sigma)$ and $g: \mathbb{R}^k \to \mathbb{R}^m$ differentiable with Jacobian $\nabla g(\theta) \in \mathbb{R}^{k \times m}$:<br>
-                            $\sqrt{n}(g(T_n) - g(\theta)) \\xrightarrow{d} \mathcal{N}\left(0, \nabla g(\theta)^T \Sigma \nabla g(\theta)\right)$.
+                            $X_n + Y_n \\xrightarrow{d} X + c, \\quad X_n Y_n \\xrightarrow{d} cX, \\quad \\text{and} \\quad \\frac{X_n}{Y_n} \\xrightarrow{d} \\frac{X}{c} \\quad (c \\ne 0)$<br>
+                            <strong>Univariate Delta Method:</strong> Let $\\sqrt{n}(T_n - \\theta) \\xrightarrow{d} \\mathcal{N}(0, \\sigma^2)$ and let $g: \\mathbb{R} \\to \\mathbb{R}$ be continuously differentiable at $\\theta$ with $g'(\\theta) \\ne 0$.<br>
+                            First-order Taylor expansion around $\\theta$: $g(T_n) = g(\\theta) + g'(\\theta)(T_n - \\theta) + R_n$ where $\\frac{R_n}{T_n - \\theta} \\xrightarrow{P} 0$.<br>
+                            Scaling by $\\sqrt{n}$: $\\sqrt{n}(g(T_n) - g(\\theta)) = g'(\\theta) \\sqrt{n}(T_n - \\theta) + \\sqrt{n} R_n$. Since $\\sqrt{n} R_n \\xrightarrow{P} 0$ by Slutsky's Theorem:<br>
+                            $\\sqrt{n}(g(T_n) - g(\\theta)) \\xrightarrow{d} \\mathcal{N}\\left(0, [g'(\\theta)]^2 \\sigma^2\\right)$<br>
+                            <strong>Multivariate Delta Method:</strong> For $T_n \\in \\mathbb{R}^k$ with $\\sqrt{n}(T_n - \\theta) \\xrightarrow{d} \\mathcal{N}(0, \\Sigma)$ and $g: \\mathbb{R}^k \\to \\mathbb{R}^m$ differentiable with Jacobian $\\nabla g(\\theta) \\in \\mathbb{R}^{k \\times m}$:<br>
+                            $\\sqrt{n}(g(T_n) - g(\\theta)) \\xrightarrow{d} \\mathcal{N}\\left(0, \\nabla g(\\theta)^T \\Sigma \\nabla g(\\theta)\\right)$.
                         </div>
                     `,
                     'mle_asymptotics': `
@@ -3418,52 +3440,52 @@
 
                         <div class="math-box">
                             <strong>1. Score Function and Zero Expected Score Identity</strong><br>
-                            Let $X_1, \dots, X_n \stackrel{\text{iid}}{\sim} f(x; \theta)$ with parameter $\theta \in \Theta \subseteq \mathbb{R}^d$. The joint log-likelihood is $\ell_n(\theta) = \sum_{i=1}^n \log f(X_i; \theta)$.<br>
-                            The <strong>Score Function</strong> is the gradient: $\mathcal{S}_n(\theta) = \nabla_\theta \ell_n(\theta) = \sum_{i=1}^n \nabla_\theta \log f(X_i; \theta)$.<br>
-                            <strong>Proof that $\mathbb{E}_\theta[\mathcal{S}_1(\theta)] = \mathbf{0}$ under regular support:</strong><br>
-                            $\mathbb{E}_\theta[\nabla_\theta \log f(X; \theta)] = \int_{\mathcal{X}} \nabla_\theta \log f(x; \theta) \cdot f(x; \theta) dx = \int_{\mathcal{X}} \frac{\nabla_\theta f(x; \theta)}{f(x; \theta)} f(x; \theta) dx = \int_{\mathcal{X}} \nabla_\theta f(x; \theta) dx$<br>
+                            Let $X_1, \\dots, X_n \\stackrel{\\text{iid}}{\\sim} f(x; \\theta)$ with parameter $\\theta \\in \\Theta \\subseteq \\mathbb{R}^d$. The joint log-likelihood is $\\ell_n(\\theta) = \\sum_{i=1}^n \\log f(X_i; \\theta)$.<br>
+                            The <strong>Score Function</strong> is the gradient: $\\mathcal{S}_n(\\theta) = \\nabla_\\theta \\ell_n(\\theta) = \\sum_{i=1}^n \\nabla_\\theta \\log f(X_i; \\theta)$.<br>
+                            <strong>Proof that $\\mathbb{E}_\\theta[\\mathcal{S}_1(\\theta)] = \\mathbf{0}$ under regular support:</strong><br>
+                            $\\mathbb{E}_\\theta[\\nabla_\\theta \\log f(X; \\theta)] = \\int_{\\mathcal{X}} \\nabla_\\theta \\log f(x; \\theta) \\cdot f(x; \\theta) dx = \\int_{\\mathcal{X}} \\frac{\\nabla_\\theta f(x; \\theta)}{f(x; \\theta)} f(x; \\theta) dx = \\int_{\\mathcal{X}} \\nabla_\\theta f(x; \\theta) dx$<br>
                             Under regularity conditions permitting differentiation under the integral sign (Leibniz integral rule):<br>
-                            $= \nabla_\theta \int_{\mathcal{X}} f(x; \theta) dx = \nabla_\theta (1) = \mathbf{0}$.
+                            $= \\nabla_\\theta \\int_{\\mathcal{X}} f(x; \\theta) dx = \\nabla_\\theta (1) = \\mathbf{0}$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Fisher Information Matrix & Second Information Identity</strong><br>
-                            The Fisher Information matrix for a single sample is $I_1(\theta) = \operatorname{Cov}_\theta(\mathcal{S}_1(\theta)) = \mathbb{E}_\theta\left[ \nabla_\theta \log f(X; \theta) (\nabla_\theta \log f(X; \theta))^T \right]$.<br>
-                            <strong>Proof of the Equivalence Identity $I_1(\theta) = -\mathbb{E}_\theta\left[ \nabla_\theta^2 \log f(X; \theta) \right]$:</strong><br>
-                            Differentiate both sides of $\int_{\mathcal{X}} \nabla_\theta \log f(x; \theta) f(x; \theta) dx = \mathbf{0}$ with respect to $\theta^T$:<br>
-                            $\nabla_\theta \int_{\mathcal{X}} \nabla_\theta \log f(x; \theta) f(x; \theta) dx = \int_{\mathcal{X}} \left[ \nabla_\theta^2 \log f(x; \theta) f(x; \theta) + \nabla_\theta \log f(x; \theta) (\nabla_\theta f(x; \theta))^T \right] dx = \mathbf{0}$<br>
-                            Substituting $\nabla_\theta f(x; \theta) = (\nabla_\theta \log f(x; \theta)) f(x; \theta)$ into the second term:<br>
-                            $\int_{\mathcal{X}} \nabla_\theta^2 \log f(x; \theta) f(x; \theta) dx + \int_{\mathcal{X}} (\nabla_\theta \log f(x; \theta))(\nabla_\theta \log f(x; \theta))^T f(x; \theta) dx = \mathbf{0}$<br>
-                            $\implies \mathbb{E}_\theta\left[ \nabla_\theta^2 \log f(X; \theta) \right] + I_1(\theta) = \mathbf{0} \implies I_1(\theta) = -\mathbb{E}_\theta\left[ \nabla_\theta^2 \log f(X; \theta) \right]$.<br>
-                            For $n$ i.i.d. observations, linearity and independence give total information $I_n(\theta) = n I_1(\theta)$.
+                            The Fisher Information matrix for a single sample is $I_1(\\theta) = \\operatorname{Cov}_\\theta(\\mathcal{S}_1(\\theta)) = \\mathbb{E}_\\theta\\left[ \\nabla_\\theta \\log f(X; \\theta) (\\nabla_\\theta \\log f(X; \\theta))^T \\right]$.<br>
+                            <strong>Proof of the Equivalence Identity $I_1(\\theta) = -\\mathbb{E}_\\theta\\left[ \\nabla_\\theta^2 \\log f(X; \\theta) \\right]$:</strong><br>
+                            Differentiate both sides of $\\int_{\\mathcal{X}} \\nabla_\\theta \\log f(x; \\theta) f(x; \\theta) dx = \\mathbf{0}$ with respect to $\\theta^T$:<br>
+                            $\\nabla_\\theta \\int_{\\mathcal{X}} \\nabla_\\theta \\log f(x; \\theta) f(x; \\theta) dx = \\int_{\\mathcal{X}} \\left[ \\nabla_\\theta^2 \\log f(x; \\theta) f(x; \\theta) + \\nabla_\\theta \\log f(x; \\theta) (\\nabla_\\theta f(x; \\theta))^T \\right] dx = \\mathbf{0}$<br>
+                            Substituting $\\nabla_\\theta f(x; \\theta) = (\\nabla_\\theta \\log f(x; \\theta)) f(x; \\theta)$ into the second term:<br>
+                            $\\int_{\\mathcal{X}} \\nabla_\\theta^2 \\log f(x; \\theta) f(x; \\theta) dx + \\int_{\\mathcal{X}} (\\nabla_\\theta \\log f(x; \\theta))(\\nabla_\\theta \\log f(x; \\theta))^T f(x; \\theta) dx = \\mathbf{0}$<br>
+                            $\\implies \\mathbb{E}_\\theta\\left[ \\nabla_\\theta^2 \\log f(X; \\theta) \\right] + I_1(\\theta) = \\mathbf{0} \\implies I_1(\\theta) = -\\mathbb{E}_\\theta\\left[ \\nabla_\\theta^2 \\log f(X; \\theta) \\right]$.<br>
+                            For $n$ i.i.d. observations, linearity and independence give total information $I_n(\\theta) = n I_1(\\theta)$.
                         </div>
 
                         <div class="math-box">
-                            <strong>3. Consistency of the Maximum Likelihood Estimator ($\hat{\theta}_n \\xrightarrow{P} \theta^*$)</strong><br>
-                            Define normalized sample criterion $M_n(\theta) = \frac{1}{n} \ell_n(\theta) = \frac{1}{n} \sum_{i=1}^n \log f(X_i; \theta)$ and population objective $M(\theta) = \mathbb{E}_{\theta^*}[\log f(X; \theta)]$.<br>
-                            By the Uniform Weak Law of Large Numbers (over compact $\Theta$ with dominated envelope): $\sup_{\theta \in \Theta} |M_n(\theta) - M(\theta)| \\xrightarrow{P} 0$.<br>
-                            Evaluate the gap between candidate parameter $\theta$ and true data-generating parameter $\theta^*$:<br>
-                            $M(\theta) - M(\theta^*) = \mathbb{E}_{\theta^*}\left[ \log \frac{f(X; \theta)}{f(X; \theta^*)} \right] = -D_{KL}(f_{\theta^*} \parallel f_\theta)$<br>
+                            <strong>3. Consistency of the Maximum Likelihood Estimator ($\\hat{\\theta}_n \\xrightarrow{P} \\theta^*$)</strong><br>
+                            Define normalized sample criterion $M_n(\\theta) = \\frac{1}{n} \\ell_n(\\theta) = \\frac{1}{n} \\sum_{i=1}^n \\log f(X_i; \\theta)$ and population objective $M(\\theta) = \\mathbb{E}_{\\theta^*}[\\log f(X; \\theta)]$.<br>
+                            By the Uniform Weak Law of Large Numbers (over compact $\\Theta$ with dominated envelope): $\\sup_{\\theta \\in \\Theta} |M_n(\\theta) - M(\\theta)| \\xrightarrow{P} 0$.<br>
+                            Evaluate the gap between candidate parameter $\\theta$ and true data-generating parameter $\\theta^*$:<br>
+                            $M(\\theta) - M(\\theta^*) = \\mathbb{E}_{\\theta^*}\\left[ \\log \\frac{f(X; \\theta)}{f(X; \\theta^*)} \\right] = -D_{KL}(f_{\\theta^*} \\parallel f_\\theta)$<br>
                             Applying Jensen's inequality to strictly concave logarithm function:<br>
-                            $\mathbb{E}_{\theta^*}\left[ \log \frac{f(X; \theta)}{f(X; \theta^*)} \right] \le \log \mathbb{E}_{\theta^*}\left[ \frac{f(X; \theta)}{f(X; \theta^*)} \right] = \log \int_{\mathcal{X}} \frac{f(x; \theta)}{f(x; \theta^*)} f(x; \theta^*) dx = \log(1) = 0$<br>
-                            Assuming statistical identifiability ($\mathbb{P}_{\theta^*}(f(X; \theta) \ne f(X; \theta^*)) > 0$ for $\theta \ne \theta^*$), strict Jensen inequality holds:<br>
-                            $M(\theta) - M(\theta^*) < 0 \implies M(\theta) < M(\theta^*) \quad \forall \theta \ne \theta^*$.<br>
-                            Because $\theta^*$ is the strictly unique well-separated global maximizer of $M(\theta)$ and $M_n$ converges uniformly to $M$, the empirical argmax $\hat{\theta}_n = \arg\max_{\theta \in \Theta} M_n(\theta)$ satisfies $\hat{\theta}_n \\xrightarrow{P} \theta^*$.
+                            $\\mathbb{E}_{\\theta^*}\\left[ \\log \\frac{f(X; \\theta)}{f(X; \\theta^*)} \\right] \\le \\log \\mathbb{E}_{\\theta^*}\\left[ \\frac{f(X; \\theta)}{f(X; \\theta^*)} \\right] = \\log \\int_{\\mathcal{X}} \\frac{f(x; \\theta)}{f(x; \\theta^*)} f(x; \\theta^*) dx = \\log(1) = 0$<br>
+                            Assuming statistical identifiability ($\\mathbb{P}_{\\theta^*}(f(X; \\theta) \\ne f(X; \\theta^*)) > 0$ for $\\theta \\ne \\theta^*$), strict Jensen inequality holds:<br>
+                            $M(\\theta) - M(\\theta^*) < 0 \\implies M(\\theta) < M(\\theta^*) \\quad \\forall \\theta \\ne \\theta^*$.<br>
+                            Because $\\theta^*$ is the strictly unique well-separated global maximizer of $M(\\theta)$ and $M_n$ converges uniformly to $M$, the empirical argmax $\\hat{\\theta}_n = \\arg\\max_{\\theta \\in \\Theta} M_n(\\theta)$ satisfies $\\hat{\\theta}_n \\xrightarrow{P} \\theta^*$.
                         </div>
 
                         <div class="math-box">
                             <strong>4. Proof of Asymptotic Normality of the MLE via Mean Value Theorem</strong><br>
-                            Because $\hat{\theta}_n$ is an interior local maximizer with probability approaching 1, the first-order condition holds: $\mathcal{S}_n(\hat{\theta}_n) = \mathbf{0}$.<br>
-                            Applying the multivariate Mean Value Theorem coordinate-wise to score function $\mathcal{S}_n$ around true $\theta^*$:<br>
-                            $\mathbf{0} = \mathcal{S}_n(\hat{\theta}_n) = \mathcal{S}_n(\theta^*) + \nabla_\theta \mathcal{S}_n(\tilde{\theta}_n) (\hat{\theta}_n - \theta^*)$ for some $\tilde{\theta}_n$ satisfying $\|\tilde{\theta}_n - \theta^*\| \le \|\hat{\theta}_n - \theta^*\|$.<br>
-                            Note that $\nabla_\theta \mathcal{S}_n(\tilde{\theta}_n) = \nabla_\theta^2 \ell_n(\tilde{\theta}_n)$. Rearranging and scaling by $\sqrt{n}$:<br>
-                            $\sqrt{n}(\hat{\theta}_n - \theta^*) = \left[ -\frac{1}{n} \nabla_\theta^2 \ell_n(\tilde{\theta}_n) \right]^{-1} \left[ \frac{1}{\sqrt{n}} \mathcal{S}_n(\theta^*) \right]$<br>
+                            Because $\\hat{\\theta}_n$ is an interior local maximizer with probability approaching 1, the first-order condition holds: $\\mathcal{S}_n(\\hat{\\theta}_n) = \\mathbf{0}$.<br>
+                            Applying the multivariate Mean Value Theorem coordinate-wise to score function $\\mathcal{S}_n$ around true $\\theta^*$:<br>
+                            $\\mathbf{0} = \\mathcal{S}_n(\\hat{\\theta}_n) = \\mathcal{S}_n(\\theta^*) + \\nabla_\\theta \\mathcal{S}_n(\\tilde{\\theta}_n) (\\hat{\\theta}_n - \\theta^*)$ for some $\\tilde{\\theta}_n$ satisfying $\\|\\tilde{\\theta}_n - \\theta^*\\| \\le \\|\\hat{\\theta}_n - \\theta^*\\|$.<br>
+                            Note that $\\nabla_\\theta \\mathcal{S}_n(\\tilde{\\theta}_n) = \\nabla_\\theta^2 \\ell_n(\\tilde{\\theta}_n)$. Rearranging and scaling by $\\sqrt{n}$:<br>
+                            $\\sqrt{n}(\\hat{\\theta}_n - \\theta^*) = \\left[ -\\frac{1}{n} \\nabla_\\theta^2 \\ell_n(\\tilde{\\theta}_n) \\right]^{-1} \\left[ \\frac{1}{\\sqrt{n}} \\mathcal{S}_n(\\theta^*) \\right]$<br>
                             <strong>Convergence of factors:</strong><br>
-                            1. Since $\hat{\theta}_n \\xrightarrow{P} \theta^*$, $\tilde{\theta}_n \\xrightarrow{P} \theta^*$. By the Uniform WLLN: $-\frac{1}{n} \nabla_\theta^2 \ell_n(\tilde{\theta}_n) \\xrightarrow{P} -\mathbb{E}_{\theta^*}[\nabla^2 \log f(X; \theta^*)] = I_1(\theta^*)$.<br>
-                            2. By the Classical Multivariate CLT on i.i.d. zero-mean score vectors with covariance $I_1(\theta^*)$:<br>
-                            $\frac{1}{\sqrt{n}} \mathcal{S}_n(\theta^*) = \frac{1}{\sqrt{n}} \sum_{i=1}^n \nabla_\theta \log f(X_i; \theta^*) \\xrightarrow{d} \mathcal{N}\left(\mathbf{0}, I_1(\theta^*)\right)$.<br>
-                            <strong>Slutsky's Theorem:</strong> Combining with continuous matrix inversion $[I_1(\theta^*)]^{-1}$:<br>
-                            $\sqrt{n}(\hat{\theta}_n - \theta^*) \\xrightarrow{d} [I_1(\theta^*)]^{-1} \cdot \mathcal{N}\left(\mathbf{0}, I_1(\theta^*)\right) \sim \mathcal{N}\left(\mathbf{0}, [I_1(\theta^*)]^{-1} I_1(\theta^*) [I_1(\theta^*)]^{-1}\right) = \mathcal{N}\left(\mathbf{0}, I_1(\theta^*)^{-1}\right)$.
+                            1. Since $\\hat{\\theta}_n \\xrightarrow{P} \\theta^*$, $\\tilde{\\theta}_n \\xrightarrow{P} \\theta^*$. By the Uniform WLLN: $-\\frac{1}{n} \\nabla_\\theta^2 \\ell_n(\\tilde{\\theta}_n) \\xrightarrow{P} -\\mathbb{E}_{\\theta^*}[\\nabla^2 \\log f(X; \\theta^*)] = I_1(\\theta^*)$.<br>
+                            2. By the Classical Multivariate CLT on i.i.d. zero-mean score vectors with covariance $I_1(\\theta^*)$:<br>
+                            $\\frac{1}{\\sqrt{n}} \\mathcal{S}_n(\\theta^*) = \\frac{1}{\\sqrt{n}} \\sum_{i=1}^n \\nabla_\\theta \\log f(X_i; \\theta^*) \\xrightarrow{d} \\mathcal{N}\\left(\\mathbf{0}, I_1(\\theta^*)\\right)$.<br>
+                            <strong>Slutsky's Theorem:</strong> Combining with continuous matrix inversion $[I_1(\\theta^*)]^{-1}$:<br>
+                            $\\sqrt{n}(\\hat{\\theta}_n - \\theta^*) \\xrightarrow{d} [I_1(\\theta^*)]^{-1} \\cdot \\mathcal{N}\\left(\\mathbf{0}, I_1(\\theta^*)\\right) \\sim \\mathcal{N}\\left(\\mathbf{0}, [I_1(\\theta^*)]^{-1} I_1(\\theta^*) [I_1(\\theta^*)]^{-1}\\right) = \\mathcal{N}\\left(\\mathbf{0}, I_1(\\theta^*)^{-1}\\right)$.
                         </div>
                     `,
                     'crlb_efficiency': `
@@ -3472,50 +3494,50 @@
 
                         <div class="math-box">
                             <strong>1. Derivation of the Cramér-Rao Lower Bound (CRLB)</strong><br>
-                            Let $T(X) = T(X_1, \dots, X_n)$ be an unbiased estimator of scalar parametric function $g(\theta)$, so $\mathbb{E}_\theta[T(X)] = g(\theta)$.<br>
-                            Differentiate both sides with respect to $\theta$ under integral sign:<br>
-                            $g'(\theta) = \frac{\partial}{\partial \theta} \int_{\mathcal{X}^n} T(x) f_n(x; \theta) dx = \int_{\mathcal{X}^n} T(x) \frac{\nabla_\theta f_n(x; \theta)}{f_n(x; \theta)} f_n(x; \theta) dx = \mathbb{E}_\theta\left[ T(X) \nabla_\theta \log f_n(X; \theta) \right] = \mathbb{E}_\theta[T(X) \mathcal{S}_n(\theta)]$<br>
-                            Recall that expected score $\mathbb{E}_\theta[\mathcal{S}_n(\theta)] = 0$. Hence the covariance between $T(X)$ and score $\mathcal{S}_n(\theta)$ is:<br>
-                            $\operatorname{Cov}_\theta(T(X), \mathcal{S}_n(\theta)) = \mathbb{E}_\theta[T(X) \mathcal{S}_n(\theta)] - \mathbb{E}_\theta[T(X)] \mathbb{E}_\theta[\mathcal{S}_n(\theta)] = g'(\theta)$<br>
-                            Applying the Cauchy-Schwarz inequality for random variables: $[\operatorname{Cov}(U, V)]^2 \le \operatorname{Var}(U) \operatorname{Var}(V)$:<br>
-                            $[g'(\theta)]^2 = [\operatorname{Cov}_\theta(T(X), \mathcal{S}_n(\theta))]^2 \le \operatorname{Var}_\theta(T(X)) \cdot \operatorname{Var}_\theta(\mathcal{S}_n(\theta))$<br>
-                            Substituting $\operatorname{Var}_\theta(\mathcal{S}_n(\theta)) = I_n(\theta) = n I_1(\theta)$ and isolating $\operatorname{Var}(T)$:<br>
-                            $\operatorname{Var}_\theta(T(X)) \ge \frac{[g'(\theta)]^2}{n I_1(\theta)}$<br>
-                            For direct parameter estimation where $g(\theta) = \theta \implies g'(\theta) = 1$: $\operatorname{Var}_\theta(T(X)) \ge \frac{1}{n I_1(\theta)}$.
+                            Let $T(X) = T(X_1, \\dots, X_n)$ be an unbiased estimator of scalar parametric function $g(\\theta)$, so $\\mathbb{E}_\\theta[T(X)] = g(\\theta)$.<br>
+                            Differentiate both sides with respect to $\\theta$ under integral sign:<br>
+                            $g'(\\theta) = \\frac{\\partial}{\\partial \\theta} \\int_{\\mathcal{X}^n} T(x) f_n(x; \\theta) dx = \\int_{\\mathcal{X}^n} T(x) \\frac{\\nabla_\\theta f_n(x; \\theta)}{f_n(x; \\theta)} f_n(x; \\theta) dx = \\mathbb{E}_\\theta\\left[ T(X) \\nabla_\\theta \\log f_n(X; \\theta) \\right] = \\mathbb{E}_\\theta[T(X) \\mathcal{S}_n(\\theta)]$<br>
+                            Recall that expected score $\\mathbb{E}_\\theta[\\mathcal{S}_n(\\theta)] = 0$. Hence the covariance between $T(X)$ and score $\\mathcal{S}_n(\\theta)$ is:<br>
+                            $\\operatorname{Cov}_\\theta(T(X), \\mathcal{S}_n(\\theta)) = \\mathbb{E}_\\theta[T(X) \\mathcal{S}_n(\\theta)] - \\mathbb{E}_\\theta[T(X)] \\mathbb{E}_\\theta[\\mathcal{S}_n(\\theta)] = g'(\\theta)$<br>
+                            Applying the Cauchy-Schwarz inequality for random variables: $[\\operatorname{Cov}(U, V)]^2 \\le \\operatorname{Var}(U) \\operatorname{Var}(V)$:<br>
+                            $[g'(\\theta)]^2 = [\\operatorname{Cov}_\\theta(T(X), \\mathcal{S}_n(\\theta))]^2 \\le \\operatorname{Var}_\\theta(T(X)) \\cdot \\operatorname{Var}_\\theta(\\mathcal{S}_n(\\theta))$<br>
+                            Substituting $\\operatorname{Var}_\\theta(\\mathcal{S}_n(\\theta)) = I_n(\\theta) = n I_1(\\theta)$ and isolating $\\operatorname{Var}(T)$:<br>
+                            $\\operatorname{Var}_\\theta(T(X)) \\ge \\frac{[g'(\\theta)]^2}{n I_1(\\theta)}$<br>
+                            For direct parameter estimation where $g(\\theta) = \\theta \\implies g'(\\theta) = 1$: $\\operatorname{Var}_\\theta(T(X)) \\ge \\frac{1}{n I_1(\\theta)}$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Condition for Exact Attainment & Exponential Families</strong><br>
-                            In Cauchy-Schwarz, equality holds if and only if $T(X) - g(\theta)$ and score $\mathcal{S}_n(\theta)$ are proportional almost surely:<br>
-                            $\mathcal{S}_n(\theta) = c(\theta)(T(X) - g(\theta))$ for some scalar function $c(\theta)$.<br>
-                            Integrating with respect to $\theta$: $\log f_n(x; \theta) = \int c(\theta)(T(x) - g(\theta)) d\theta + d(x) = C(\theta) T(x) - B(\theta) + d(x)$.<br>
+                            In Cauchy-Schwarz, equality holds if and only if $T(X) - g(\\theta)$ and score $\\mathcal{S}_n(\\theta)$ are proportional almost surely:<br>
+                            $\\mathcal{S}_n(\\theta) = c(\\theta)(T(X) - g(\\theta))$ for some scalar function $c(\\theta)$.<br>
+                            Integrating with respect to $\\theta$: $\\log f_n(x; \\theta) = \\int c(\\theta)(T(x) - g(\\theta)) d\\theta + d(x) = C(\\theta) T(x) - B(\\theta) + d(x)$.<br>
                             Exponentiating reveals the exact density structure:<br>
-                            $f_n(x; \theta) = \exp\left( C(\theta) T(x) - B(\theta) \right) \cdot h(x)$<br>
+                            $f_n(x; \\theta) = \\exp\\left( C(\\theta) T(x) - B(\\theta) \\right) \\cdot h(x)$<br>
                             <strong>Conclusion:</strong> An unbiased estimator attains the Cramér-Rao lower bound at finite sample size $n$ if and only if the distribution is a member of the 1-parameter Natural Exponential Family, where $T(X)$ is the natural sufficient statistic!
                         </div>
 
                         <div class="math-box">
                             <strong>3. The Rao-Blackwell Theorem (Variance Reduction via Conditioning)</strong><br>
-                            Let $T$ be any unbiased estimator of $	heta$ ($\mathbb{E}_\theta[T] = \theta$) with finite variance $\operatorname{Var}_\theta(T) < \infty$. Let $S$ be a sufficient statistic for $	heta$.<br>
-                            Define the conditional expectation estimator: $T^*(S) = \mathbb{E}[T \mid S]$.<br>
-                            Because $S$ is sufficient, the conditional distribution $T \mid S$ is completely independent of $	heta$, ensuring $T^*(S)$ is a valid statistic.<br>
+                            Let $T$ be any unbiased estimator of $	heta$ ($\\mathbb{E}_\\theta[T] = \\theta$) with finite variance $\\operatorname{Var}_\\theta(T) < \\infty$. Let $S$ be a sufficient statistic for $	heta$.<br>
+                            Define the conditional expectation estimator: $T^*(S) = \\mathbb{E}[T \\mid S]$.<br>
+                            Because $S$ is sufficient, the conditional distribution $T \\mid S$ is completely independent of $	heta$, ensuring $T^*(S)$ is a valid statistic.<br>
                             <strong>Expectation (Unbiasedness):</strong> By the Law of Total Expectation:<br>
-                            $\mathbb{E}_\theta[T^*(S)] = \mathbb{E}_\theta[\mathbb{E}[T \mid S]] = \mathbb{E}_\theta[T] = \theta$<br>
+                            $\\mathbb{E}_\\theta[T^*(S)] = \\mathbb{E}_\\theta[\\mathbb{E}[T \\mid S]] = \\mathbb{E}_\\theta[T] = \\theta$<br>
                             <strong>Variance Reduction (Law of Total Variance):</strong><br>
-                            $\operatorname{Var}_\theta(T) = \operatorname{Var}_\theta(\mathbb{E}[T \mid S]) + \mathbb{E}_\theta[\operatorname{Var}(T \mid S)] = \operatorname{Var}_\theta(T^*(S)) + \mathbb{E}_\theta[\operatorname{Var}(T \mid S)]$<br>
-                            Since conditional variance $\operatorname{Var}(T \mid S) \ge 0$ almost surely, its expectation is non-negative: $\mathbb{E}_\theta[\operatorname{Var}(T \mid S)] \ge 0$.<br>
-                            $\implies \operatorname{Var}_\theta(T^*(S)) \le \operatorname{Var}_\theta(T)$<br>
-                            Strict inequality holds unless $\operatorname{Var}(T \mid S) = 0$ a.s., which occurs if and only if $T$ is already almost surely equal to a deterministic function of $S$.
+                            $\\operatorname{Var}_\\theta(T) = \\operatorname{Var}_\\theta(\\mathbb{E}[T \\mid S]) + \\mathbb{E}_\\theta[\\operatorname{Var}(T \\mid S)] = \\operatorname{Var}_\\theta(T^*(S)) + \\mathbb{E}_\\theta[\\operatorname{Var}(T \\mid S)]$<br>
+                            Since conditional variance $\\operatorname{Var}(T \\mid S) \\ge 0$ almost surely, its expectation is non-negative: $\\mathbb{E}_\\theta[\\operatorname{Var}(T \\mid S)] \\ge 0$.<br>
+                            $\\implies \\operatorname{Var}_\\theta(T^*(S)) \\le \\operatorname{Var}_\\theta(T)$<br>
+                            Strict inequality holds unless $\\operatorname{Var}(T \\mid S) = 0$ a.s., which occurs if and only if $T$ is already almost surely equal to a deterministic function of $S$.
                         </div>
 
                         <div class="math-box">
                             <strong>4. Lehmann-Scheffé Theorem & UMVUE Uniqueness</strong><br>
-                            <strong>Definition (Completeness):</strong> A sufficient statistic $S$ is complete if for every measurable function $h(S)$, $\mathbb{E}_\theta[h(S)] = 0 \ \forall \theta \in \Theta \implies \mathbb{P}_\theta(h(S) = 0) = 1$.<br>
+                            <strong>Definition (Completeness):</strong> A sufficient statistic $S$ is complete if for every measurable function $h(S)$, $\\mathbb{E}_\\theta[h(S)] = 0 \\ \\forall \\theta \\in \\Theta \\implies \\mathbb{P}_\\theta(h(S) = 0) = 1$.<br>
                             <strong>Theorem:</strong> If $S$ is complete and sufficient for $	heta$, and $T^* = g(S)$ is an unbiased estimator of $	heta$, then $T^*$ is the Unique Uniformly Minimum-Variance Unbiased Estimator (UMVUE).<br>
                             <strong>Proof of Uniqueness:</strong> Suppose $T_1^*(S)$ and $T_2^*(S)$ are two unbiased estimators of $	heta$ that are both measurable functions of $S$.<br>
-                            Then $\mathbb{E}_\theta\left[ T_1^*(S) - T_2^*(S) \right] = \mathbb{E}_\theta[T_1^*(S)] - \mathbb{E}_\theta[T_2^*(S)] = \theta - \theta = 0 \quad \forall \theta \in \Theta$.<br>
-                            Defining $h(S) = T_1^*(S) - T_2^*(S)$, completeness of $S$ immediately implies $\mathbb{P}_\theta(h(S) = 0) = 1$, meaning $T_1^*(S) = T_2^*(S)$ almost surely.<br>
-                            Coupled with Rao-Blackwell variance domination, $T^*(S)$ achieves minimum variance among all unbiased estimators uniformly over all $	heta \in \Theta$.
+                            Then $\\mathbb{E}_\\theta\\left[ T_1^*(S) - T_2^*(S) \\right] = \\mathbb{E}_\\theta[T_1^*(S)] - \\mathbb{E}_\\theta[T_2^*(S)] = \\theta - \\theta = 0 \\quad \\forall \\theta \\in \\Theta$.<br>
+                            Defining $h(S) = T_1^*(S) - T_2^*(S)$, completeness of $S$ immediately implies $\\mathbb{P}_\\theta(h(S) = 0) = 1$, meaning $T_1^*(S) = T_2^*(S)$ almost surely.<br>
+                            Coupled with Rao-Blackwell variance domination, $T^*(S)$ achieves minimum variance among all unbiased estimators uniformly over all $	heta \\in \\Theta$.
                         </div>
                     `,
                     'hypothesis_testing': `
@@ -3524,46 +3546,46 @@
 
                         <div class="math-box">
                             <strong>1. Neyman-Pearson Lemma (Most Powerful Test for Simple Hypotheses)</strong><br>
-                            Consider testing null hypothesis $H_0: \theta = \theta_0$ versus alternative hypothesis $H_1: \theta = \theta_1$.<br>
-                            Define the likelihood ratio test critical function $\phi(x) = \mathbf{1}\{ L(x) > \eta \}$ where $L(x) = \frac{f(x; \theta_1)}{f(x; \theta_0)}$ and threshold $\eta \ge 0$ is chosen such that the test size is $\alpha = \mathbb{E}_{\theta_0}[\phi(X)] = \mathbb{P}_{\theta_0}(L(X) > \eta)$.<br>
-                            Let $\phi^*(x)$ be any competing test with size $\alpha^* = \mathbb{E}_{\theta_0}[\phi^*(X)] \le \alpha$.<br>
-                            <strong>Pointwise Inequality:</strong> Examine the quantity $(\phi(x) - \phi^*(x))(f(x; \theta_1) - \eta f(x; \theta_0))$ for all $x \in \mathcal{X}$:<br>
-                            • If $L(x) > \eta \implies f(x; \theta_1) - \eta f(x; \theta_0) > 0$. Here $\phi(x) = 1$, so $\phi(x) - \phi^*(x) = 1 - \phi^*(x) \ge 0$. The product is $\ge 0$.<br>
-                            • If $L(x) < \eta \implies f(x; \theta_1) - \eta f(x; \theta_0) < 0$. Here $\phi(x) = 0$, so $\phi(x) - \phi^*(x) = 0 - \phi^*(x) \le 0$. The product is $\ge 0$.<br>
-                            Thus $(\phi(x) - \phi^*(x))(f(x; \theta_1) - \eta f(x; \theta_0)) \ge 0$ holds point-by-point everywhere in $\mathcal{X}$.<br>
-                            <strong>Integrating over $\mathcal{X}$:</strong><br>
-                            $\int_{\mathcal{X}} (\phi(x) - \phi^*(x))(f(x; \theta_1) - \eta f(x; \theta_0)) dx \ge 0$<br>
-                            $\int \phi(x) f(x; \theta_1) dx - \int \phi^*(x) f(x; \theta_1) dx - \eta \left( \int \phi(x) f(x; \theta_0) dx - \int \phi^*(x) f(x; \theta_0) dx \right) \ge 0$<br>
-                            $\implies \operatorname{Power}(\phi) - \operatorname{Power}(\phi^*) - \eta (\alpha - \alpha^*) \ge 0$<br>
-                            Because $\alpha \ge \alpha^*$ and $\eta \ge 0$, the term $\eta(\alpha - \alpha^*) \ge 0$:<br>
-                            $\operatorname{Power}(\phi) - \operatorname{Power}(\phi^*) \ge \eta(\alpha - \alpha^*) \ge 0 \implies \operatorname{Power}(\phi) \ge \operatorname{Power}(\phi^*)$.<br>
-                            <strong>Conclusion:</strong> The Likelihood Ratio Test achieves maximum statistical power among all tests of size at most $\alpha$.
+                            Consider testing null hypothesis $H_0: \\theta = \\theta_0$ versus alternative hypothesis $H_1: \\theta = \\theta_1$.<br>
+                            Define the likelihood ratio test critical function $\\phi(x) = \\mathbf{1}\\{ L(x) > \\eta \\}$ where $L(x) = \\frac{f(x; \\theta_1)}{f(x; \\theta_0)}$ and threshold $\\eta \\ge 0$ is chosen such that the test size is $\\alpha = \\mathbb{E}_{\\theta_0}[\\phi(X)] = \\mathbb{P}_{\\theta_0}(L(X) > \\eta)$.<br>
+                            Let $\\phi^*(x)$ be any competing test with size $\\alpha^* = \\mathbb{E}_{\\theta_0}[\\phi^*(X)] \\le \\alpha$.<br>
+                            <strong>Pointwise Inequality:</strong> Examine the quantity $(\\phi(x) - \\phi^*(x))(f(x; \\theta_1) - \\eta f(x; \\theta_0))$ for all $x \\in \\mathcal{X}$:<br>
+                            • If $L(x) > \\eta \\implies f(x; \\theta_1) - \\eta f(x; \\theta_0) > 0$. Here $\\phi(x) = 1$, so $\\phi(x) - \\phi^*(x) = 1 - \\phi^*(x) \\ge 0$. The product is $\\ge 0$.<br>
+                            • If $L(x) < \\eta \\implies f(x; \\theta_1) - \\eta f(x; \\theta_0) < 0$. Here $\\phi(x) = 0$, so $\\phi(x) - \\phi^*(x) = 0 - \\phi^*(x) \\le 0$. The product is $\\ge 0$.<br>
+                            Thus $(\\phi(x) - \\phi^*(x))(f(x; \\theta_1) - \\eta f(x; \\theta_0)) \\ge 0$ holds point-by-point everywhere in $\\mathcal{X}$.<br>
+                            <strong>Integrating over $\\mathcal{X}$:</strong><br>
+                            $\\int_{\\mathcal{X}} (\\phi(x) - \\phi^*(x))(f(x; \\theta_1) - \\eta f(x; \\theta_0)) dx \\ge 0$<br>
+                            $\\int \\phi(x) f(x; \\theta_1) dx - \\int \\phi^*(x) f(x; \\theta_1) dx - \\eta \\left( \\int \\phi(x) f(x; \\theta_0) dx - \\int \\phi^*(x) f(x; \\theta_0) dx \\right) \\ge 0$<br>
+                            $\\implies \\operatorname{Power}(\\phi) - \\operatorname{Power}(\\phi^*) - \\eta (\\alpha - \\alpha^*) \\ge 0$<br>
+                            Because $\\alpha \\ge \\alpha^*$ and $\\eta \\ge 0$, the term $\\eta(\\alpha - \\alpha^*) \\ge 0$:<br>
+                            $\\operatorname{Power}(\\phi) - \\operatorname{Power}(\\phi^*) \\ge \\eta(\\alpha - \\alpha^*) \\ge 0 \\implies \\operatorname{Power}(\\phi) \\ge \\operatorname{Power}(\\phi^*)$.<br>
+                            <strong>Conclusion:</strong> The Likelihood Ratio Test achieves maximum statistical power among all tests of size at most $\\alpha$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Generalized Likelihood Ratio Test (GLRT) & Wilks' Theorem</strong><br>
-                            For composite hypotheses $H_0: \theta \in \Theta_0$ versus $H_1: \theta \in \Theta \setminus \Theta_0$ where $\dim(\Theta) = d$ and $\dim(\Theta_0) = d - r$ ($r$ independent constraints).<br>
-                            The GLRT statistic is $\Lambda_n = 2\left(\ell_n(\hat{\theta}) - \ell_n(\hat{\theta}_0)\right)$, where $\hat{\theta}$ is the unconstrained MLE over $\Theta$ and $\hat{\theta}_0$ is the constrained MLE over $\Theta_0$.<br>
+                            For composite hypotheses $H_0: \\theta \\in \\Theta_0$ versus $H_1: \\theta \\in \\Theta \\setminus \\Theta_0$ where $\\dim(\\Theta) = d$ and $\\dim(\\Theta_0) = d - r$ ($r$ independent constraints).<br>
+                            The GLRT statistic is $\\Lambda_n = 2\\left(\\ell_n(\\hat{\\theta}) - \\ell_n(\\hat{\\theta}_0)\\right)$, where $\\hat{\\theta}$ is the unconstrained MLE over $\\Theta$ and $\\hat{\\theta}_0$ is the constrained MLE over $\\Theta_0$.<br>
                             <strong>Wilks' Theorem Proof Sketch via Quadratic Expansion:</strong><br>
-                            Perform a second-order Taylor expansion of $\ell_n(\theta)$ around unconstrained MLE $\hat{\theta}$:<br>
-                            $\ell_n(\theta) \approx \ell_n(\hat{\theta}) + \nabla \ell_n(\hat{\theta})^T (\theta - \hat{\theta}) - \frac{1}{2}(\theta - \hat{\theta})^T \left[-\nabla^2 \ell_n(\hat{\theta})\right] (\theta - \hat{\theta})$<br>
-                            Since $\nabla \ell_n(\hat{\theta}) = \mathbf{0}$ and $-\frac{1}{n} \nabla^2 \ell_n(\hat{\theta}) \\xrightarrow{P} I_1(\theta^*)$:<br>
-                            $\ell_n(\theta) \approx \ell_n(\hat{\theta}) - \frac{n}{2}(\theta - \hat{\theta})^T I_1(\theta^*) (\theta - \hat{\theta})$<br>
-                            Evaluating at constrained maximizer $\hat{\theta}_0$:<br>
-                            $\Lambda_n = 2\left(\ell_n(\hat{\theta}) - \ell_n(\hat{\theta}_0)\right) \approx n (\hat{\theta}_0 - \hat{\theta})^T I_1(\theta^*) (\hat{\theta}_0 - \hat{\theta})$<br>
-                            Under $H_0$, the vector $\sqrt{n}(\hat{\theta} - \theta^*) \\xrightarrow{d} \mathcal{N}\left(\mathbf{0}, I_1(\theta^*)^{-1}\right)$. The constrained projection $(\hat{\theta} - \hat{\theta}_0)$ isolates the component orthogonal to the tangent space of $\Theta_0$, which has dimension $r = \dim(\Theta) - \dim(\Theta_0)$.<br>
+                            Perform a second-order Taylor expansion of $\\ell_n(\\theta)$ around unconstrained MLE $\\hat{\\theta}$:<br>
+                            $\\ell_n(\\theta) \\approx \\ell_n(\\hat{\\theta}) + \\nabla \\ell_n(\\hat{\\theta})^T (\\theta - \\hat{\\theta}) - \\frac{1}{2}(\\theta - \\hat{\\theta})^T \\left[-\\nabla^2 \\ell_n(\\hat{\\theta})\\right] (\\theta - \\hat{\\theta})$<br>
+                            Since $\\nabla \\ell_n(\\hat{\\theta}) = \\mathbf{0}$ and $-\\frac{1}{n} \\nabla^2 \\ell_n(\\hat{\\theta}) \\xrightarrow{P} I_1(\\theta^*)$:<br>
+                            $\\ell_n(\\theta) \\approx \\ell_n(\\hat{\\theta}) - \\frac{n}{2}(\\theta - \\hat{\\theta})^T I_1(\\theta^*) (\\theta - \\hat{\\theta})$<br>
+                            Evaluating at constrained maximizer $\\hat{\\theta}_0$:<br>
+                            $\\Lambda_n = 2\\left(\\ell_n(\\hat{\\theta}) - \\ell_n(\\hat{\\theta}_0)\\right) \\approx n (\\hat{\\theta}_0 - \\hat{\\theta})^T I_1(\\theta^*) (\\hat{\\theta}_0 - \\hat{\\theta})$<br>
+                            Under $H_0$, the vector $\\sqrt{n}(\\hat{\\theta} - \\theta^*) \\xrightarrow{d} \\mathcal{N}\\left(\\mathbf{0}, I_1(\\theta^*)^{-1}\\right)$. The constrained projection $(\\hat{\\theta} - \\hat{\\theta}_0)$ isolates the component orthogonal to the tangent space of $\\Theta_0$, which has dimension $r = \\dim(\\Theta) - \\dim(\\Theta_0)$.<br>
                             The quadratic form of an $r$-dimensional projected Gaussian vector weighted by its precision metric tensor is identically distributed as the sum of $r$ squared independent standard Gaussians:<br>
-                            $\Lambda_n = 2\left(\ell_n(\hat{\theta}) - \ell_n(\hat{\theta}_0)\right) \\xrightarrow{d} \chi^2(r) \quad \text{as } n \to \infty$.
+                            $\\Lambda_n = 2\\left(\\ell_n(\\hat{\\theta}) - \\ell_n(\\hat{\\theta}_0)\\right) \\xrightarrow{d} \\chi^2(r) \\quad \\text{as } n \\to \\infty$.
                         </div>
 
                         <div class="math-box">
                             <strong>3. The Asymptotic Equivalence Triangle: LRT, Wald & Rao Score Tests</strong><br>
-                            Three fundamental test statistics evaluate $H_0: \theta = \theta_0$ against $H_1: \theta \ne \theta_0$ in large samples:<br>
-                            • <strong>Likelihood Ratio Test (LRT):</strong> $\Lambda_{LR} = 2\left(\ell_n(\hat{\theta}) - \ell_n(\theta_0)\right)$ (vertical height comparison on log-likelihood surface).<br>
-                            • <strong>Wald Test:</strong> $W = (\hat{\theta} - \theta_0)^T [I_n(\hat{\theta})] (\hat{\theta} - \theta_0)$ (horizontal parameter distance weighted by local curvature at $\hat{\theta}$, requires only unconstrained optimization).<br>
-                            • <strong>Rao Score (Lagrange Multiplier) Test:</strong> $S = \mathcal{S}_n(\theta_0)^T [I_n(\theta_0)]^{-1} \mathcal{S}_n(\theta_0)$ (evaluates gradient deviation from zero at null $\theta_0$, requires zero optimization under alternative $H_1$).<br>
-                            <strong>Asymptotic Equivalence:</strong> Under the null hypothesis and local contiguous alternatives $\theta_n = \theta_0 + \frac{h}{\sqrt{n}}$:<br>
-                            $\Lambda_{LR} - W \\xrightarrow{P} 0 \quad \text{and} \quad \Lambda_{LR} - S \\xrightarrow{P} 0 \implies \Lambda_{LR}, W, S \\xrightarrow{d} \chi^2(d)$.
+                            Three fundamental test statistics evaluate $H_0: \\theta = \\theta_0$ against $H_1: \\theta \\ne \\theta_0$ in large samples:<br>
+                            • <strong>Likelihood Ratio Test (LRT):</strong> $\\Lambda_{LR} = 2\\left(\\ell_n(\\hat{\\theta}) - \\ell_n(\\theta_0)\\right)$ (vertical height comparison on log-likelihood surface).<br>
+                            • <strong>Wald Test:</strong> $W = (\\hat{\\theta} - \\theta_0)^T [I_n(\\hat{\\theta})] (\\hat{\\theta} - \\theta_0)$ (horizontal parameter distance weighted by local curvature at $\\hat{\\theta}$, requires only unconstrained optimization).<br>
+                            • <strong>Rao Score (Lagrange Multiplier) Test:</strong> $S = \\mathcal{S}_n(\\theta_0)^T [I_n(\\theta_0)]^{-1} \\mathcal{S}_n(\\theta_0)$ (evaluates gradient deviation from zero at null $\\theta_0$, requires zero optimization under alternative $H_1$).<br>
+                            <strong>Asymptotic Equivalence:</strong> Under the null hypothesis and local contiguous alternatives $\\theta_n = \\theta_0 + \\frac{h}{\\sqrt{n}}$:<br>
+                            $\\Lambda_{LR} - W \\xrightarrow{P} 0 \\quad \\text{and} \\quad \\Lambda_{LR} - S \\xrightarrow{P} 0 \\implies \\Lambda_{LR}, W, S \\xrightarrow{d} \\chi^2(d)$.
                         </div>
                     `
                 },
@@ -3589,39 +3611,39 @@
 
                         <div class="math-box">
                             <strong>1. Combinatorial Set Families as Characteristic Boolean Functions</strong><br>
-                            Let $V = \{x_1, x_2, \dots, x_n\}$ be a finite ground set of boolean variables with strict linear ordering $\pi: x_1 < x_2 < \dots < x_n$.<br>
-                            A combination is a subset $S \subseteq V$. A set family $\mathcal{F} \subseteq \mathcal{P}(V)$ is a collection of combinations.<br>
-                            Any family $\mathcal{F}$ is isomorphic to a characteristic boolean function $f_\mathcal{F}: \{0, 1\}^n \to \{0, 1\}$ defined such that:<br>
-                            $f_\mathcal{F}(b_1, \dots, b_n) = 1 \iff \{ x_i \in V \mid b_i = 1 \} \in \mathcal{F}$.
+                            Let $V = \\{x_1, x_2, \\dots, x_n\\}$ be a finite ground set of boolean variables with strict linear ordering $\\pi: x_1 < x_2 < \\dots < x_n$.<br>
+                            A combination is a subset $S \\subseteq V$. A set family $\\mathcal{F} \\subseteq \\mathcal{P}(V)$ is a collection of combinations.<br>
+                            Any family $\\mathcal{F}$ is isomorphic to a characteristic boolean function $f_\\mathcal{F}: \\{0, 1\\}^n \\to \\{0, 1\\}$ defined such that:<br>
+                            $f_\\mathcal{F}(b_1, \\dots, b_n) = 1 \\iff \\{ x_i \\in V \\mid b_i = 1 \\} \\in \\mathcal{F}$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Shannon-Minato Unate Set Family Decomposition</strong><br>
-                            For any chosen pivot variable $x \in V$, the family $\mathcal{F}$ partitions into two disjoint subfamilies:<br>
-                            $\mathcal{F} = x \cdot \mathcal{F}_{\text{high}} \cup \mathcal{F}_{\text{low}}$<br>
+                            For any chosen pivot variable $x \\in V$, the family $\\mathcal{F}$ partitions into two disjoint subfamilies:<br>
+                            $\\mathcal{F} = x \\cdot \\mathcal{F}_{\\text{high}} \\cup \\mathcal{F}_{\\text{low}}$<br>
                             where:<br>
-                            • $\mathcal{F}_{\text{high}} = \{ S \setminus \{x\} \mid S \in \mathcal{F}, x \in S \}$ (the 1-cofactor: set of combinations containing $x$, with $x$ stripped away).<br>
-                            • $\mathcal{F}_{\text{low}} = \{ S \in \mathcal{F} \mid x \notin S \}$ (the 0-cofactor: set of combinations that do not contain $x$).<br>
-                            Here, $x \cdot \mathcal{F}_{\text{high}}$ denotes prepending element $x$ to every subset in $\mathcal{F}_{\text{high}}$: $\{ S \cup \{x\} \mid S \in \mathcal{F}_{\text{high}} \}$.
+                            • $\\mathcal{F}_{\\text{high}} = \\{ S \\setminus \\{x\\} \\mid S \\in \\mathcal{F}, x \\in S \\}$ (the 1-cofactor: set of combinations containing $x$, with $x$ stripped away).<br>
+                            • $\\mathcal{F}_{\\text{low}} = \\{ S \\in \\mathcal{F} \\mid x \\notin S \\}$ (the 0-cofactor: set of combinations that do not contain $x$).<br>
+                            Here, $x \\cdot \\mathcal{F}_{\\text{high}}$ denotes prepending element $x$ to every subset in $\\mathcal{F}_{\\text{high}}$: $\\{ S \\cup \\{x\\} \\mid S \\in \\mathcal{F}_{\\text{high}} \\}$.
                         </div>
 
                         <div class="math-box">
                             <strong>3. The Elimination Rule: Bryant BDD vs. Minato ZBDD</strong><br>
                             • <strong>Bryant Reduced Ordered BDD (1986):</strong><br>
-                            Elimination Condition: A node $v$ is eliminated if $\operatorname{low}(v) == \operatorname{high}(v)$.<br>
-                            <em>Pathological Sparsity Failure:</em> In combinatorial applications (e.g. subsets of a graph with 1,000 vertices), most items are absent ($x_i = 0$). Bryant BDDs require explicit node chains to test that every absent variable is 0. Representing a single 1-element set $\{x_1\}$ in a 1,000-variable universe consumes 999 dummy nodes!<br>
+                            Elimination Condition: A node $v$ is eliminated if $\\operatorname{low}(v) == \\operatorname{high}(v)$.<br>
+                            <em>Pathological Sparsity Failure:</em> In combinatorial applications (e.g. subsets of a graph with 1,000 vertices), most items are absent ($x_i = 0$). Bryant BDDs require explicit node chains to test that every absent variable is 0. Representing a single 1-element set $\\{x_1\\}$ in a 1,000-variable universe consumes 999 dummy nodes!<br>
                             • <strong>Minato Zero-Suppressed BDD (1993):</strong><br>
-                            Elimination Condition: A node $v$ is eliminated if and only if $\operatorname{high}(v) == \mathbf{0}$ (the empty set leaf $\emptyset$).<br>
-                            <em>Automatic Zero Suppression:</em> If variable $x$ does not appear in any subset of family $\mathcal{F}$, its 1-cofactor is empty ($\mathcal{F}_{\text{high}} = \emptyset$). Hence, $\operatorname{high}(v) = \mathbf{0}$, and node $v$ is automatically suppressed and bypassed! The representation size depends only on combinations present, not the universe size $|V|$.<br>
+                            Elimination Condition: A node $v$ is eliminated if and only if $\\operatorname{high}(v) == \\mathbf{0}$ (the empty set leaf $\\emptyset$).<br>
+                            <em>Automatic Zero Suppression:</em> If variable $x$ does not appear in any subset of family $\\mathcal{F}$, its 1-cofactor is empty ($\\mathcal{F}_{\\text{high}} = \\emptyset$). Hence, $\\operatorname{high}(v) = \\mathbf{0}$, and node $v$ is automatically suppressed and bypassed! The representation size depends only on combinations present, not the universe size $|V|$.<br>
                             <strong>Terminal Leaves:</strong><br>
-                            $\mathbf{0} = \emptyset$ (the empty family containing no combinations).<br>
-                            $\mathbf{1} = \{ \emptyset \}$ (the family containing exactly one combination: the empty combination).
+                            $\\mathbf{0} = \\emptyset$ (the empty family containing no combinations).<br>
+                            $\\mathbf{1} = \\{ \\emptyset \\}$ (the family containing exactly one combination: the empty combination).
                         </div>
 
                         <div class="math-box">
                             <strong>4. Canonical Representation Theorem (Minato 1993 / Knuth TAOCP Vol 4A, Theorem S)</strong><br>
-                            <strong>Theorem:</strong> For any fixed strict variable ordering $\pi$, every family of subsets $\mathcal{F} \subseteq \mathcal{P}(V)$ has a uniquely determined, canonical reduced directed acyclic graph (ZBDD).<br>
-                            <strong>Corollary ($\mathcal{O}(1)$ Equivalence Checking):</strong> By utilizing a global hash-consed unique table with weak reference caching, graph nodes are maximally shared. Testing equivalence $\mathcal{F}_1 \equiv \mathcal{F}_2$ or checking whether a candidate set family is empty ($\mathcal{F} \equiv \emptyset$) executes in exactly $\mathcal{O}(1)$ time by comparing root node memory pointers: $\operatorname{ptr}(\mathcal{F}_1) == \operatorname{ptr}(\mathcal{F}_2)$.
+                            <strong>Theorem:</strong> For any fixed strict variable ordering $\\pi$, every family of subsets $\\mathcal{F} \\subseteq \\mathcal{P}(V)$ has a uniquely determined, canonical reduced directed acyclic graph (ZBDD).<br>
+                            <strong>Corollary ($\\mathcal{O}(1)$ Equivalence Checking):</strong> By utilizing a global hash-consed unique table with weak reference caching, graph nodes are maximally shared. Testing equivalence $\\mathcal{F}_1 \\equiv \\mathcal{F}_2$ or checking whether a candidate set family is empty ($\\mathcal{F} \\equiv \\emptyset$) executes in exactly $\\mathcal{O}(1)$ time by comparing root node memory pointers: $\\operatorname{ptr}(\\mathcal{F}_1) == \\operatorname{ptr}(\\mathcal{F}_2)$.
                         </div>
                     `,
                     'unate_algebra': `
@@ -3630,28 +3652,28 @@
 
                         <div class="math-box">
                             <strong>1. Recursive Unate Set Operations</strong><br>
-                            Let $\mathcal{P}$ and $\mathcal{Q}$ be two ZBDDs with top variables $v_P = \operatorname{var}(P)$ and $v_Q = \operatorname{var}(Q)$.<br>
-                            Let $x = \min(v_P, v_Q)$ according to order $\pi$. Decompose $\mathcal{P}$ and $\mathcal{Q}$ with respect to $x$:<br>
-                            • If $\operatorname{var}(P) == x$: $P_1 = P.\text{high}, P_0 = P.\text{low}$; else: $P_1 = \mathbf{0}, P_0 = P$.<br>
-                            • If $\operatorname{var}(Q) == x$: $Q_1 = Q.\text{high}, Q_0 = Q.\text{low}$; else: $Q_1 = \mathbf{0}, Q_0 = Q$.<br>
+                            Let $\\mathcal{P}$ and $\\mathcal{Q}$ be two ZBDDs with top variables $v_P = \\operatorname{var}(P)$ and $v_Q = \\operatorname{var}(Q)$.<br>
+                            Let $x = \\min(v_P, v_Q)$ according to order $\\pi$. Decompose $\\mathcal{P}$ and $\\mathcal{Q}$ with respect to $x$:<br>
+                            • If $\\operatorname{var}(P) == x$: $P_1 = P.\\text{high}, P_0 = P.\\text{low}$; else: $P_1 = \\mathbf{0}, P_0 = P$.<br>
+                            • If $\\operatorname{var}(Q) == x$: $Q_1 = Q.\\text{high}, Q_0 = Q.\\text{low}$; else: $Q_1 = \\mathbf{0}, Q_0 = Q$.<br>
                             <strong>Fundamental Algebraic Operations:</strong><br>
-                            • <strong>Union ($\mathcal{P} \cup \mathcal{Q}$):</strong> $x \cdot (P_1 \cup Q_1) \cup (P_0 \cup Q_0)$<br>
-                            • <strong>Intersection ($\mathcal{P} \cap \mathcal{Q}$):</strong> $x \cdot (P_1 \cap Q_1) \cup (P_0 \cap Q_0)$<br>
-                            • <strong>Difference ($\mathcal{P} \setminus \mathcal{Q}$):</strong> $x \cdot (P_1 \setminus Q_1) \cup (P_0 \setminus Q_0)$<br>
-                            • <strong>Subset Join ($\mathcal{P} \bowtie \mathcal{Q}$):</strong> $(P_0 \bowtie Q_0) \cup x \cdot \left[ (P_1 \bowtie Q_0) \cup (P_0 \bowtie Q_1) \cup (P_1 \bowtie Q_1) \right]$.
+                            • <strong>Union ($\\mathcal{P} \\cup \\mathcal{Q}$):</strong> $x \\cdot (P_1 \\cup Q_1) \\cup (P_0 \\cup Q_0)$<br>
+                            • <strong>Intersection ($\\mathcal{P} \\cap \\mathcal{Q}$):</strong> $x \\cdot (P_1 \\cap Q_1) \\cup (P_0 \\cap Q_0)$<br>
+                            • <strong>Difference ($\\mathcal{P} \\setminus \\mathcal{Q}$):</strong> $x \\cdot (P_1 \\setminus Q_1) \\cup (P_0 \\setminus Q_0)$<br>
+                            • <strong>Subset Join ($\\mathcal{P} \\bowtie \\mathcal{Q}$):</strong> $(P_0 \\bowtie Q_0) \\cup x \\cdot \\left[ (P_1 \\bowtie Q_0) \\cup (P_0 \\bowtie Q_1) \\cup (P_1 \\bowtie Q_1) \\right]$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Boundary Base Cases & Short-Circuit Rules</strong><br>
-                            • $\mathcal{P} \cup \mathbf{0} = \mathcal{P}, \quad \mathcal{P} \cup \mathcal{P} = \mathcal{P}$<br>
-                            • $\mathcal{P} \cap \mathbf{0} = \mathbf{0}, \quad \mathcal{P} \cap \mathcal{P} = \mathcal{P}$<br>
-                            • $\mathcal{P} \setminus \mathbf{0} = \mathcal{P}, \quad \mathbf{0} \setminus \mathcal{P} = \mathbf{0}, \quad \mathcal{P} \setminus \mathcal{P} = \mathbf{0}$<br>
-                            • $\mathcal{P} \bowtie \mathbf{0} = \mathbf{0}, \quad \mathcal{P} \bowtie \mathbf{1} = \mathcal{P}$.
+                            • $\\mathcal{P} \\cup \\mathbf{0} = \\mathcal{P}, \\quad \\mathcal{P} \\cup \\mathcal{P} = \\mathcal{P}$<br>
+                            • $\\mathcal{P} \\cap \\mathbf{0} = \\mathbf{0}, \\quad \\mathcal{P} \\cap \\mathcal{P} = \\mathcal{P}$<br>
+                            • $\\mathcal{P} \\setminus \\mathbf{0} = \\mathcal{P}, \\quad \\mathbf{0} \\setminus \\mathcal{P} = \\mathbf{0}, \\quad \\mathcal{P} \\setminus \\mathcal{P} = \\mathbf{0}$<br>
+                            • $\\mathcal{P} \\bowtie \\mathbf{0} = \\mathbf{0}, \\quad \\mathcal{P} \\bowtie \\mathbf{1} = \\mathcal{P}$.
                         </div>
 
                         <div class="math-box">
                             <strong>3. Node Allocation Primitive with Zero Suppression</strong><br>
-                            Constructing a canonical node $(x, \text{low}, \text{high})$ enforces the zero-suppression invariant:<br>
+                            Constructing a canonical node $(x, \\text{low}, \\text{high})$ enforces the zero-suppression invariant:<br>
                             <code>
                             function getNode(x, low, high):<br>
                             &nbsp;&nbsp;if high == 0:<br>
@@ -3668,8 +3690,8 @@
                         <div class="math-box">
                             <strong>4. Complexity Guarantee via Computed Cache Table</strong><br>
                             Every recursive sub-operation queries a memoized cache: <code>computed_cache.lookup(op, P_node, Q_node)</code>.<br>
-                            Because each pair of sub-DAG nodes $(u \in \mathcal{P}, v \in \mathcal{Q})$ is visited and resolved at most once:<br>
-                            <strong>Time & Space Complexity:</strong> $\mathcal{O}(|\mathcal{P}| \cdot |\mathcal{Q}|)$, bounded strictly by the product of DAG node counts, completely bypassing the exponential cardinality $2^n$ of the set family.
+                            Because each pair of sub-DAG nodes $(u \\in \\mathcal{P}, v \\in \\mathcal{Q})$ is visited and resolved at most once:<br>
+                            <strong>Time & Space Complexity:</strong> $\\mathcal{O}(|\\mathcal{P}| \\cdot |\\mathcal{Q}|)$, bounded strictly by the product of DAG node counts, completely bypassing the exponential cardinality $2^n$ of the set family.
                         </div>
                     `,
                     'combinatorial_counting': `
@@ -3677,31 +3699,31 @@
                         <p>Computing exact configuration counts in linear time over exponential spaces, and solving NP-hard constraint satisfaction problems via ZBDD intersections.</p>
 
                         <div class="math-box">
-                            <strong>1. Exact Cardinality Counting in Linear Time $\mathcal{O}(|V_{\text{ZBDD}}|)$</strong><br>
-                            Let $|\mathcal{F}|$ denote the exact number of distinct combinations contained in family $\mathcal{F}$.<br>
-                            By Shannon decomposition, the subsets in $\mathcal{F}_{\text{low}}$ and $x \cdot \mathcal{F}_{\text{high}}$ are disjoint. Therefore:<br>
-                            $|\mathcal{F}| = |\mathcal{F}_{\text{low}}| + |\mathcal{F}_{\text{high}}|$<br>
+                            <strong>1. Exact Cardinality Counting in Linear Time $\\mathcal{O}(|V_{\\text{ZBDD}}|)$</strong><br>
+                            Let $|\\mathcal{F}|$ denote the exact number of distinct combinations contained in family $\\mathcal{F}$.<br>
+                            By Shannon decomposition, the subsets in $\\mathcal{F}_{\\text{low}}$ and $x \\cdot \\mathcal{F}_{\\text{high}}$ are disjoint. Therefore:<br>
+                            $|\\mathcal{F}| = |\\mathcal{F}_{\\text{low}}| + |\\mathcal{F}_{\\text{high}}|$<br>
                             Boundary conditions:<br>
-                            $|\mathbf{0}| = 0, \quad |\mathbf{1}| = 1$<br>
-                            <strong>Linear Evaluation:</strong> Performing a post-order traversal with memoization computes the exact size of set families exceeding $> 10^{35}$ valid states in exact $\mathcal{O}(|V_{\text{ZBDD}}|)$ linear time with 64-bit/BigInt arithmetic, requiring zero explicit combination enumeration.
+                            $|\\mathbf{0}| = 0, \\quad |\\mathbf{1}| = 1$<br>
+                            <strong>Linear Evaluation:</strong> Performing a post-order traversal with memoization computes the exact size of set families exceeding $> 10^{35}$ valid states in exact $\\mathcal{O}(|V_{\\text{ZBDD}}|)$ linear time with 64-bit/BigInt arithmetic, requiring zero explicit combination enumeration.
                         </div>
 
                         <div class="math-box">
                             <strong>2. NP-Hard Exact Cover Problem (Knuth's Algorithm X via ZBDD)</strong><br>
-                            Given a boolean matrix $A \in \{0, 1\}^{m \times n}$, select a subset of rows $R \subseteq \{1, \dots, m\}$ such that every column $j \in \{1, \dots, n\}$ contains exactly one 1: $\sum_{i \in R} A_{ij} = 1 \ \forall j$.<br>
+                            Given a boolean matrix $A \\in \\{0, 1\\}^{m \\times n}$, select a subset of rows $R \\subseteq \\{1, \\dots, m\\}$ such that every column $j \\in \\{1, \\dots, n\\}$ contains exactly one 1: $\\sum_{i \\in R} A_{ij} = 1 \\ \\forall j$.<br>
                             <strong>ZBDD Construction via Constraint Intersection:</strong><br>
-                            1. For each column $j$, define the unit-sum constraint family: $\mathcal{C}_j = \bigcup_{i: A_{ij}=1} \{ \{r_i\} \}$.<br>
+                            1. For each column $j$, define the unit-sum constraint family: $\\mathcal{C}_j = \\bigcup_{i: A_{ij}=1} \\{ \\{r_i\\} \\}$.<br>
                             2. Compute the exact cover solution space by intersecting constraints using disjoint set products:<br>
-                            $\mathcal{S}_{\text{exact}} = \mathcal{C}_1 \bowtie \mathcal{C}_2 \bowtie \dots \bowtie \mathcal{C}_n$<br>
-                            The resulting single canonical ZBDD root contains <em>all</em> valid exact cover solutions simultaneously. Each path from root to $\mathbf{1}$-leaf corresponds to an exact valid tiling/cover.
+                            $\\mathcal{S}_{\\text{exact}} = \\mathcal{C}_1 \\bowtie \\mathcal{C}_2 \\bowtie \\dots \\bowtie \\mathcal{C}_n$<br>
+                            The resulting single canonical ZBDD root contains <em>all</em> valid exact cover solutions simultaneously. Each path from root to $\\mathbf{1}$-leaf corresponds to an exact valid tiling/cover.
                         </div>
 
                         <div class="math-box">
                             <strong>3. Structural Advantages over Dancing Links (DLX)</strong><br>
-                            • <strong>Knuth's Dancing Links (DLX):</strong> Backtracking search based on circular doubly linked lists. Efficient for finding a single solution, but counting or extracting all solutions requires traversing the full search tree $\mathcal{O}(b^d)$.<br>
+                            • <strong>Knuth's Dancing Links (DLX):</strong> Backtracking search based on circular doubly linked lists. Efficient for finding a single solution, but counting or extracting all solutions requires traversing the full search tree $\\mathcal{O}(b^d)$.<br>
                             • <strong>ZBDD Symbolic Representation:</strong> Directly constructs the compressed solution DAG. Once built:<br>
-                            - Finding total solution count takes $\mathcal{O}(|V_{\text{ZBDD}}|)$ time.<br>
-                            - Minimum/maximum cost optimization takes $\mathcal{O}(|V_{\text{ZBDD}}|)$ shortest-path DAG dynamic programming.<br>
+                            - Finding total solution count takes $\\mathcal{O}(|V_{\\text{ZBDD}}|)$ time.<br>
+                            - Minimum/maximum cost optimization takes $\\mathcal{O}(|V_{\\text{ZBDD}}|)$ shortest-path DAG dynamic programming.<br>
                             - Zero runtime penalty for dense or overlapping constraint matrices.
                         </div>
                     `,
@@ -3715,7 +3737,7 @@
                             • Spatial & Affine: <code>Rotate90</code>, <code>ReflectHorizontal</code>, <code>ReflectMainDiagonal</code>, <code>CropBoundingBox</code>.<br>
                             • Morphological & Topological: <code>ExtractConnectedComponents(4-way | 8-way)</code>, <code>ContourHull</code>, <code>FloodFill(color)</code>.<br>
                             • Cellular Automata: <code>GravityFall(direction)</code>, <code>RayCastCollision</code>, <code>ColorByAreaRank</code>.<br>
-                            For a DSL with branching factor $b \approx 140$, depth $d = 5$ explores $\approx 140^5 = 5.37 \times 10^{10}$ candidate programs.
+                            For a DSL with branching factor $b \\approx 140$, depth $d = 5$ explores $\\approx 140^5 = 5.37 \\times 10^{10}$ candidate programs.
                         </div>
 
                         <div class="math-box">
@@ -3723,14 +3745,14 @@
                             Synthetically generated distinct AST programs frequently produce identical spatial transformation effect sets across training examples.<br>
                             By representing candidate execution hypothesis sets as canonical ZBDD set families:<br>
                             • <strong>42.8x Memory Reduction:</strong> Canonical DAG node sharing compresses the working hypothesis memory footprint by an empirical factor of 42.8x compared to explicit AST nodes.<br>
-                            • <strong>$\mathcal{O}(1)$ Semantic Equivalence Pruning:</strong> If two syntactically distinct programs evaluate to the same canonical ZBDD pointer ($\operatorname{ptr}(P_A) == \operatorname{ptr}(P_B)$), redundant search sub-branches are pruned immediately without further exploration.
+                            • <strong>$\\mathcal{O}(1)$ Semantic Equivalence Pruning:</strong> If two syntactically distinct programs evaluate to the same canonical ZBDD pointer ($\\operatorname{ptr}(P_A) == \\operatorname{ptr}(P_B)$), redundant search sub-branches are pruned immediately without further exploration.
                         </div>
 
                         <div class="math-box">
                             <strong>3. High-Performance Rust Synthesis Engine Architecture</strong><br>
                             • <strong>Lock-Free Arena Allocators:</strong> Cache-aligned 64-bit packed words <code>(var: u16, low: u32, high: u32)</code> with zero dynamic heap allocations during evaluation loops.<br>
                             • <strong>Thread-Local Computed Caches:</strong> High-speed thread-local hash tables achieving zero synchronization contention across 16 parallel worker threads.<br>
-                            • <strong>Throughput Benchmark:</strong> Achieved sustained evaluation speed of <strong>$1.4 \times 10^6$ program candidates per second</strong> on multi-core CPU architectures.<br>
+                            • <strong>Throughput Benchmark:</strong> Achieved sustained evaluation speed of <strong>$1.4 \\times 10^6$ program candidates per second</strong> on multi-core CPU architectures.<br>
                             • <strong>Outcome:</strong> Key computational driver powering team placement at <strong>Rank #179 / 1,456 (Top 13% Globally)</strong> in ARC Prize 2025 without reliance on heavy LLM inference.
                         </div>
                     `
@@ -3757,24 +3779,24 @@
 
                         <div class="math-box">
                             <strong>1. Data Structures & Advanced ADTs (CS301 · Grade: A+)</strong><br>
-                            • <strong>Asymptotic Complexity Analysis:</strong> Formal mathematical definitions of Big-O ($\mathcal{O}$), Big-Omega ($\Omega$), and Big-Theta ($\Theta$). Recurrence relations solved via the Master Theorem: $T(n) = a T(n/b) + f(n)$ and the Akra-Bazzi method.<br>
-                            • <strong>Balanced Search Trees:</strong> Red-Black tree invariants (root black, red node with black children, uniform black-height), single and double tree rotations, and $\mathcal{O}(\log n)$ insertion/deletion guarantees. AVL tree height-balance factors $(-1, 0, 1)$.<br>
-                            • <strong>Priority Queues & Heaps:</strong> Binary heap swim/sink array operations, Binomial heaps, and Fibonacci heaps with $\mathcal{O}(1)$ amortized decrease-key operations for dense graph optimization.<br>
-                            • <strong>Disjoint-Set Forest (Union-Find):</strong> Union-by-rank and path compression heuristics proving near-linear $\mathcal{O}(m \cdot \alpha(n))$ time complexity, where $\alpha(n)$ is the inverse Ackermann function.
+                            • <strong>Asymptotic Complexity Analysis:</strong> Formal mathematical definitions of Big-O ($\\mathcal{O}$), Big-Omega ($\\Omega$), and Big-Theta ($\\Theta$). Recurrence relations solved via the Master Theorem: $T(n) = a T(n/b) + f(n)$ and the Akra-Bazzi method.<br>
+                            • <strong>Balanced Search Trees:</strong> Red-Black tree invariants (root black, red node with black children, uniform black-height), single and double tree rotations, and $\\mathcal{O}(\\log n)$ insertion/deletion guarantees. AVL tree height-balance factors $(-1, 0, 1)$.<br>
+                            • <strong>Priority Queues & Heaps:</strong> Binary heap swim/sink array operations, Binomial heaps, and Fibonacci heaps with $\\mathcal{O}(1)$ amortized decrease-key operations for dense graph optimization.<br>
+                            • <strong>Disjoint-Set Forest (Union-Find):</strong> Union-by-rank and path compression heuristics proving near-linear $\\mathcal{O}(m \\cdot \\alpha(n))$ time complexity, where $\\alpha(n)$ is the inverse Ackermann function.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Graph Theory & Network Optimization</strong><br>
                             • <strong>Traversals & Topologies:</strong> Breadth-First Search (shortest path on unweighted graphs), Depth-First Search with parenthesis theorem, discovery/finish timestamps, topological sort, and Tarjan's strongly connected components.<br>
-                            • <strong>Shortest Path Algorithms:</strong> Dijkstra's algorithm with min-priority queues ($\mathcal{O}((V + E) \log V)$), Bellman-Ford algorithm with negative-cycle detection ($\mathcal{O}(VE)$), and Floyd-Warshall dynamic programming for all-pairs shortest paths ($\mathcal{O}(V^3)$).<br>
-                            • <strong>Minimum Spanning Trees:</strong> Kruskal's algorithm with disjoint-set union ($\mathcal{O}(E \log E)$) and Prim's algorithm with indexed priority queues ($\mathcal{O}(E \log V)$). Cut Property and Cycle Property proofs.<br>
-                            • <strong>Network Flow:</strong> Max-Flow Min-Cut Theorem, Ford-Fulkerson method, and Edmonds-Karp shortest augmenting path algorithm ($\mathcal{O}(VE^2)$).
+                            • <strong>Shortest Path Algorithms:</strong> Dijkstra's algorithm with min-priority queues ($\\mathcal{O}((V + E) \\log V)$), Bellman-Ford algorithm with negative-cycle detection ($\\mathcal{O}(VE)$), and Floyd-Warshall dynamic programming for all-pairs shortest paths ($\\mathcal{O}(V^3)$).<br>
+                            • <strong>Minimum Spanning Trees:</strong> Kruskal's algorithm with disjoint-set union ($\\mathcal{O}(E \\log E)$) and Prim's algorithm with indexed priority queues ($\\mathcal{O}(E \\log V)$). Cut Property and Cycle Property proofs.<br>
+                            • <strong>Network Flow:</strong> Max-Flow Min-Cut Theorem, Ford-Fulkerson method, and Edmonds-Karp shortest augmenting path algorithm ($\\mathcal{O}(VE^2)$).
                         </div>
 
                         <div class="math-box">
                             <strong>3. Algorithms, Complexity Theory & P vs NP</strong><br>
-                            • <strong>String Matching:</strong> Knuth-Morris-Pratt (KMP) deterministic finite state failure functions ($\mathcal{O}(n + m)$), Rabin-Karp polynomial rolling hash, and Aho-Corasick multi-pattern trie automatons.<br>
-                            • <strong>Computational Complexity:</strong> Deterministic vs Non-Deterministic Turing Machines, polynomial-time reductions ($A \le_P B$), Cook-Levin Theorem proving 3-SAT is NP-Complete, and Karp's 21 NP-complete reductions (Vertex Cover, Hamiltonian Cycle, Subset Sum, Independent Set).<br>
+                            • <strong>String Matching:</strong> Knuth-Morris-Pratt (KMP) deterministic finite state failure functions ($\\mathcal{O}(n + m)$), Rabin-Karp polynomial rolling hash, and Aho-Corasick multi-pattern trie automatons.<br>
+                            • <strong>Computational Complexity:</strong> Deterministic vs Non-Deterministic Turing Machines, polynomial-time reductions ($A \\le_P B$), Cook-Levin Theorem proving 3-SAT is NP-Complete, and Karp's 21 NP-complete reductions (Vertex Cover, Hamiltonian Cycle, Subset Sum, Independent Set).<br>
                             • <strong>Approximation Algorithms:</strong> 2-approximation for Vertex Cover, Christofides' 1.5-approximation algorithm for metric TSP, and greedy Set Cover logarithmic factor analysis.
                         </div>
                     `,
@@ -3784,27 +3806,27 @@
 
                         <div class="math-box">
                             <strong>1. Linear Algebra & Spectral Matrix Analysis</strong><br>
-                            • <strong>Fundamental Subspaces & Rank-Nullity:</strong> For matrix $A \in \mathbb{R}^{m \times n}$: Column space $\operatorname{Col}(A)$, Nullspace $\operatorname{Null}(A)$, Row space $\operatorname{Row}(A)$, and Left Nullspace $\operatorname{Null}(A^T)$. Fundamental Theorem of Linear Algebra: $\operatorname{Col}(A)^\perp = \operatorname{Null}(A^T)$ and $\operatorname{dim}(\operatorname{Col}(A)) + \operatorname{dim}(\operatorname{Null}(A)) = n$.<br>
-                            • <strong>Orthogonality & Projections:</strong> Gram-Schmidt orthogonalization process, $QR$ factorizations ($A = QR$), orthogonal projection operator $P = A(A^T A)^{-1} A^T$, and closed-form Normal Equations for least squares $(A^T A) \hat{x} = A^T b$.<br>
-                            • <strong>Spectral Theorem:</strong> Any real symmetric matrix $A = A^T \in \mathbb{R}^{n \times n}$ has purely real eigenvalues and admits an orthonormal basis of eigenvectors: $A = Q \Lambda Q^T = \sum_{i=1}^n \lambda_i q_i q_i^T$.<br>
-                            • <strong>Singular Value Decomposition (SVD):</strong> Any matrix $A \in \mathbb{R}^{m \times n}$ decomposes as $A = U \Sigma V^T$. Low-rank matrix approximation via Eckart-Young-Mirsky Theorem $\|A - A_k\|_2 = \sigma_{k+1}$, Moore-Penrose pseudoinverse $A^+ = V \Sigma^+ U^T$, and numerical condition number $\kappa(A) = \sigma_{\max} / \sigma_{\min}$.
+                            • <strong>Fundamental Subspaces & Rank-Nullity:</strong> For matrix $A \\in \\mathbb{R}^{m \\times n}$: Column space $\\operatorname{Col}(A)$, Nullspace $\\operatorname{Null}(A)$, Row space $\\operatorname{Row}(A)$, and Left Nullspace $\\operatorname{Null}(A^T)$. Fundamental Theorem of Linear Algebra: $\\operatorname{Col}(A)^\\perp = \\operatorname{Null}(A^T)$ and $\\operatorname{dim}(\\operatorname{Col}(A)) + \\operatorname{dim}(\\operatorname{Null}(A)) = n$.<br>
+                            • <strong>Orthogonality & Projections:</strong> Gram-Schmidt orthogonalization process, $QR$ factorizations ($A = QR$), orthogonal projection operator $P = A(A^T A)^{-1} A^T$, and closed-form Normal Equations for least squares $(A^T A) \\hat{x} = A^T b$.<br>
+                            • <strong>Spectral Theorem:</strong> Any real symmetric matrix $A = A^T \\in \\mathbb{R}^{n \\times n}$ has purely real eigenvalues and admits an orthonormal basis of eigenvectors: $A = Q \\Lambda Q^T = \\sum_{i=1}^n \\lambda_i q_i q_i^T$.<br>
+                            • <strong>Singular Value Decomposition (SVD):</strong> Any matrix $A \\in \\mathbb{R}^{m \\times n}$ decomposes as $A = U \\Sigma V^T$. Low-rank matrix approximation via Eckart-Young-Mirsky Theorem $\\|A - A_k\\|_2 = \\sigma_{k+1}$, Moore-Penrose pseudoinverse $A^+ = V \\Sigma^+ U^T$, and numerical condition number $\\kappa(A) = \\sigma_{\\max} / \\sigma_{\\min}$.
                         </div>
 
                         <div class="math-box">
                             <strong>2. Multivariable Calculus & Vector Analysis</strong><br>
-                            • <strong>Differential Calculus in $\mathbb{R}^n$:</strong> Directional derivatives, gradient vector field $\nabla f(x)$, Jacobian matrix $J_f \in \mathbb{R}^{m \times n}$, Hessian matrix $H_f \in \mathbb{R}^{n \times n}$, and second-order multivariate Taylor expansions: $f(x+h) = f(x) + \nabla f(x)^T h + \frac{1}{2} h^T H_f(x) h + o(\|h\|^2)$.<br>
-                            • <strong>Constrained Optimization:</strong> Critical points classification via Hessian positive definiteness ($H_f \succ 0 \implies \text{local min}$), and Lagrange Multiplier Theorem for multi-constraint manifolds: $\nabla f(x^*) = \sum_{i=1}^k \lambda_i \nabla g_i(x^*)$ subject to $g_i(x^*) = 0$.<br>
+                            • <strong>Differential Calculus in $\\mathbb{R}^n$:</strong> Directional derivatives, gradient vector field $\\nabla f(x)$, Jacobian matrix $J_f \\in \\mathbb{R}^{m \\times n}$, Hessian matrix $H_f \\in \\mathbb{R}^{n \\times n}$, and second-order multivariate Taylor expansions: $f(x+h) = f(x) + \\nabla f(x)^T h + \\frac{1}{2} h^T H_f(x) h + o(\\|h\\|^2)$.<br>
+                            • <strong>Constrained Optimization:</strong> Critical points classification via Hessian positive definiteness ($H_f \\succ 0 \\implies \\text{local min}$), and Lagrange Multiplier Theorem for multi-constraint manifolds: $\\nabla f(x^*) = \\sum_{i=1}^k \\lambda_i \\nabla g_i(x^*)$ subject to $g_i(x^*) = 0$.<br>
                             • <strong>Integral Theorems of Vector Analysis:</strong><br>
-                            - <strong>Green's Theorem:</strong> $\oint_{\partial D} (L dx + M dy) = \iint_D \left( \frac{\partial M}{\partial x} - \frac{\partial L}{\partial y} \right) dA$<br>
-                            - <strong>Gauss' Divergence Theorem:</strong> $\iiint_V (\nabla \cdot \mathbf{F}) dV = \iint_{\partial V} (\mathbf{F} \cdot \mathbf{n}) dS$<br>
-                            - <strong>Stokes' Theorem:</strong> $\iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S} = \oint_{\partial S} \mathbf{F} \cdot d\mathbf{r}$.
+                            - <strong>Green's Theorem:</strong> $\\oint_{\\partial D} (L dx + M dy) = \\iint_D \\left( \\frac{\\partial M}{\\partial x} - \\frac{\\partial L}{\\partial y} \\right) dA$<br>
+                            - <strong>Gauss' Divergence Theorem:</strong> $\\iiint_V (\\nabla \\cdot \\mathbf{F}) dV = \\iint_{\\partial V} (\\mathbf{F} \\cdot \\mathbf{n}) dS$<br>
+                            - <strong>Stokes' Theorem:</strong> $\\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S} = \\oint_{\\partial S} \\mathbf{F} \\cdot d\\mathbf{r}$.
                         </div>
 
                         <div class="math-box">
                             <strong>3. Engineering Mathematics & Differential Equations</strong><br>
-                            • <strong>Ordinary Differential Equations (ODEs):</strong> First-order separable and linear differential equations with integrating factors $\mu(x) = \exp\left(\int P(x) dx\right)$. Second-order homogeneous and non-homogeneous equations with constant coefficients via characteristic polynomial roots and method of undetermined coefficients.<br>
-                            • <strong>Laplace Transforms:</strong> Unilateral Laplace transform $\mathcal{L}\{f(t)\} = F(s) = \int_0^\infty e^{-st} f(t) dt$, derivative property $\mathcal{L}\{f'(t)\} = s F(s) - f(0)$, convolution theorem $\mathcal{L}\{f * g\} = F(s) G(s)$, and transfer function analysis for dynamical systems.<br>
-                            • <strong>Fourier Series & PDEs:</strong> Orthogonality of trigonometric systems, Fourier series expansion of piecewise continuous functions, Dirichlet conditions, and separation of variables for the canonical 1D Heat Equation $\frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2}$ and Wave Equation $\frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2}$.
+                            • <strong>Ordinary Differential Equations (ODEs):</strong> First-order separable and linear differential equations with integrating factors $\\mu(x) = \\exp\\left(\\int P(x) dx\\right)$. Second-order homogeneous and non-homogeneous equations with constant coefficients via characteristic polynomial roots and method of undetermined coefficients.<br>
+                            • <strong>Laplace Transforms:</strong> Unilateral Laplace transform $\\mathcal{L}\\{f(t)\\} = F(s) = \\int_0^\\infty e^{-st} f(t) dt$, derivative property $\\mathcal{L}\\{f'(t)\\} = s F(s) - f(0)$, convolution theorem $\\mathcal{L}\\{f * g\\} = F(s) G(s)$, and transfer function analysis for dynamical systems.<br>
+                            • <strong>Fourier Series & PDEs:</strong> Orthogonality of trigonometric systems, Fourier series expansion of piecewise continuous functions, Dirichlet conditions, and separation of variables for the canonical 1D Heat Equation $\\frac{\\partial u}{\\partial t} = \\alpha \\frac{\\partial^2 u}{\\partial x^2}$ and Wave Equation $\\frac{\\partial^2 u}{\\partial t^2} = c^2 \\frac{\\partial^2 u}{\\partial x^2}$.
                         </div>
                     `,
                     'systems_hw': `
@@ -3814,7 +3836,7 @@
                         <div class="math-box">
                             <strong>1. Systems Programming & Assembly (CS302 · Grade: A+)</strong><br>
                             • <strong>Microprocessor Architecture:</strong> Intel 8086 / IA-32 execution models. General-purpose registers (<code>EAX</code>, <code>EBX</code>, <code>ECX</code>, <code>EDX</code>), pointer/index registers (<code>ESP</code>, <code>EBP</code>, <code>ESI</code>, <code>EDI</code>), segment registers (<code>CS</code>, <code>DS</code>, <code>SS</code>, <code>ES</code>), instruction pointer (<code>EIP</code>), and processor condition flags (<code>EFLAGS</code>: Carry, Zero, Sign, Overflow).<br>
-                            • <strong>Real-Mode vs Protected-Mode Memory Addressing:</strong> 20-bit physical address generation in Real Mode: $\text{Physical Address} = (\text{Segment} \times 16) + \text{Offset}$. Global Descriptor Tables (GDT) and Local Descriptor Tables (LDT) segment selectors with privilege levels (Ring 0 to Ring 3) in Protected Mode.<br>
+                            • <strong>Real-Mode vs Protected-Mode Memory Addressing:</strong> 20-bit physical address generation in Real Mode: $\\text{Physical Address} = (\\text{Segment} \\times 16) + \\text{Offset}$. Global Descriptor Tables (GDT) and Local Descriptor Tables (LDT) segment selectors with privilege levels (Ring 0 to Ring 3) in Protected Mode.<br>
                             • <strong>Instruction Set & Calling Conventions:</strong> Arithmetic/logic execution (<code>MOV</code>, <code>LEA</code>, <code>ADD</code>, <code>SUB</code>, <code>IMUL</code>, <code>DIV</code>, <code>SHL</code>, <code>SHR</code>, <code>XOR</code>), condition flags manipulation (<code>CMP</code>, <code>TEST</code>), and jump tables. C standard calling conventions (<code>cdecl</code>, <code>stdcall</code>, <code>fastcall</code>), stack frame establishment (<code>push ebp; mov ebp, esp; sub esp, N</code>), callee/caller register preservation, and stack teardown.<br>
                             • <strong>Two-Pass Assembler Architecture:</strong><br>
                             - <em>Pass 1:</em> Symbol table construction, Location Counter (<code>LC</code>) incrementation, literal pool resolution, and external reference collection.<br>
@@ -3837,7 +3859,7 @@
                             <strong>1. ARC Prize 2025: Global Rank #179 / 1,456 (Top 13% Worldwide)</strong><br>
                             • <strong>Competition Scope:</strong> The premier global benchmark measuring Artificial General Intelligence (AGI) reasoning efficiency across novel abstract visual reasoning tasks.<br>
                             • <strong>Engineering Achievement:</strong> Designed and implemented an independent neuro-symbolic program synthesis engine in Rust (<code>ARC-AGI-HIN</code>). Integrated 120+ spatial transformation primitives, cellular automata, and Minato ZBDDs for 42.8x hypothesis set compression.<br>
-                            • <strong>Performance:</strong> Evaluated $1.4 \times 10^6$ program candidates/second across 16 parallel threads with deterministic constraint propagation and zero reliance on external LLM APIs.
+                            • <strong>Performance:</strong> Evaluated $1.4 \\times 10^6$ program candidates/second across 16 parallel threads with deterministic constraint propagation and zero reliance on external LLM APIs.
                         </div>
 
                         <div class="math-box">
@@ -4033,6 +4055,31 @@
             });
         }
 
+                function renderMathInContainer(targetEl) {
+            if (!targetEl) return;
+            function tryRender(attempts = 0) {
+                if (typeof renderMathInElement === 'function') {
+                    try {
+                        renderMathInElement(targetEl, {
+                            delimiters: [
+                                { left: '$$', right: '$$', display: true },
+                                { left: '$', right: '$', display: false },
+                                { left: '\\(', right: '\\)', display: false },
+                                { left: '\\[', right: '\\]', display: true }
+                            ],
+                            throwOnError: false,
+                            trust: true
+                        });
+                    } catch (err) {
+                        console.warn('KaTeX render warning:', err);
+                    }
+                } else if (attempts < 25) {
+                    setTimeout(() => tryRender(attempts + 1), 80);
+                }
+            }
+            tryRender();
+        }
+
         function openStudyModal(moduleId) {
             const data = STUDY_DATA[moduleId];
             if (!data) return;
@@ -4052,7 +4099,9 @@
             });
 
             activeTabId = data.tabs[0].id;
-            document.getElementById('modalBodyContainer').innerHTML = data.content[activeTabId] || '';
+            const bodyEl = document.getElementById('modalBodyContainer');
+            bodyEl.innerHTML = data.content[activeTabId] || '';
+            renderMathInContainer(bodyEl);
             document.getElementById('modalFooterContainer').innerHTML = data.actions || '<button class="modal-close-btn" onclick="closeStudyModal()">[ Close ]</button>';
 
             document.getElementById('studyModalOverlay').classList.add('active');
@@ -4071,7 +4120,9 @@
                 }
             });
 
-            document.getElementById('modalBodyContainer').innerHTML = STUDY_DATA[activeStudyModule].content[tabId] || '';
+            const bodyEl = document.getElementById('modalBodyContainer');
+            bodyEl.innerHTML = STUDY_DATA[activeStudyModule].content[tabId] || '';
+            renderMathInContainer(bodyEl);
         }
 
         function closeStudyModal() {
