@@ -3136,101 +3136,178 @@
         const STUDY_DATA = {
             'cs229': {
                 title: "Stanford CS229: Machine Learning",
-                sub: "Autumn 2018 · Prof. Andrew Ng · Complete Problem Sets & Proofs",
+                sub: "Autumn 2018 · Prof. Andrew Ng · Rigorous Problem Sets PS0–PS4 & Closed-Form Proofs",
                 tabs: [
-                    { id: 'ps0', label: 'PS0: Linear Algebra & Matrix Calculus' },
-                    { id: 'ps1', label: 'PS1: GLMs & Convexity' },
-                    { id: 'ps2', label: 'PS2: Calibration & Kernels' },
-                    { id: 'ps3', label: 'PS3: Natural Gradient & Deep Learning' },
-                    { id: 'ps4', label: 'PS4: MDP Contraction & ICA' }
+                    { id: 'ps0', label: 'PS0: Vector Calculus & Spectral Theory' },
+                    { id: 'ps1', label: 'PS1: GLMs, GDA & Strict Convexity' },
+                    { id: 'ps2', label: 'PS2: SVM Duality, Kernels & Bayesian Priors' },
+                    { id: 'ps3', label: 'PS3: Information Theory & Natural Gradients' },
+                    { id: 'ps4', label: 'PS4: Bellman Contraction & Infomax ICA' }
                 ],
                 content: {
                     'ps0': `
-                        <h4>Problem Set 0: Linear Algebra & Multivariable Calculus Refresher</h4>
-                        <p>PS0 tests and establishes the mathematical bedrock for all downstream derivations in machine learning: vector spaces, matrix derivatives, Hessians, and spectral decomposition.</p>
+                        <h4>Problem Set 0: Linear Algebra, Spectral Theory & Matrix Differential Calculus</h4>
+                        <p>Establishes the coordinate-free mathematical bedrock for convex optimization, quadratic error geometry, and spectral decomposition in statistical learning.</p>
                         
                         <div class="math-box">
-                            <strong>Problem 1: Gradients and Hessians of Quadratic Forms</strong><br>
-                            For f(x) = (1/2) x^T A x + b^T x with symmetric A:<br>
-                            ∇f(x) = (1/2)(A + A^T)x + b = Ax + b<br>
-                            ∇²f(x) = A
+                            <strong>1. Gradient and Hessian of Symmetric Quadratic Forms</strong><br>
+                            Let $f(x) = \frac{1}{2} x^T A x + b^T x$ where $x, b \in \mathbb{R}^n$ and $A \in \mathbb{R}^{n \times n}$ is symmetric ($A = A^T$).<br>
+                            <strong>Step-by-step Index Derivation:</strong> Expanding in summation notation:<br>
+                            $f(x) = \frac{1}{2} \sum_{i=1}^n \sum_{j=1}^n A_{ij} x_i x_j + \sum_{i=1}^n b_i x_i$<br>
+                            Taking the partial derivative with respect to coordinate $x_k$ using the product rule:<br>
+                            $\frac{\partial f}{\partial x_k} = \frac{1}{2} \left[ \sum_{j=1}^n A_{kj} x_j + \sum_{i=1}^n A_{ik} x_i \right] + b_k$<br>
+                            Since $A_{ik} = A_{ki}$ by symmetry:<br>
+                            $\frac{\partial f}{\partial x_k} = \sum_{j=1}^n A_{kj} x_j + b_k = (Ax)_k + b_k \implies \nabla_x f(x) = Ax + b$<br>
+                            Differentiating again with respect to $x_l$: $\frac{\partial^2 f}{\partial x_l \partial x_k} = A_{kl} \implies \nabla^2 f(x) = A$.
                         </div>
-                        <p><strong>Proof Insights:</strong> Derived component-wise using scalar indices ∂f/∂x_k = ∑_i A_ki x_i + b_k, then synthesized into coordinate-free matrix notation.</p>
 
                         <div class="math-box">
-                            <strong>Problem 2: Positive Definite Matrices & Inner Products</strong><br>
-                            A symmetric matrix A ∈ ℝ^{n×n} is positive definite (A ≻ 0) if and only if ∀x ≠ 0, x^T A x > 0.
+                            <strong>2. Spectral Theorem & The Rayleigh Quotient Bounds</strong><br>
+                            <strong>Theorem:</strong> For any real symmetric matrix $A \in \mathbb{R}^{n \times n}$, there exists an orthogonal matrix $Q = [q_1, \dots, q_n]$ ($Q^T Q = I$) such that:<br>
+                            $A = Q \Lambda Q^T = \sum_{i=1}^n \lambda_i q_i q_i^T, \quad \text{where } \lambda_1 \le \lambda_2 \le \dots \le \lambda_n$<br>
+                            <strong>Rayleigh Quotient:</strong> For any non-zero vector $x \ne 0$, let $y = Q^T x$ ($x = Qy$). Then $\|x\|_2^2 = \|y\|_2^2 = \sum y_i^2$, and:<br>
+                            $R_A(x) = \frac{x^T A x}{x^T x} = \frac{y^T \Lambda y}{y^T y} = \frac{\sum_{i=1}^n \lambda_i y_i^2}{\sum_{i=1}^n y_i^2}$<br>
+                            Since $\lambda_1 \sum y_i^2 \le \sum \lambda_i y_i^2 \le \lambda_n \sum y_i^2$, we have the tight spectral bounds:<br>
+                            $\lambda_{\min}(A) \le \frac{x^T A x}{x^T x} \le \lambda_{\max}(A), \quad \text{with equality attained at } x = q_1 \text{ and } x = q_n$.
                         </div>
-                        <p><strong>Takeaway:</strong> Proved that every positive definite matrix induces a valid inner product ⟨x, y⟩_A = x^T A y, defining geometric ellipsoids and strict convexity of squared error surfaces.</p>
 
                         <div class="math-box">
-                            <strong>Problem 3: Spectral Theorem & Eigendecomposition</strong><br>
-                            Every real symmetric matrix A can be factorized as A = Q Λ Q^T, where Q is orthogonal (Q^T Q = I) and Λ = diag(λ_1, ..., λ_n).
+                            <strong>3. Positive Definite Geometry & Matrix Differential Identities</strong><br>
+                            - A symmetric matrix $A$ is positive definite ($A \succ 0$) iff all eigenvalues $\lambda_i > 0$.<br>
+                            - $A \succ 0$ induces a valid inner product $\langle x, y \rangle_A = x^T A y$ and Mahalanobis metric $\|x\|_A = \sqrt{x^T A x}$, proving that level curves of quadratic objectives are hyper-ellipsoids with strictly positive curvature.<br>
+                            - <strong>Essential Matrix Differentials:</strong><br>
+                            $\nabla_X \operatorname{tr}(AXB) = A^T B^T, \quad \nabla_X \log \det(X) = X^{-T}, \quad \nabla_X \operatorname{tr}(X^{-1} A) = - X^{-T} A^T X^{-T}$.
                         </div>
                     `,
                     'ps1': `
                         <h4>Problem Set 1: Supervised Learning, GLMs & Locally Weighted Regression</h4>
                         <div class="math-box">
-                            <strong>Problem 1: Logistic Regression vs Gaussian Discriminant Analysis (GDA)</strong><br>
-                            Under GDA, p(y=1|x) = 1 / (1 + exp(-θ^T x)). While GDA makes stronger distributional assumptions (Gaussian class-conditionals), it achieves asymptotic efficiency when assumptions hold. Logistic regression is robust under general non-Gaussian exponential families.
+                            <strong>1. Second-Order Optimization: Newton-Raphson vs Gradient Ascent</strong><br>
+                            For log-likelihood $\ell(\theta)$, the Newton-Raphson update is: $\theta^{(t+1)} = \theta^{(t)} - H^{-1} \nabla_\theta \ell(\theta^{(t)})$.<br>
+                            For logistic regression with sigmoid $h_\theta(x) = \frac{1}{1 + \exp(-\theta^T x)}$:<br>
+                            Gradient: $\nabla_\theta \ell(\theta) = X^T (y - h_\theta(X))$<br>
+                            Hessian: $H = \nabla_\theta^2 \ell(\theta) = - X^T D X$, where $D = \operatorname{diag}(h_\theta(x^{(i)})(1 - h_\theta(x^{(i)}))) \succ 0$.<br>
+                            Since $D$ is strictly positive for non-degenerate probabilities, $H \prec 0$ everywhere, guaranteeing quadratic asymptotic convergence rate: $\|\theta^{(t+1)} - \theta^*\| \le M \|\theta^{(t)} - \theta^*\|^2$.
                         </div>
 
                         <div class="math-box">
-                            <strong>Problem 2: Positive-Unlabeled (PU) Learning</strong><br>
-                            Proved that the true posterior p(y=1|x) can be recovered from uncurated positive and unlabeled data via: p(y=1|x) = p(s=1|x) / p(s=1|y=1), enabling semi-supervised classifiers without negative labels.
+                            <strong>2. Generative GDA vs Discriminative Logistic Regression</strong><br>
+                            Under Gaussian Discriminant Analysis (GDA): $y \sim \operatorname{Bernoulli}(\phi)$, $x|y=0 \sim \mathcal{N}(\mu_0, \Sigma)$, $x|y=1 \sim \mathcal{N}(\mu_1, \Sigma)$.<br>
+                            <strong>Posterior Derivation:</strong> By Bayes' rule:<br>
+                            $p(y=1|x) = \frac{p(x|y=1)p(y=1)}{p(x|y=0)p(y=0) + p(x|y=1)p(y=1)} = \frac{1}{1 + \exp\left(-\left[ \theta^T x + \theta_0 \right]\right)}$<br>
+                            where $\theta = \Sigma^{-1}(\mu_1 - \mu_0)$ and $\theta_0 = \frac{1}{2}\mu_0^T \Sigma^{-1} \mu_0 - \frac{1}{2}\mu_1^T \Sigma^{-1} \mu_1 + \log\frac{\phi}{1-\phi}$.<br>
+                            <strong>Theoretical Consequence:</strong> GDA achieves asymptotic statistical efficiency (Cramér-Rao lower bound) when normality holds. Logistic regression makes strictly weaker assumptions and remains consistent under arbitrary non-Gaussian exponential families.
                         </div>
 
                         <div class="math-box">
-                            <strong>Problem 4: Convexity of Generalized Linear Models (GLMs)</strong><br>
-                            Proved that the negative log-likelihood Hessian for any natural exponential family is positive semi-definite:<br>
-                            ∇² (-ℓ(θ)) = ∑_i Var_{y|x}(T(y)) X^{(i)} (X^{(i)})^T ⪰ 0.<br>
-                            Because covariance matrices are positive semi-definite, GLMs are strictly convex and guaranteed to reach global minima under gradient ascent.
+                            <strong>3. General Exponential Family & Strict Convexity of GLMs</strong><br>
+                            Natural exponential family density: $p(y; \eta) = b(y) \exp(\eta^T T(y) - a(\eta))$.<br>
+                            Normalizing $\int p(y; \eta) dy = 1 \implies a(\eta) = \log \int b(y) \exp(\eta^T T(y)) dy$. Differentiating under the integral:<br>
+                            $\nabla_\eta a(\eta) = \mathbb{E}[T(y)], \quad \nabla_\eta^2 a(\eta) = \operatorname{Var}(T(y)) \succeq 0$.<br>
+                            For natural link $\eta = \theta^T x$, the negative log-likelihood Hessian is:<br>
+                            $\nabla_\theta^2 (-\ell(\theta)) = \sum_{i=1}^m \nabla_\eta^2 a(\eta^{(i)}) x^{(i)} (x^{(i)})^T = \sum_{i=1}^m \operatorname{Var}(y|x^{(i)}) x^{(i)} (x^{(i)})^T \succeq 0$.<br>
+                            Proving all Generalized Linear Models under canonical link are <strong>globally convex</strong> with no non-global local extrema.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>4. Locally Weighted Linear Regression (LWR)</strong><br>
+                            Objective: $J(\theta) = \sum_{i=1}^m w^{(i)} (y^{(i)} - \theta^T x^{(i)})^2 = (X\theta - y)^T W (X\theta - y)$, with weights $w^{(i)} = \exp\left(-\frac{\|x^{(i)} - x\|^2}{2\tau^2}\right)$.<br>
+                            Analytical solution via weighted normal equations: $\theta^* = (X^T W X)^{-1} X^T W y$.
                         </div>
                     `,
                     'ps2': `
-                        <h4>Problem Set 2: Model Calibration, Kernels & Bayesian Regularization</h4>
+                        <h4>Problem Set 2: Model Calibration, Support Vector Machines & Kernel Theory</h4>
                         <div class="math-box">
-                            <strong>Problem 1: Logistic Regression Stability on Linearly Separable Data</strong><br>
-                            On linearly separable datasets, the unregularized maximum likelihood weights diverge: ||θ|| → ∞. Proved why adding an L2 regularization penalty λ ||θ||² restores strict convexity and guarantees finite unique weights.
+                            <strong>1. MLE Divergence on Linearly Separable Datasets</strong><br>
+                            If $\exists \theta$ such that $y^{(i)} \theta^T x^{(i)} > 0, \forall i$ (separable data), scaling $\theta \to c \theta$ with $c \to \infty$ yields:<br>
+                            $\ell(c\theta) = - \sum_{i=1}^m \log(1 + \exp(-c y^{(i)} \theta^T x^{(i)})) \to 0$.<br>
+                            The maximum likelihood objective has no finite maximizer ($\|\theta^*\|_2 \to \infty$).<br>
+                            <strong>Resolution:</strong> Adding an $L_2$ Tikhonov penalty $\frac{\lambda}{2} \|\theta\|_2^2$ makes the objective strongly convex with parameter $\lambda$, guaranteeing a unique, strictly bounded finite solution: $\|\theta^*\|_2 \le \frac{m}{\lambda} \max_i \|x^{(i)}\|_2$.
                         </div>
 
                         <div class="math-box">
-                            <strong>Problem 3: Bayesian Interpretation of Regularization</strong><br>
-                            - L2 Regularization (Ridge / Weight Decay) ⇔ MAP estimation with a Gaussian prior p(θ) ~ 𝒩(0, σ² I).<br>
-                            - L1 Regularization (Lasso) ⇔ MAP estimation with a Laplace prior p(θ) ~ (1/2b) exp(-|θ|/b), inducing exact sparsity at zero.
+                            <strong>2. Support Vector Machines: Primal to Wolfe Dual via KKT Conditions</strong><br>
+                            Primal formulation: $\min_{w, b} \frac{1}{2} \|w\|^2$ subject to $y^{(i)}(w^T x^{(i)} + b) \ge 1, \forall i$.<br>
+                            Lagrangian: $\mathcal{L}(w, b, \alpha) = \frac{1}{2} \|w\|^2 - \sum_{i=1}^m \alpha_i [y^{(i)}(w^T x^{(i)} + b) - 1], \quad \alpha_i \ge 0$.<br>
+                            <strong>Stationary Conditions:</strong><br>
+                            $\nabla_w \mathcal{L} = w - \sum_{i=1}^m \alpha_i y^{(i)} x^{(i)} = 0 \implies w = \sum_{i=1}^m \alpha_i y^{(i)} x^{(i)}$<br>
+                            $\frac{\partial \mathcal{L}}{\partial b} = - \sum_{i=1}^m \alpha_i y^{(i)} = 0 \implies \sum_{i=1}^m \alpha_i y^{(i)} = 0$<br>
+                            Substituting $w$ back into $\mathcal{L}$ yields the Wolfe Dual:<br>
+                            $\max_\alpha W(\alpha) = \sum_{i=1}^m \alpha_i - \frac{1}{2} \sum_{i=1}^m \sum_{j=1}^m \alpha_i \alpha_j y^{(i)} y^{(j)} \langle x^{(i)}, x^{(j)} \rangle \quad \text{s.t.} \quad \alpha_i \ge 0, \sum_{i=1}^m \alpha_i y^{(i)} = 0$.<br>
+                            <strong>KKT Complementary Slackness:</strong> $\alpha_i [y^{(i)}(w^T x^{(i)} + b) - 1] = 0$.<br>
+                            Only points on the margin hyperplanes have $\alpha_i > 0$ (Support Vectors).
                         </div>
 
                         <div class="math-box">
-                            <strong>Problem 4: Mercer's Theorem & Constructing Kernels</strong><br>
-                            Proved that Mercer kernels are closed under positive scaling, addition, tensor multiplication, polynomial transformation, and exponentiation K'(x, z) = exp(K(x, z)).
+                            <strong>3. Mercer's Theorem & Reproducing Kernel Hilbert Spaces (RKHS)</strong><br>
+                            A symmetric function $K(x, z)$ is a valid Mercer kernel iff the Gram matrix $K_{ij} = K(x^{(i)}, x^{(j)})$ is positive semi-definite ($K \succeq 0$) for any finite set.<br>
+                            <strong>Closure Properties:</strong> Valid kernels are closed under positive linear combinations ($c_1 K_1 + c_2 K_2$), Hadamard products ($K_1 \odot K_2$, via Schur Product Theorem), polynomial maps ($p(K)$), and exponentiation $K'(x, z) = \exp(K(x, z))$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>4. Bayesian Prior Interpretation of Regularization</strong><br>
+                            - <strong>Gaussian Prior</strong> $p(\theta) \sim \mathcal{N}(0, \sigma^2 I) \iff L_2$ Regularization (Ridge / Weight Decay) with $\lambda = \frac{\sigma_\epsilon^2}{\sigma^2}$.<br>
+                            - <strong>Laplace Prior</strong> $p(\theta) = \prod_j \frac{1}{2b} \exp\left(-\frac{|\theta_j|}{b}\right) \iff L_1$ Regularization (Lasso) with $\lambda = \frac{\sigma_\epsilon^2}{b}$.<br>
+                            The non-differentiable corner of the $L_1$ ball at $\theta_j = 0$ forces subgradients to set parameters exactly to zero, yielding sparse representations.
                         </div>
                     `,
                     'ps3': `
-                        <h4>Problem Set 3: Deep Learning, Information Theory & Natural Gradients</h4>
+                        <h4>Problem Set 3: Information Theory, MLE Equivalence & Natural Gradients</h4>
                         <div class="math-box">
-                            <strong>Problem 2: Equivalence of Empirical KL Divergence & Maximum Likelihood</strong><br>
-                            argmin_θ D_{KL}(P̂_data || P_θ) ≡ argmax_θ ∑_i log P_θ(x^{(i)}).<br>
-                            Minimizing the statistical distance between empirical distribution and parametric model is mathematically identical to maximizing log-likelihood.
+                            <strong>1. Equivalence of Empirical KL Divergence & Maximum Likelihood</strong><br>
+                            Let $\hat{P}_{\text{data}}(x) = \frac{1}{m} \sum_{i=1}^m \delta(x - x^{(i)})$ be the empirical data distribution.<br>
+                            $D_{KL}(\hat{P}_{\text{data}} \parallel P_\theta) = \sum_{x} \hat{P}_{\text{data}}(x) \log \frac{\hat{P}_{\text{data}}(x)}{P_\theta(x)} = - H(\hat{P}_{\text{data}}) - \frac{1}{m} \sum_{i=1}^m \log P_\theta(x^{(i)})$.<br>
+                            Since empirical entropy $H(\hat{P}_{\text{data}})$ is independent of $\theta$:<br>
+                            $\operatorname{argmin}_\theta D_{KL}(\hat{P}_{\text{data}} \parallel P_\theta) \equiv \operatorname{argmax}_\theta \sum_{i=1}^m \log P_\theta(x^{(i)}) = \operatorname{argmax}_\theta \ell(\theta)$.<br>
+                            Minimizing information-theoretic divergence is algebraically identical to maximum likelihood estimation.
                         </div>
 
                         <div class="math-box">
-                            <strong>Problem 3: Fisher Information Matrix & Natural Gradient Descent</strong><br>
-                            The Fisher Information Matrix F(θ) = 𝔼[(∇_θ log p)(∇_θ log p)^T] represents the Riemannian metric tensor on the statistical parameter manifold. The invariant parameter update is:<br>
-                            θ_{t+1} = θ_t - η F(θ_t)^{-1} ∇_θ ℓ(θ_t), eliminating coordinate-dependence in standard gradient descent.
+                            <strong>2. Fisher Information Matrix as Riemannian Metric Tensor</strong><br>
+                            The Fisher Information Matrix is defined as:<br>
+                            $F(\theta) = \mathbb{E}_{x \sim P_\theta} \left[ \nabla_\theta \log P_\theta(x) (\nabla_\theta \log P_\theta(x))^T \right] = - \mathbb{E}_{x \sim P_\theta} \left[ \nabla_\theta^2 \log P_\theta(x) \right]$.<br>
+                            $F(\theta)$ acts as the Riemannian metric tensor on the manifold of probability distributions, measuring distance via the infinitesimal KL divergence: $D_{KL}(P_\theta \parallel P_{\theta + d\theta}) = \frac{1}{2} d\theta^T F(\theta) d\theta + \mathcal{O}(\|d\theta\|^3)$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. Natural Gradient Descent (Amari 1998)</strong><br>
+                            Standard Euclidean gradient $\Delta \theta = -\eta \nabla \ell(\theta)$ is coordinate-dependent: reparameterizing $\phi = g(\theta)$ distorts optimization trajectories.<br>
+                            The natural gradient defines steepest descent with respect to invariant distribution distance:<br>
+                            $\Delta \theta_{\text{nat}} = - \eta F(\theta)^{-1} \nabla_\theta \ell(\theta)$, achieving parameterization-invariance and immunity to pathological curvature.
                         </div>
                     `,
                     'ps4': `
                         <h4>Problem Set 4: Reinforcement Learning, PCA & Independent Component Analysis</h4>
                         <div class="math-box">
-                            <strong>Problem 5: Bellman Operator Contraction Mapping Proof</strong><br>
-                            Let (B V)(s) = R(s) + γ max_a ∑_{s'} P_{sa}(s') V(s').<br>
-                            Proved that ||B V_1 - B V_2||_∞ ≤ γ ||V_1 - V_2||_∞ for discount factor γ < 1.<br>
-                            By the Banach Fixed-Point Theorem, value iteration converges exponentially to a unique optimal value function V* from any arbitrary starting point.
+                            <strong>1. Bellman Operator Contraction Mapping Proof</strong><br>
+                            Define the Bellman optimality operator $B: \mathbb{R}^{|\mathcal{S}|} \to \mathbb{R}^{|\mathcal{S}|}$ on value functions:<br>
+                            $(B V)(s) = R(s) + \gamma \max_{a \in \mathcal{A}} \sum_{s' \in \mathcal{S}} P_{sa}(s') V(s')$.<br>
+                            For any two value functions $V_1, V_2$ and any state $s$:<br>
+                            $|(B V_1)(s) - (B V_2)(s)| = \gamma \left| \max_a \sum_{s'} P_{sa}(s') V_1(s') - \max_{a'} \sum_{s'} P_{s a'}(s') V_2(s') \right|$<br>
+                            Using the algebraic inequality $|\max_a f(a) - \max_a g(a)| \le \max_a |f(a) - g(a)|$:<br>
+                            $|(B V_1)(s) - (B V_2)(s)| \le \gamma \max_a \sum_{s'} P_{sa}(s') |V_1(s') - V_2(s')| \le \gamma \max_a \sum_{s'} P_{sa}(s') \|V_1 - V_2\|_\infty = \gamma \|V_1 - V_2\|_\infty$.<br>
+                            Taking the supremum over all states $s \in \mathcal{S}$ yields:<br>
+                            $\|B V_1 - B V_2\|_\infty \le \gamma \|V_1 - V_2\|_\infty$.<br>
+                            Since $\gamma < 1$, $B$ is a $\gamma$-contraction mapping on the complete metric space $(\mathbb{R}^{|\mathcal{S}|}, \|\cdot\|_\infty)$.<br>
+                            <strong>Conclusion:</strong> By the <strong>Banach Fixed-Point Theorem</strong>, Value Iteration $V_{k+1} = B V_k$ converges geometrically at rate $\mathcal{O}(\gamma^k)$ to a unique optimal value function $V^* = B V^*$.
                         </div>
 
                         <div class="math-box">
-                            <strong>Problem 3 & 4: PCA & ICA (Infomax Algorithm)</strong><br>
-                            Derived PCA via Rayleigh quotient maximization of empirical covariance. Derived Bell-Sejnowski ICA unmixing update using natural gradient: ΔW ∝ (I - 2 g(Wx) (Wx)^T) W.
+                            <strong>2. Principal Component Analysis (PCA) via Rayleigh Quotient</strong><br>
+                            For centered data matrix $X \in \mathbb{R}^{m \times n}$ with sample covariance $\Sigma = \frac{1}{m} X^T X$, the first principal component maximizes empirical variance: $\max_{u : \|u\|_2=1} u^T \Sigma u$.<br>
+                            Formulating the Lagrangian: $\mathcal{L}(u, \lambda) = u^T \Sigma u - \lambda (u^T u - 1)$.<br>
+                            $\nabla_u \mathcal{L} = 2 \Sigma u - 2 \lambda u = 0 \implies \Sigma u = \lambda u$.<br>
+                            The variance captured is $u^T \Sigma u = \lambda u^T u = \lambda$. Hence, variance is maximized by choosing the eigenvector corresponding to $\lambda_{\max}(\Sigma)$.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>3. Independent Component Analysis (ICA) via Infomax</strong><br>
+                            Linear mixture model: $x = A s \implies s = W x$ where $W = A^{-1}$.<br>
+                            Nonlinear sigmoid output: $y_i = g(w_i^T x) = \frac{1}{1 + \exp(-w_i^T x)}$.<br>
+                            Output entropy maximization: $H(y) = H(x) + \mathbb{E}[\log |\det J|]$, with Jacobian $J_{ij} = \frac{\partial y_i}{\partial x_j} = g'(w_i^T x) W_{ij}$.<br>
+                            Log-likelihood: $\ell(W) = \log |\det W| + \sum_{i=1}^n \log g'(w_i^T x)$.<br>
+                            Using natural gradient on the parameter matrix $\Delta W \propto \nabla_W \ell(W) W^T W$ yields Bell-Sejnowski update:<br>
+                            $\Delta W \propto \left[ I - 2 y x^T W^T \right] W = \left[ I - 2 g(Wx) (Wx)^T \right] W$.
                         </div>
                     `
                 },
@@ -3239,50 +3316,102 @@
                         🚀 Launch Interactive 2D Simulator ↗
                     </a>
                     <a href="https://github.com/Heisnotanimposter/cs229-2018-autumn" target="_blank" class="btn-secondary" style="font-size:0.85rem; padding:8px 16px;">
-                        📘 View Verified Code & PDFs ↗
+                        📘 View Verified Code & Problem Sets ↗
                     </a>
                 `
             },
             'cs230': {
                 title: "Stanford CS230: Deep Learning",
-                sub: "Convolutional Networks, RNNs, and From-Scratch Tensor Derivations",
+                sub: "Convolutional Networks, Vectorized Backpropagation Dynamics & Tensor Calculus",
                 tabs: [
-                    { id: 'overview', label: 'Core Architecture' },
-                    { id: 'backprop', label: 'Backprop Derivations' },
-                    { id: 'perception', label: 'Object Detection & YOLO' }
+                    { id: 'tensor_invariance', label: '1. Tensor Calculus & Shape Invariance' },
+                    { id: 'backprop_proof', label: '2. Vectorized Backprop & Grad-Checking' },
+                    { id: 'adam_dynamics', label: '3. Adam Dynamics & Bias Correction' },
+                    { id: 'batch_norm', label: '4. Batch Normalization Backward Proof' }
                 ],
                 content: {
-                    'overview': `
-                        <h4>From-Scratch Deep Learning Architecture</h4>
-                        <p>Verification of deep gradient dynamics and neural network mechanics without third-party frameworks like PyTorch or TensorFlow.</p>
+                    'tensor_invariance': `
+                        <h4>Tensor Calculus & Multi-Dimensional Shape Invariance</h4>
+                        <p>Mathematical formalization of feedforward neural networks without high-level autograd abstractions, ensuring dimension invariance across arbitrary batch sizes.</p>
+                        
                         <div class="math-box">
-                            <strong>Core Models Implemented:</strong><br>
-                            - Multi-layer Perceptron (MLP) with manual Jacobian calculation.<br>
-                            - Convolutional Neural Network forward/backward convolution tensor slicing.<br>
-                            - LSTM (Long Short-Term Memory) recurrent cells with full BPTT (Backpropagation Through Time).<br>
-                            - Generative Adversarial Networks (GAN) min-max objective verification.
+                            <strong>Layer Forward Equation & Dimension Compatibility:</strong><br>
+                            Let layer $l \in \{1, \dots, L\}$ have $n^{[l]}$ hidden units, with mini-batch size $m$.<br>
+                            Input batch: $X = A^{[0]} \in \mathbb{R}^{n^{[0]} \times m}$.<br>
+                            Linear pre-activation: $Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}$, where $W^{[l]} \in \mathbb{R}^{n^{[l]} \times n^{[l-1]}}$ and $b^{[l]} \in \mathbb{R}^{n^{[l]} \times 1}$.<br>
+                            Post-activation: $A^{[l]} = g^{[l]}(Z^{[l]}) \in \mathbb{R}^{n^{[l]} \times m}$.<br>
+                            <strong>Shape Invariance Principle:</strong> Invariance under batch dimension $m$ guarantees that matrix multiplications perform simultaneous forward propagation over the entire batch tensor without explicit loops.
+                        </div>
+
+                        <div class="math-box">
+                            <strong>Activation Dynamics:</strong><br>
+                            - <strong>ReLU:</strong> $g(z) = \max(0, z)$, subgradient $g'(z) = \mathbf{1}_{\{z > 0\}}$. Eliminates vanishing gradients for positive activations.<br>
+                            - <strong>Sigmoid:</strong> $g(z) = \frac{1}{1 + e^{-z}}$, derivative $g'(z) = g(z)(1 - g(z))$. Bounded in $(0, 1)$, ideal for binary Bernoulli likelihoods.<br>
+                            - <strong>Softmax:</strong> $g(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}$, Jacobian $J_{ij} = \frac{\partial a_i}{\partial z_j} = a_i (\delta_{ij} - a_j)$.
                         </div>
                     `,
-                    'backprop': `
-                        <h4>Manual Error Backpropagation Calculus</h4>
+                    'backprop_proof': `
+                        <h4>Vectorized Error Backpropagation & Analytical Gradient Checking</h4>
                         <div class="math-box">
-                            δ^{[l]} = (W^{[l+1]T} δ^{[l+1]}) ⊙ g'^{[l]}(Z^{[l]})<br>
-                            ∂J/∂W^{[l]} = (1/m) δ^{[l]} (A^{[l-1]})^T<br>
-                            ∂J/∂b^{[l]} = (1/m) ∑_i δ^{[l](i)}
+                            <strong>Coordinate-Free Matrix Backpropagation:</strong><br>
+                            For cross-entropy loss $\mathcal{L} = - \frac{1}{m} \sum_{i=1}^m [Y \odot \log A^{[L]} + (1-Y) \odot \log(1 - A^{[L]})]$:<br>
+                            <strong>Output Layer Error:</strong><br>
+                            $dZ^{[L]} = \frac{\partial \mathcal{L}}{\partial Z^{[L]}} = A^{[L]} - Y \in \mathbb{R}^{n^{[L]} \times m}$<br>
+                            <strong>Hidden Layer Recurrence (for $l = L-1, \dots, 1$):</strong><br>
+                            $dA^{[l]} = (W^{[l+1]})^T dZ^{[l+1]} \in \mathbb{R}^{n^{[l]} \times m}$<br>
+                            $dZ^{[l]} = dA^{[l]} \odot g'^{[l]}(Z^{[l]}) \in \mathbb{R}^{n^{[l]} \times m}$<br>
+                            <strong>Parameter Gradients:</strong><br>
+                            $dW^{[l]} = \frac{\partial \mathcal{L}}{\partial W^{[l]}} = \frac{1}{m} dZ^{[l]} (A^{[l-1]})^T \in \mathbb{R}^{n^{[l]} \times n^{[l-1]}}$<br>
+                            $db^{[l]} = \frac{\partial \mathcal{L}}{\partial b^{[l]}} = \frac{1}{m} \sum_{i=1}^m dZ^{[l](i)} \in \mathbb{R}^{n^{[l]} \times 1}$
                         </div>
-                        <p>Verified that analytical manual gradients exactly match numerical finite difference approximations within 10^{-7} precision tolerance.</p>
-                    `,
-                    'perception': `
-                        <h4>YOLO Real-time Spatial Perception</h4>
+
                         <div class="math-box">
-                            Intersection over Union (IoU) = Area(B_p ∩ B_gt) / Area(B_p ∪ B_gt)<br>
-                            Multi-scale anchor box bounding box regression and Non-Maximum Suppression (NMS) for autonomous vehicle perception baselines.
+                            <strong>Finite Difference Gradient Verification Protocol:</strong><br>
+                            To formally verify that analytical Jacobian gradients match true function slopes, we implement two-sided central difference quotients:<br>
+                            $\frac{\partial J}{\partial \theta_k} \approx \frac{J(\theta + \epsilon e_k) - J(\theta - \epsilon e_k)}{2\epsilon}, \quad \text{with } \epsilon = 10^{-7}$.<br>
+                            Normalized Relative Error Criterion:<br>
+                            $\operatorname{RelError} = \frac{\|d\theta_{\text{analytical}} - d\theta_{\text{numerical}}\|_2}{\|d\theta_{\text{analytical}}\|_2 + \|d\theta_{\text{numerical}}\|_2} < 10^{-7}$.<br>
+                            Conducted across all hidden layers to mathematically prove zero backpropagation error.
+                        </div>
+                    `,
+                    'adam_dynamics': `
+                        <h4>Adam (Adaptive Moment Estimation) Dynamics & Bias Correction Proof</h4>
+                        <div class="math-box">
+                            <strong>Optimization Equations:</strong><br>
+                            Let gradient at step $t$ be $g_t = \nabla_\theta \mathcal{L}(\theta_t)$.<br>
+                            First moment (momentum): $m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t$<br>
+                            Second raw moment (RMSprop): $v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2$<br>
+                            <strong>Analytical Proof of Bias Correction:</strong><br>
+                            Expanding $m_t$ recursively from $m_0 = 0$:<br>
+                            $m_t = (1 - \beta_1) \sum_{i=1}^t \beta_1^{t-i} g_i$<br>
+                            Taking mathematical expectations under stationarity $\mathbb{E}[g_i] = \mathbb{E}[g_t]$:<br>
+                            $\mathbb{E}[m_t] = \mathbb{E}\left[(1 - \beta_1) \sum_{i=1}^t \beta_1^{t-i} g_i\right] = \mathbb{E}[g_t] (1 - \beta_1) \sum_{k=0}^{t-1} \beta_1^k = \mathbb{E}[g_t] (1 - \beta_1) \frac{1 - \beta_1^t}{1 - \beta_1} = \mathbb{E}[g_t] (1 - \beta_1^t)$.<br>
+                            Therefore, to ensure an asymptotically unbiased estimator $\mathbb{E}[\hat{m}_t] = \mathbb{E}[g_t]$, we must divide by $(1 - \beta_1^t)$:<br>
+                            $\hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}$<br>
+                            <strong>Parameter Update Rule:</strong><br>
+                            $\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t$.
+                        </div>
+                    `,
+                    'batch_norm': `
+                        <h4>Batch Normalization Backward Calculus (Ioffe & Szegedy 2015)</h4>
+                        <div class="math-box">
+                            <strong>Forward Transformation on Mini-Batch $\mathcal{B} = \{x_1, \dots, x_m\}$:</strong><br>
+                            $\mu_\mathcal{B} = \frac{1}{m} \sum_{i=1}^m x_i, \quad \sigma_\mathcal{B}^2 = \frac{1}{m} \sum_{i=1}^m (x_i - \mu_\mathcal{B})^2$<br>
+                            Normalized input: $\hat{x}_i = \frac{x_i - \mu_\mathcal{B}}{\sqrt{\sigma_\mathcal{B}^2 + \epsilon}}, \quad y_i = \gamma \hat{x}_i + \beta$.<br>
+                            <strong>Exact Backward Chain Rule Derivation:</strong><br>
+                            Given incoming gradient $\frac{\partial \mathcal{L}}{\partial y_i}$:<br>
+                            $\frac{\partial \mathcal{L}}{\partial \gamma} = \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial y_i} \hat{x}_i, \quad \frac{\partial \mathcal{L}}{\partial \beta} = \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial y_i}$<br>
+                            $\frac{\partial \mathcal{L}}{\partial \hat{x}_i} = \frac{\partial \mathcal{L}}{\partial y_i} \gamma$<br>
+                            $\frac{\partial \mathcal{L}}{\partial \sigma_\mathcal{B}^2} = \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial \hat{x}_i} (x_i - \mu_\mathcal{B}) \left(-\frac{1}{2} (\sigma_\mathcal{B}^2 + \epsilon)^{-3/2}\right)$<br>
+                            $\frac{\partial \mathcal{L}}{\partial \mu_\mathcal{B}} = \left( \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial \hat{x}_i} \frac{-1}{\sqrt{\sigma_\mathcal{B}^2 + \epsilon}} \right) + \frac{\partial \mathcal{L}}{\partial \sigma_\mathcal{B}^2} \frac{\sum_{i=1}^m -2(x_i - \mu_\mathcal{B})}{m} = - \frac{1}{\sqrt{\sigma_\mathcal{B}^2 + \epsilon}} \sum_{i=1}^m \frac{\partial \mathcal{L}}{\partial \hat{x}_i}$<br>
+                            <strong>Combined Input Gradient Formulation:</strong><br>
+                            $\frac{\partial \mathcal{L}}{\partial x_i} = \frac{\gamma}{m \sqrt{\sigma_\mathcal{B}^2 + \epsilon}} \left[ m \frac{\partial \mathcal{L}}{\partial y_i} - \sum_{k=1}^m \frac{\partial \mathcal{L}}{\partial y_k} - \hat{x}_i \sum_{k=1}^m \frac{\partial \mathcal{L}}{\partial y_k} \hat{x}_k \right]$.
                         </div>
                     `
                 },
                 actions: `
-                    <a href="https://github.com/Heisnotanimposter/Totalcare_autonomous_driving_Yolov5" target="_blank" class="btn-primary" style="font-size:0.85rem; padding:8px 16px;">
-                        View Implementation Code ↗
+                    <a href="https://github.com/Heisnotanimposter/AIAD_3-Advanced-Integrated-Aerospace-Data" target="_blank" class="btn-primary" style="font-size:0.85rem; padding:8px 16px;">
+                        📘 View From-Scratch Deep Learning Code ↗
                     </a>
                 `
             },
