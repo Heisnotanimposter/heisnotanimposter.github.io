@@ -1060,7 +1060,7 @@
             <!-- Hero / Abstract -->
             <section class="academic-hero">
                 <h1 class="hero-title aero-step step-1">Simon (Seungwon) Lee</h1>
-                <div class="hero-subtitle aero-step step-2" data-i18n="hero_subtitle">AI & Systems Researcher · Mathematical Foundations & Neuro-Symbolic Computing</div>
+                <div class="hero-subtitle aero-step step-2" data-i18n="hero_subtitle">AI & Systems Researcher · Neuro-Symbolic Reasoning, SGLang Serving & ARC Prize 2026 Paper Track</div>
                 
                 <div class="hero-contacts aero-step step-2">
                     <span><strong>Email:</strong> <a href="mailto:redcar1024@gmail.com">redcar1024@gmail.com</a></span>
@@ -1070,7 +1070,7 @@
                 </div>
 
                 <p class="hero-statement aero-step step-3" data-i18n="hero_statement">
-                    Focusing on neuro-symbolic artificial intelligence, discrete program synthesis under spatial constraints, and real-time state estimation for autonomous systems. Ranked in the <strong>Top 13% Globally in ARC Prize 2025</strong> (Abstraction and Reasoning Corpus). Developer of high-performance interactive scientific platforms, 3D spatial simulation engines, and rigorous open-source implementations of graduate machine learning curricula (Stanford CS229 & CS230).
+                    Focusing on neuro-symbolic artificial intelligence, discrete program synthesis under spatial constraints, and real-time state estimation for autonomous systems. Ranked in the <strong>Top 13% Globally in ARC Prize 2025</strong> and currently participating in the <strong>ARC Prize 2026 Paper Track</strong> (<em>From a 33.38-Point Peak to a 23.41-Point Late Run: A Versioned Study of Hybrid Interactive Reasoning on ARC-AGI-3</em>, verified peak score <strong>33.38</strong> on ARC-AGI-3). Developer of high-performance interactive scientific platforms, 3D spatial simulation engines, and rigorous open-source implementations of graduate machine learning curricula (Stanford CS229 & CS230).
                 </p>
 
                 <!-- Academic Highlights Table -->
@@ -1084,9 +1084,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong data-i18n="arc_title">ARC Prize 2025</strong></td>
-                            <td data-i18n="arc_desc">Top 13% Global Rank. Multi-dimensional neuro-symbolic program synthesis engine with discrete spatial primitives and cellular automata.</td>
-                            <td><a href="https://github.com/Heisnotanimposter/ARC-AGI-HIN" target="_blank">ARC-AGI-HIN Repo ↗</a></td>
+                            <td><strong data-i18n="arc_title">ARC Prize 2026 (Dual-Track & Paper Track)</strong></td>
+                            <td data-i18n="arc_desc"><strong>Paper Track Participant</strong> (<em>A Versioned Study of Hybrid Interactive Reasoning on ARC-AGI-3</em>). Verified Peak Official Score <strong>33.38</strong> on ARC-AGI-3 (SGLang MTP speculative serving, 128K context, action guards). Static ARC-AGI-2 baseline 30.97%.</td>
+                            <td><a href="javascript:void(0)" onclick="openStudyModal('arc3_paper')">Inspect Paper Track ↗</a> · <a href="https://github.com/Heisnotanimposter/ARC-AGI-HIN" target="_blank">Repo ↗</a></td>
                         </tr>
                         <tr>
                             <td><strong data-i18n="services_title">Running Interactive Services</strong></td>
@@ -1184,19 +1184,20 @@
                         </div>
                     </article>
 
-                    <!-- Project 4: ARC-AGI-HIN -->
-                    <article class="project-entry" data-category="research" data-keywords="arc prize 2025 program synthesis zbdd cellular automata dsl abstract reasoning neuro-symbolic research">
+                    <!-- Project 4: ARC-AGI-HIN & ARC Prize 2026 Paper Track -->
+                    <article class="project-entry" data-category="research" data-keywords="arc prize 2026 arc-agi-3 paper track sglang mtp speculative decoding 33.38 rhae program synthesis neuro-symbolic research">
                         <div class="project-top">
-                            <span class="project-title">4. ARC-AGI-HIN: Multi-Dimensional Neuro-Symbolic Program Synthesis</span>
-                            <span class="project-badge" data-i18n="p4_badge">Core Research · Top 13%</span>
+                            <span class="project-title">4. ARC Prize 2026: Hybrid Interactive Reasoning (ARC-AGI-3) & Paper Track</span>
+                            <span class="project-badge" data-i18n="p4_badge">Paper Track Participant · Peak 33.38</span>
                         </div>
-                        <div class="project-sub" data-i18n="p4_sub">Top 13% Global Rank in ARC Prize 2025 · Discrete Logic Primitives & Cellular Automata</div>
-                        <p class="project-desc" data-i18n="p4_desc">End-to-end neuro-symbolic program synthesis engine developed for the ARC Prize 2025 (Abstraction and Reasoning Corpus). Features a domain-specific language (DSL) with 120+ spatial transformation primitives, bidirectional state-space search, and ZBDD-compressed hypothesis spaces.</p>
+                        <div class="project-sub" data-i18n="p4_sub">Dual-Track Competition & Longitudinal Systems Study · SGLang Speculative Serving & Deterministic Action Guards</div>
+                        <p class="project-desc" data-i18n="p4_desc">High-throughput hybrid agent engineered for the interactive ARC-AGI-3 benchmark, achieving a verified peak competition score of <strong>33.38</strong> (Kernel V6, submission <code>57758308</code>). Authored a comprehensive versioned study (<em>From a 33.38-Point Peak to a 23.41-Point Late Run</em>) analyzing model serving, multi-stream bounded concurrency (10 streams), 128K context window, 150-turn memory horizon retention, and deterministic action guards under the quadratic Relative Human Action Efficiency (RHAE) metric. Active participant in the official ARC Prize 2026 Paper Track.</p>
                         <div class="project-meta">
-                            <strong>Key Algorithms:</strong> Domain-Specific Language (DSL) Synthesis, Bidirectional Breadth-First Search, Cellular Automata, Invariant Feature Extraction.<br>
-                            <strong>Technology Stack:</strong> Python, PyTorch, NumPy, Multiprocessing, Rust bindings.
+                            <strong>Key Algorithms:</strong> Speculative Decoding (Albucino MTP INT4-G32, 3 steps), AutoRound W4A16 Quantization, SGLang / Pennyroyal Serving, State Continuity Hysteresis, Action Guards (Stale/Repeat/Death), Spatial Search.<br>
+                            <strong>Technology Stack:</strong> Python, PyTorch, SGLang, Pennyroyal, AutoRound, CUDA, Multiprocessing, Rust bindings.
                         </div>
                         <div class="project-actions">
+                            <button onclick="openStudyModal('arc3_paper')" class="btn-minimal">[ Inspect Paper Track Abstract & Findings ↗ ]</button>
                             <a href="https://github.com/Heisnotanimposter/ARC-AGI-HIN" target="_blank" class="btn-minimal">[ GitHub Repository ↗ ]</a>
                             <button onclick="openStudyModal('zbdd')" class="btn-minimal">[ Inspect ZBDD Foundations ↗ ]</button>
                         </div>
@@ -1476,11 +1477,11 @@
                 'nav_resume': `Academic CV`,
                 'hero_subtitle': `AI & Systems Researcher · Mathematical Foundations & Neuro-Symbolic Computing`,
                 'hero_location': `Seoul, Republic of Korea`,
-                'hero_statement': `Focusing on neuro-symbolic artificial intelligence, discrete program synthesis under spatial constraints, and real-time state estimation for autonomous systems. Ranked in the <strong>Top 13% Globally in ARC Prize 2025</strong> (Abstraction and Reasoning Corpus). Developer of high-performance interactive scientific platforms, 3D spatial simulation engines, and rigorous open-source implementations of graduate machine learning curricula (Stanford CS229 & CS230).`,
+                'hero_statement': `Focusing on neuro-symbolic artificial intelligence, discrete program synthesis under spatial constraints, and real-time state estimation for autonomous systems. Ranked in the <strong>Top 13% Globally in ARC Prize 2025</strong> and currently participating in the <strong>ARC Prize 2026 Paper Track</strong> (<em>From a 33.38-Point Peak to a 23.41-Point Late Run: A Versioned Study of Hybrid Interactive Reasoning on ARC-AGI-3</em>, verified peak score <strong>33.38</strong> on ARC-AGI-3). Developer of high-performance interactive scientific platforms, 3D spatial simulation engines, and rigorous open-source implementations of graduate machine learning curricula (Stanford CS229 & CS230).`,
                 'th_domain': `Domain / Track`,
                 'th_contributions': `Core Contributions & Milestones`,
                 'th_artifact': `Reference / Artifact`,
-                'arc_title': `ARC Prize 2025`,
+                'arc_title': `ARC Prize 2026 (Dual-Track & Paper Track)`,
                 'arc_desc': `Top 13% Global Rank. Multi-dimensional neuro-symbolic program synthesis engine with discrete spatial primitives and cellular automata.`,
                 'services_title': `Running Interactive Services`,
                 'services_desc': `Live WebGL 3D systems: Stanford CS229 Platform, SafeRoute Sense 3D spatial simulator, Protein Explorer (AlphaFold PAE).`,
@@ -1511,8 +1512,8 @@
                 'p3_badge': `Running Service · Online`,
                 'p3_sub': `Molecular Structure Visualizer · Predicted Aligned Error Heatmaps`,
                 'p3_desc': `Interactive 3D biological macromolecule visualizer rendering PDB structures directly in the browser via 3Dmol.js with an automatic RCSB PDB CloudFront CDN fallback. Features Predicted Aligned Error (PAE) interactive heatmaps, residue distance matrices, and secondary structure ribbons.`,
-                'p4_badge': `Core Research · Top 13%`,
-                'p4_sub': `Top 13% Global Rank in ARC Prize 2025 · Discrete Logic Primitives & Cellular Automata`,
+                'p4_badge': `Paper Track Participant · Peak 33.38`,
+                'p4_sub': `Dual-Track Competition & Longitudinal Systems Study · SGLang Speculative Serving & Deterministic Action Guards`,
                 'p4_desc': `End-to-end neuro-symbolic program synthesis engine developed for the ARC Prize 2025 (Abstraction and Reasoning Corpus). Features a domain-specific language (DSL) with 120+ spatial transformation primitives, bidirectional state-space search, and ZBDD-compressed hypothesis spaces.`,
                 'p5_badge': `Core Research`,
                 'p5_sub': `Bayesian Filtering Suite · Extended Kalman Filter (EKF) & Unscented Kalman Filter (UKF)`,
@@ -1598,6 +1599,20 @@
                 
                 'h2_projects': 'Research & Projects',
                 'projects_content': `<div class="item-block">
+                    <div class="item-header">
+                        <span>ARC Prize 2026: Hybrid Interactive Reasoning (ARC-AGI-3) & Paper Track</span>
+                        <span>2026 -- Present</span>
+                    </div>
+                    <div class="item-sub">HINAGI Systems Group | Paper Track Participant & Verified 33.38 Peak Official Score</div>
+                    <ul>
+                        <li><strong>Paper Track Authorship:</strong> Authored <em>"From a 33.38-Point Peak to a 23.41-Point Late Run: A Versioned Study of Hybrid Interactive Reasoning on ARC-AGI-3"</em>, conducting a longitudinal systems audit of interactive agents under quadratic Relative Human Action Efficiency (RHAE).</li>
+                        <li><strong>Inference Serving & Speculative Decoding:</strong> Deployed quantized Qwen3.8-Flash-Next (W4A16 AutoRound) paired with an Albucino INT4-G32 MTP draft model (3 speculative steps) served via SGLang / Pennyroyal v2.5.3, sustaining 10-stream bounded concurrency and 128K context window.</li>
+                        <li><strong>Deterministic Action Guards & Continuity:</strong> Engineered real-time safety and path-planning guards (batch-no-op, stale-state, repeat-state, death-repeat, and lookahead) preserving 150-turn conversational history to maintain causal hypothesis continuity across multi-level resets.</li>
+                        <li><strong>Dual-Track Benchmarking:</strong> Achieved verified <strong>33.38</strong> official public baseline on ARC-AGI-3 (Kernel V6, submission 57758308) and <strong>30.97%</strong> baseline on static ARC-AGI-2.</li>
+                        <li>Repository: <a href="https://github.com/Heisnotanimposter/ARC-AGI-HIN" target="_blank">github.com/Heisnotanimposter/ARC-AGI-HIN</a></li>
+                    </ul>
+                </div>
+                <div class="item-block">
                     <div class="item-header">
                         <span>ARC Prize 2025: Program Synthesis & System 2 Reasoning</span>
                         <span>2025</span>
@@ -1886,7 +1901,7 @@
                 'th_domain': `분야 및 연구 트랙`,
                 'th_contributions': `핵심 기여 및 성과`,
                 'th_artifact': `참조 링크 및 산출물`,
-                'arc_title': `ARC Prize 2025`,
+                'arc_title': `ARC Prize 2026 (Dual-Track & Paper Track)`,
                 'arc_desc': `글로벌 상위 13% 기록. 120개 이상의 공간 변환 프리미티브와 셀룰러 오토마타를 결합한 다차원 뉴로-심볼릭 프로그램 합성 엔진 독자 개발.`,
                 'services_title': `실행 중인 인터랙티브 서비스`,
                 'services_desc': `라이브 WebGL 3D 시스템: 스탠포드 CS229 플랫폼, SafeRoute Sense 3D 공간 시뮬레이터, 단백질 구조 분석기(AlphaFold PAE).`,
@@ -1917,8 +1932,8 @@
                 'p3_badge': `실행 중인 서비스 · 온라인`,
                 'p3_sub': `생체 거대분자 구조 시각화 · AlphaFold PAE 오차 히트맵`,
                 'p3_desc': `3Dmol.js 및 RCSB PDB CloudFront CDN 연동을 통해 브라우저에서 PDB 생체 분자 구조를 즉각 렌더링하는 3D 시각화 도구입니다. AlphaFold의 예측 정렬 오차(PAE) 인터랙티브 히트맵, 잔기 간 거리 행렬, 2차 구조 리본 모델을 제공합니다.`,
-                'p4_badge': `핵심 연구 · 상위 13%`,
-                'p4_sub': `ARC Prize 2025 글로벌 상위 13% 달성 · 이산 논리 프리미티브 & 셀룰러 오토마타`,
+                'p4_badge': `페이퍼 트랙 참가 · 최고 33.38점`,
+                'p4_sub': `듀얼 트랙 챌린지 및 종단 시스템 분석 · SGLang 투기적 서빙 & 결정론적 행동 가드`,
                 'p4_desc': `ARC Prize 2025(추상화 및 추론 코퍼스)를 위해 개발된 엔드-투-엔드 뉴로-심볼릭 프로그램 합성 엔진입니다. 120개 이상의 공간 변환 프리미티브로 구성된 도메인 특화 언어(DSL), 양방향 상태 공간 탐색, ZBDD로 압축된 가설 공간 탐색 메커니즘을 구현했습니다.`,
                 'p5_badge': `핵심 연구`,
                 'p5_sub': `베이지안 필터링 스위트 · 확장 칼만 필터(EKF) 및 무향 칼만 필터(UKF)`,
@@ -2004,6 +2019,20 @@
                 
                 'h2_projects': '연구 및 프로젝트',
                 'projects_content': `<div class="item-block">
+                    <div class="item-header">
+                        <span>ARC Prize 2026: 하이브리드 대화형 추론 (ARC-AGI-3) 및 페이퍼 트랙 참가</span>
+                        <span>2026 -- 현재</span>
+                    </div>
+                    <div class="item-sub">HINAGI Systems Group | 페이퍼 트랙 참가 및 공식 33.38점 피크 스코어 달성</div>
+                    <ul>
+                        <li><strong>페이퍼 트랙 연구 및 논문 집필:</strong> <em>"From a 33.38-Point Peak to a 23.41-Point Late Run: A Versioned Study of Hybrid Interactive Reasoning on ARC-AGI-3"</em> 논문을 집필하여, 상대적 인간 행동 효율성(RHAE) 메트릭 하에서 대화형 에이전트의 서빙 아키텍처 및 실패 모드에 대한 체계적인 종단 분석 수행.</li>
+                        <li><strong>추론 서빙 및 투기적 디코딩:</strong> Qwen3.8-Flash-Next W4A16 AutoRound와 Albucino INT4-G32 MTP 드래프트 모델(3단계 투기적 디코딩)을 SGLang / Pennyroyal v2.5.3 환경에 배포, 10개 동시 스트림 및 128K 컨텍스트 윈도우 유지.</li>
+                        <li><strong>결정론적 행동 가드 및 연속성 보존:</strong> 사망 후 리셋 상황에서도 150턴의 대화 히스토리를 보존하여 다단계 환경에서의 인과적 가설 연속성을 유지하고, 낭비 액션을 차단하는 실시간 행동 가드(stale, repeat, death-repeat, lookahead) 구축.</li>
+                        <li><strong>듀얼 트랙 벤치마크:</strong> ARC-AGI-3 대화형 트랙에서 공식 검증 피크 <strong>33.38점</strong>(Kernel V6, submission 57758308) 달성 및 정적 ARC-AGI-2 트랙에서 <strong>30.97%</strong> 기준선 확보.</li>
+                        <li>연구 저장소: <a href="https://github.com/Heisnotanimposter/ARC-AGI-HIN" target="_blank">github.com/Heisnotanimposter/ARC-AGI-HIN</a></li>
+                    </ul>
+                </div>
+                <div class="item-block">
                     <div class="item-header">
                         <span>ARC Prize 2025: 프로그램 합성 및 System 2 추론</span>
                         <span>2025년</span>
@@ -2292,7 +2321,7 @@
                 'th_domain': `分野 / 研究トラック`,
                 'th_contributions': `主な貢献と実績`,
                 'th_artifact': `参照リンク・成果物`,
-                'arc_title': `ARC Prize 2025`,
+                'arc_title': `ARC Prize 2026 (Dual-Track & Paper Track)`,
                 'arc_desc': `世界上位13%達成。空間変換プリミティブとセル・オートマトンを統合した多次元ニューロシンボリック・プログラム合成エンジン。`,
                 'services_title': `稼働中のインタラクティブサービス`,
                 'services_desc': `リアルタイムWebGL 3Dシステム：スタンフォードCS229プラットフォーム、SafeRoute Sense 3D空間シミュレータ、タンパク質解析ツール（AlphaFold PAE）。`,
@@ -2323,8 +2352,8 @@
                 'p3_badge': `稼働中 · オンライン`,
                 'p3_sub': `生体高分子構造ビジュアライザ · AlphaFold PAE ヒートマップ`,
                 'p3_desc': `3Dmol.jsとRCSB PDB CDN連携により、ブラウザ内でPDB分子構造を直接描画する3Dビジュアライザ。AlphaFold予測整合誤差（PAE）ヒートマップ、アミノ酸残基間距離行列、二次構造リボン表示を搭載。`,
-                'p4_badge': `中核研究 · 上位13%`,
-                'p4_sub': `ARC Prize 2025 世界上位13% · 離散論理プリミティブ＆セル・オートマトン`,
+                'p4_badge': `論文トラック参加 · 最高33.38点`,
+                'p4_sub': `二重トラック競技＆長期的システム検証 · SGLang投機的推論＆決定的アクションガード`,
                 'p4_desc': `ARC Prize 2025（抽象・推論コーパス）に向けて開発されたエンドツーエンドのニューロシンボリック・プログラム合成エンジン。120以上の空間変換DSLプリミティブ、双方向探索、ZBDD圧縮仮説空間を搭載。`,
                 'p5_badge': `中核研究`,
                 'p5_sub': `ベイズ推定フィルタ・スイート · 拡張カルマンフィルタ（EKF）＆無香料カルマンフィルタ（UKF）`,
@@ -2410,6 +2439,20 @@
                 
                 'h2_projects': '研究・技術プロジェクト実績',
                 'projects_content': `<div class="item-block">
+                    <div class="item-header">
+                        <span>ARC Prize 2026: 対話型ハイブリッド推論 (ARC-AGI-3) ＆ 論文トラック参加</span>
+                        <span>2026年 -- 現在</span>
+                    </div>
+                    <div class="item-sub">HINAGI Systems Group | 論文トラック参加＆公式検証最高33.38点達成</div>
+                    <ul>
+                        <li><strong>論文トラック執筆:</strong> <em>"From a 33.38-Point Peak to a 23.41-Point Late Run: A Versioned Study of Hybrid Interactive Reasoning on ARC-AGI-3"</em> を執筆。相対的人間行動効率性（RHAE）評価下での対話型エージェントの推論サービングと障害モードを分析。</li>
+                        <li><strong>投機的デコード推論サービング:</strong> Qwen3.8-Flash-Next W4A16 AutoRound と Albucino INT4-G32 MTP ドラフトモデル（3段階投機推論）を SGLang / Pennyroyal v2.5.3 上に構築、10並列ストリームおよび128Kコンテキストを維持。</li>
+                        <li><strong>決定的アクションガードと状態維持:</strong> 死亡・リセット後も150ターンの会話履歴を保持し、マルチレベル探索における因果仮説の連続性を維持。無駄行動を防止するリアルタイム安全ガードを実装。</li>
+                        <li><strong>二重トラック評価:</strong> ARC-AGI-3対話型トラックで公式最高<strong>33.38点</strong>、静的ARC-AGI-2で<strong>30.97%</strong>を記録。</li>
+                        <li>研究リポジトリ: <a href="https://github.com/Heisnotanimposter/ARC-AGI-HIN" target="_blank">github.com/Heisnotanimposter/ARC-AGI-HIN</a></li>
+                    </ul>
+                </div>
+                <div class="item-block">
                     <div class="item-header">
                         <span>ARC Prize 2025: プログラム合成と System 2 推論</span>
                         <span>2025年</span>
@@ -2698,7 +2741,7 @@
                 'th_domain': `研究领域 / 赛道`,
                 'th_contributions': `核心成果与里程碑`,
                 'th_artifact': `参考链接与成果`,
-                'arc_title': `ARC Prize 2025`,
+                'arc_title': `ARC Prize 2026 (Dual-Track & Paper Track)`,
                 'arc_desc': `位列全球前 13%。开发了结合空间变换原语与元胞自动机的多维神经符号程序合成引擎。`,
                 'services_title': `在线交互式系统服务`,
                 'services_desc': `实时 WebGL 3D 系统：斯坦福 CS229 平台、SafeRoute Sense 3D 空间避障仿真器、蛋白质结构探索器（AlphaFold PAE）。`,
@@ -2729,8 +2772,8 @@
                 'p3_badge': `在线服务 · 运行中`,
                 'p3_sub': `分子结构可视化工具 · AlphaFold PAE 误差热图`,
                 'p3_desc': `基于 3Dmol.js 和 RCSB PDB CDN 的交互式 3D 生物大分子可视化工具。具备 AlphaFold 预测对齐误差（PAE）交互式热图、残基距离矩阵以及二级结构色带渲染。`,
-                'p4_badge': `核心研究 · 全球前13%`,
-                'p4_sub': `ARC Prize 2025 全球前 13% · 离散逻辑原语与元胞自动机`,
+                'p4_badge': `论文赛道参赛者 · 峰值33.38分`,
+                'p4_sub': `双赛道系统研究 · SGLang 投机解码服务与确定性行动防护`,
                 'p4_desc': `针对 ARC Prize 2025 开发的端到端神经符号程序合成引擎。包含 120 多个空间变换原语的专用领域语言（DSL）、双向状态空间搜索以及基于 ZBDD 压缩的假设空间评估机制。`,
                 'p5_badge': `核心研究`,
                 'p5_sub': `贝叶斯滤波组件库 · 扩展卡尔曼滤波（EKF）与无迹卡尔曼滤波（UKF）`,
@@ -2817,6 +2860,20 @@
                 
                 'h2_projects': '研究与项目',
                 'projects_content': `<div class="item-block">
+                    <div class="item-header">
+                        <span>ARC Prize 2026: 混合交互式推理 (ARC-AGI-3) 与论文赛道参赛</span>
+                        <span>2026年 -- 至今</span>
+                    </div>
+                    <div class="item-sub">HINAGI Systems Group | 论文赛道参赛者与官方验证峰值 33.38 分</div>
+                    <ul>
+                        <li><strong>论文赛道论文撰写:</strong> 撰写学术论文 <em>"From a 33.38-Point Peak to a 23.41-Point Late Run: A Versioned Study of Hybrid Interactive Reasoning on ARC-AGI-3"</em>，针对二次方相对人类动作效率（RHAE）指标系统研究了交互式智能体的服务架构与失效模式。</li>
+                        <li><strong>投机解码推理服务:</strong> 部署 Qwen3.8-Flash-Next W4A16 AutoRound 与 Albucino INT4-G32 MTP 投机草稿模型（3步投机预测），构建基于 SGLang / Pennyroyal v2.5.3 的服务栈，支持 10 路并发流与 128K 上下文窗口。</li>
+                        <li><strong>确定性动作守卫与状态连续性:</strong> 在环境死亡重置后保留 150 轮对话历史以维持跨关卡因果假设连续性，并设计状态安全守卫（无效动作、死循环、死亡重复防御）。</li>
+                        <li><strong>双赛道基准评测:</strong> 在 ARC-AGI-3 交互赛道取得官方验证峰值 <strong>33.38 分</strong>，在静态 ARC-AGI-2 赛道取得 <strong>30.97%</strong> 基准成绩。</li>
+                        <li>研究仓库: <a href="https://github.com/Heisnotanimposter/ARC-AGI-HIN" target="_blank">github.com/Heisnotanimposter/ARC-AGI-HIN</a></li>
+                    </ul>
+                </div>
+                <div class="item-block">
                     <div class="item-header">
                         <span>ARC Prize 2025: 程序合成与 System 2 推理</span>
                         <span>2025年</span>
@@ -3089,6 +3146,79 @@
 
         // 2. Mathematical Study Derivations & Proofs Data
         const STUDY_DATA = {
+            'arc3_paper': {
+                title: "ARC Prize 2026 Paper Track: Hybrid Interactive Reasoning on ARC-AGI-3",
+                sub: "HINAGI Systems Group · Lead Author: Seungwon (Simon) Lee · Empirical Study & Architecture",
+                tabs: [
+                    { id: 'paper_abstract', label: '1. Paper Abstract & Problem Formulation' },
+                    { id: 'arch_v6', label: '2. Architecture V6: 33.38 Peak Serving Stack' },
+                    { id: 'rhae_metric', label: '3. Quadratic RHAE Metric & Efficiency' },
+                    { id: 'forensics_v9_v13', label: '4. Versioned Forensics (V6 to V13)' },
+                    { id: 'lessons_continuity', label: '5. Methodological Lessons for Interactive Agents' }
+                ],
+                content: {
+                    'paper_abstract': `
+                        <h4>Paper Track Overview: From a 33.38-Point Peak to a 23.41-Point Late Run</h4>
+                        <p><strong>Title:</strong> <em>From a 33.38-Point Peak to a 23.41-Point Late Run: A Versioned Study of Hybrid Interactive Reasoning on ARC-AGI-3</em></p>
+                        <p><strong>Track:</strong> ARC Prize 2026 Paper Track (ARC-AGI-3 Interactive Agent Track)</p>
+                        <p><strong>Primary Linked Submission:</strong> Kaggle Kernel V6, submission <code>57758308</code> (Official Public Score: <strong>33.38</strong>)</p>
+                        <p><strong>Follow-Up Artifact:</strong> Kaggle Kernel V13, submission <code>57912660</code> (Public Score: 23.41; marked <em>Succeeded after deadline</em>)</p>
+                        <hr style="margin: 14px 0; border: 0; border-top: 1px dotted var(--border-secondary);" />
+                        <p><strong>Abstract:</strong> We report a versioned engineering study of a hybrid agent for ARC-AGI-3, an interactive benchmark in which agents must discover game mechanics and complete sequential levels under a limited action and runtime budget. The strongest on-time result in our archived competition history was <strong>33.38</strong> from Kernel V6. V6 combined a Qwen3.8-Flash-Next W4A16 AutoRound model, an Albucino MTP speculative drafter, SGLang/Pennyroyal serving, a bounded ten-stream execution policy, long conversation history (150 turns), and action-level guards around a Python game interface. We document the longitudinal trajectory from V1 through V13, separating verified leaderboard metrics from local smoke benchmarks and providing reproducible lessons for general interactive AI.</p>
+                    `,
+                    'arch_v6': `
+                        <h4>Architecture V6: High-Throughput Serving & Speculative Decoding</h4>
+                        <p>V6 represents our primary evaluated system and official competition peak. The inference stack decoupled high-level hypothesis generation from deterministic constraint validation:</p>
+                        <ul>
+                            <li><strong>Base Model:</strong> Qwen3.8-Flash-Next quantized to <code>W4A16</code> using AutoRound for low-latency GPU execution.</li>
+                            <li><strong>Speculative Drafter:</strong> Albucino INT4-G32 Multi-Token Prediction (MTP) draft model executing 3 speculative steps per forward pass.</li>
+                            <li><strong>Serving Framework:</strong> Pennyroyal v2.5.3 built upon SGLang radix tree prefix caching.</li>
+                            <li><strong>Bounded Concurrency:</strong> Strict 10-stream execution policy on NVIDIA RTX PRO 6000 hardware.</li>
+                            <li><strong>Memory & Context Budget:</strong> 128 KiB total token context allocation with a 58 KiB context-drain threshold; retention of up to 150 assistant turns with 30-turn history drainage.</li>
+                            <li><strong>Deterministic Action Guards:</strong> Python-level batch-no-op, stale-state, repeat-state, death-repeat, and lookahead guards with spatial A* and LiDAR ray-marching tools.</li>
+                        </ul>
+                    `,
+                    'rhae_metric': `
+                        <h4>Relative Human Action Efficiency (RHAE) Metric Formulation</h4>
+                        <p>In ARC-AGI-3, agents are scored not only on level completion but on the ratio of human actions to agent actions. For a completed level $\\ell$ in game $e$:</p>
+                        <div style="text-align: center; margin: 12px 0;">
+                            $$s_{\\ell,e} = \\min\\left(115,\\; 100\\left(\\frac{h_{\\ell,e}}{a_{\\ell,e}}\\right)^2\\right)$$
+                        </div>
+                        <p>where $h_{\\ell,e}$ represents the upper-median human reference action count and $a_{\\ell,e}$ is the agent\'s physical action count. For a game $e$ with $n_e$ levels where the agent completes $k_e$ sequential levels:</p>
+                        <div style="text-align: center; margin: 12px 0;">
+                            $$E_e = \\min\\left[ 100\\frac{\\sum_{\\ell=1}^{k_e}\\ell}{\\sum_{\\ell=1}^{n_e}\\ell},\\; \\frac{1}{k_e}\\sum_{\\ell=1}^{k_e} s_{\\ell,e} \\right]$$
+                        </div>
+                        <p><strong>Critical Implication:</strong> Because action efficiency scales <em>quadratically</em>, blind trial-and-error exploration destroys scores. Internal LLM deliberation and tool executions are free; physical game API actions must be minimized through deterministic spatial guards.</p>
+                    `,
+                    'forensics_v9_v13': `
+                        <h4>Versioned Forensic Audit: From V6 (33.38) to V9 (0.00), V10 (8.03) & V13 (23.41)</h4>
+                        <table class="academic-table" style="width: 100%; margin: 12px 0; font-size: 13px;">
+                            <thead>
+                                <tr><th>Version</th><th>Public Score</th><th>Architectural Variance & Forensic Diagnosis</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>V6</strong></td><td><strong>33.38</strong></td><td><strong>Official Peak.</strong> 150-turn memory, 128K context, SGLang MTP, deterministic action guards.</td></tr>
+                                <tr><td><strong>V9</strong></td><td>0.00</td><td>Fatal worker crash: <code>UnboundLocalError: segment_layer</code> in worker loop.</td></tr>
+                                <tr><td><strong>V10</strong></td><td>8.03</td><td>Memory horizon truncated (150 $\\to$ 36 turns); context reduced (128K $\\to$ 56K). Local smoke score was 70.94, but hidden evaluation collapsed due to loss of multi-death hypothesis continuity.</td></tr>
+                                <tr><td><strong>V13</strong></td><td>23.41</td><td>23-cell frozen candidate restoring V6 long-horizon memory and operational fixes. Succeeded after deadline.</td></tr>
+                            </tbody>
+                        </table>
+                    `,
+                    'lessons_continuity': `
+                        <h4>Methodological Lessons for General Interactive Agents</h4>
+                        <ol style="margin-left: 20px; line-height: 1.7;">
+                            <li><strong>State Continuity Across Resets:</strong> In multi-level dynamic MDPs, preserving discovered constraints across environmental deaths is mandatory. Truncating context history to save latency forces the agent to re-discover rules, triggering the quadratic RHAE action penalty.</li>
+                            <li><strong>Decoupled Physical vs Deliberative Compute:</strong> The agent must spend unlimited compute on internal simulation, beam search, and spatial verification before issuing a single irreversible physical action.</li>
+                            <li><strong>Local Smoke vs Hidden Benchmark Divergence:</strong> V10 scored 70.94 on the local 25-game public suite (vs V6\'s 49.84), yet collapsed to 8.03 on hidden test evaluation. Local interactive suites easily overfit unless game mechanics are novel and unobserved.</li>
+                        </ol>
+                    `
+                },
+                actions: `
+                    <a href="https://github.com/Heisnotanimposter/ARC-AGI-HIN" target="_blank" class="btn-minimal">[ GitHub Research Repository ↗ ]</a>
+                    <button class="modal-close-btn" onclick="closeStudyModal()">[ Close ]</button>
+                `
+            },
+
             'cs229': {
                 title: "Stanford CS229: Machine Learning",
                 sub: "Autumn 2018 · Prof. Andrew Ng · Rigorous Problem Sets PS0–PS4 & Closed-Form Proofs",
