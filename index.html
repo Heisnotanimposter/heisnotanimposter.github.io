@@ -104,43 +104,49 @@
         .header-nav {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
         .nav-item {
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 13.5px;
-            padding: 4px 6px;
+            font-size: 15px;
+            padding: 4px 2px;
             cursor: pointer;
+            border-bottom: 2.5px solid transparent;
+            transition: border-color 0.15s ease;
         }
 
         .nav-item:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            border-bottom: 2.5px solid var(--border-secondary);
         }
 
         .nav-item.active {
             font-weight: bold;
-            border-bottom: 2px solid var(--border-primary);
+            border-bottom: 2.5px solid var(--border-primary);
         }
 
         .lang-group {
             display: inline-flex;
-            gap: 3px;
+            gap: 4px;
             align-items: center;
-            margin-left: 6px;
+            margin-left: 8px;
         }
 
         .lang-btn {
             background: #ffffff;
-            border: 1px solid var(--border-secondary);
+            border: 1px solid #767676;
             color: var(--text-primary);
             font-family: var(--font-serif);
-            font-size: 11.5px;
-            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 2px 7px;
             cursor: pointer;
             border-radius: 0;
+            line-height: 1.4;
+            transition: background 0.1s ease, color 0.1s ease;
         }
 
         .lang-btn:hover {
@@ -586,18 +592,21 @@
         }
 
         /* ==========================================================================
-           View 2: Multi-Lingual Academic Resume (CV)
+           View System: 3 Discrete Domains
+           1. #view-showcase  (Showcase & Projects)
+           2. #view-curriculum (Curriculum & Proofs)
+           3. #view-resume    (Academic CV)
            ========================================================================== */
+        #view-showcase,
+        #view-curriculum,
         #view-resume {
             display: none;
         }
 
+        #view-showcase.active,
+        #view-curriculum.active,
         #view-resume.active {
             display: block;
-        }
-
-        #view-showcase.hidden {
-            display: none;
         }
 
         .resume-banner {
@@ -700,7 +709,8 @@
             #view-resume {
                 display: block !important;
             }
-            #view-showcase {
+            #view-showcase,
+            #view-curriculum {
                 display: none !important;
             }
         }
@@ -949,9 +959,25 @@
                 </div>
             </section>
 
-            <!-- SECTION 2: CURRICULUM & MATHEMATICAL PROOFS -->
-            <section id="curriculum" class="section-header">
-                <h2 class="section-heading">II. Graduate Curriculum & Mathematical Proofs</h2>
+            <!-- Bottom Transition to Other Domains -->
+            <section class="section-header" style="margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--border-primary);">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                    <div>
+                        <div style="font-weight:bold; font-size:16px;">Graduate Curricula & Academic Records</div>
+                        <div style="font-size:13.5px; color:var(--text-secondary);">Inspect mathematical problem sets and proofs or review the full academic curriculum vitae.</div>
+                    </div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button id="showcaseToCurriculumBtn" class="btn-minimal">Go to Curriculum & Proofs →</button>
+                        <button id="showcaseToResumeBtn" class="btn-minimal">View Academic CV →</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ================= VIEW 2: CURRICULUM & PROOFS ================= -->
+        <main id="view-curriculum">
+            <section class="section-header">
+                <h1 class="hero-title" style="font-size: 26px; margin-bottom: 8px;">Graduate Curriculum & Mathematical Proofs</h1>
                 <p class="section-intro">
                     Detailed mathematical solutions, closed-form derivations, and algorithmic implementations for graduate coursework and foundational machine learning theories. Click any module to inspect step-by-step proofs and derivations.
                 </p>
@@ -1010,30 +1036,27 @@
                 </div>
             </section>
 
-            <!-- SECTION 3: TRANSITION TO CV -->
-            <section class="section-header">
-                <h2 class="section-heading">III. Formal Academic Curriculum Vitae (CV)</h2>
-                <p class="section-intro">
-                    For university admissions committees, institutional review boards, and prospective research mentors, a complete multi-lingual curriculum vitae is available with verified citations and records.
-                </p>
-                <div class="hero-actions">
-                    <button id="bannerOpenResumeBtn" class="btn-minimal">Switch to Full Academic Curriculum Vitae (CV) →</button>
+            <!-- Bottom Transition to Other Domains -->
+            <section class="section-header" style="margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--border-primary);">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                    <div>
+                        <div style="font-weight:bold; font-size:16px;">Navigation</div>
+                        <div style="font-size:13.5px; color:var(--text-secondary);">Return to Showcase & Projects or review the full Academic CV.</div>
+                    </div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button id="curriculumBackToShowcase" class="btn-minimal">← Back to Showcase & Projects</button>
+                        <button id="curriculumToResumeBtn" class="btn-minimal">View Academic CV →</button>
+                    </div>
                 </div>
             </section>
         </main>
 
-        <!-- ================= VIEW 2: MULTI-LINGUAL ACADEMIC RESUME ================= -->
+        <!-- ================= VIEW 3: MULTI-LINGUAL ACADEMIC RESUME ================= -->
         <main id="view-resume">
             <div class="resume-banner">
-                <a class="btn-minimal" id="btnBackToShowcase">← Back to Showcase & Interactive Hub</a>
-                <div style="display:flex; align-items:center; gap:8px;">
+                <a class="btn-minimal" id="btnBackToShowcase">← Back to Showcase & Projects</a>
+                <div>
                     <button onclick="window.print()" class="btn-minimal">🖨️ Print CV</button>
-                    <div class="lang-group">
-                        <button class="lang-btn active" data-lang="en">EN</button>
-                        <button class="lang-btn" data-lang="kor">KO</button>
-                        <button class="lang-btn" data-lang="jp">JA</button>
-                        <button class="lang-btn" data-lang="chn">ZH</button>
-                    </div>
                 </div>
             </div>
 
@@ -2833,47 +2856,54 @@
 
         function switchView(targetView, updateHash = true) {
             const showcaseView = document.getElementById('view-showcase');
+            const curriculumView = document.getElementById('view-curriculum');
             const resumeView = document.getElementById('view-resume');
             const navShowcase = document.getElementById('navShowcase');
             const navCurriculum = document.getElementById('navCurriculum');
             const navResume = document.getElementById('navResume');
 
-            if (targetView === 'resume') {
-                showcaseView.classList.add('hidden');
-                resumeView.classList.add('active');
-                navShowcase.classList.remove('active');
-                navCurriculum.classList.remove('active');
-                navResume.classList.add('active');
+            if (showcaseView) showcaseView.classList.remove('active');
+            if (curriculumView) curriculumView.classList.remove('active');
+            if (resumeView) resumeView.classList.remove('active');
+
+            if (navShowcase) navShowcase.classList.remove('active');
+            if (navCurriculum) navCurriculum.classList.remove('active');
+            if (navResume) navResume.classList.remove('active');
+
+            if (targetView === 'curriculum') {
+                if (curriculumView) curriculumView.classList.add('active');
+                if (navCurriculum) navCurriculum.classList.add('active');
                 if (updateHash) {
-                    if (window.history && window.history.replaceState) {
-                        window.history.replaceState(null, '', '#' + currentLang);
+                    if (window.history && window.history.pushState) {
+                        window.history.pushState(null, '', '#curriculum');
                     } else {
-                        window.location.hash = currentLang;
+                        window.location.hash = 'curriculum';
                     }
                 }
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                showcaseView.classList.remove('hidden');
-                resumeView.classList.remove('active');
-                navShowcase.classList.add('active');
-                navResume.classList.remove('active');
-                if (targetView === 'curriculum') {
-                    navCurriculum.classList.add('active');
-                    navShowcase.classList.remove('active');
-                    document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' });
-                } else if (targetView === 'services') {
-                    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    if (updateHash) {
-                        if (window.history && window.history.replaceState) {
-                            window.history.replaceState(null, '', '#showcase');
-                        } else {
-                            window.location.hash = 'showcase';
-                        }
+            } else if (targetView === 'resume') {
+                if (resumeView) resumeView.classList.add('active');
+                if (navResume) navResume.classList.add('active');
+                if (updateHash) {
+                    const h = '#' + (currentLang || 'resume');
+                    if (window.history && window.history.pushState) {
+                        window.history.pushState(null, '', h);
+                    } else {
+                        window.location.hash = h;
                     }
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } else {
+                // targetView === 'showcase' or default
+                if (showcaseView) showcaseView.classList.add('active');
+                if (navShowcase) navShowcase.classList.add('active');
+                if (updateHash) {
+                    if (window.history && window.history.pushState) {
+                        window.history.pushState(null, '', '#showcase');
+                    } else {
+                        window.location.hash = 'showcase';
+                    }
                 }
             }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function filterProjects() {
@@ -2998,14 +3028,12 @@
                 switchView('resume');
             });
 
-            document.getElementById('heroOpenResumeBtn')?.addEventListener('click', () => {
-                switchView('resume');
-            });
-
-            document.getElementById('bannerOpenResumeBtn')?.addEventListener('click', () => {
-                switchView('resume');
-            });
-
+            // Transition buttons across domains
+            document.getElementById('heroOpenResumeBtn')?.addEventListener('click', () => switchView('resume'));
+            document.getElementById('showcaseToCurriculumBtn')?.addEventListener('click', () => switchView('curriculum'));
+            document.getElementById('showcaseToResumeBtn')?.addEventListener('click', () => switchView('resume'));
+            document.getElementById('curriculumBackToShowcase')?.addEventListener('click', () => switchView('showcase'));
+            document.getElementById('curriculumToResumeBtn')?.addEventListener('click', () => switchView('resume'));
             document.getElementById('btnBackToShowcase')?.addEventListener('click', (e) => {
                 e.preventDefault();
                 switchView('showcase');
