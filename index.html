@@ -68,7 +68,7 @@
             color: var(--text-secondary);
         }
 
-        /* Global Header (Minimalist Sticky Monotone) */
+        /* Global Header (Minimalist Sticky Monotone - Rigid Fixed Geometry) */
         .global-header {
             background: #ffffff;
             border-bottom: 1px solid var(--border-primary);
@@ -81,58 +81,87 @@
         .header-inner {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 12px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 12px;
         }
 
         .header-brand {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: bold;
             color: var(--text-primary);
             text-decoration: none;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.2px;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .header-brand:hover {
             text-decoration: none;
         }
 
+        /* Fixed-width nav container for Zero CLS */
         .header-nav {
             display: flex;
             align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 auto;
+            flex-shrink: 0;
         }
 
+        /* Rigid slots for each navigation tab */
         .nav-item {
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 15px;
-            padding: 4px 2px;
+            font-size: 14.5px;
+            height: 32px;
+            padding: 0 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
             cursor: pointer;
-            border-bottom: 2.5px solid transparent;
+            box-sizing: border-box;
+            border-bottom: 2px solid transparent;
             transition: border-color 0.15s ease;
+        }
+
+        /* Fixed slot widths to prevent any layout movement across languages */
+        #navShowcase {
+            width: 150px;
+        }
+
+        #navCurriculum {
+            width: 155px;
+        }
+
+        #navResume {
+            width: 120px;
         }
 
         .nav-item:hover {
             text-decoration: none;
-            border-bottom: 2.5px solid var(--border-secondary);
+            border-bottom: 2px solid var(--border-secondary);
         }
 
         .nav-item.active {
             font-weight: bold;
-            border-bottom: 2.5px solid var(--border-primary);
+            border-bottom: 2px solid var(--border-primary);
         }
 
+        /* Fixed-width, pinned language switcher */
         .lang-group {
             display: inline-flex;
             gap: 4px;
             align-items: center;
-            margin-left: 8px;
+            justify-content: flex-end;
+            flex-shrink: 0;
+            width: 136px;
         }
 
         .lang-btn {
@@ -142,11 +171,17 @@
             font-family: var(--font-serif);
             font-size: 12px;
             font-weight: 500;
-            padding: 2px 7px;
+            width: 30px;
+            height: 24px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             border-radius: 0;
-            line-height: 1.4;
-            transition: background 0.1s ease, color 0.1s ease;
+            line-height: 1;
+            box-sizing: border-box;
+            transition: background 0.1s ease, color 0.1s ease, border-color 0.1s ease;
         }
 
         .lang-btn:hover {
@@ -158,6 +193,34 @@
             color: #ffffff;
             border-color: var(--border-primary);
             font-weight: bold;
+        }
+
+        /* Responsive Mobile Layout (< 820px) */
+        @media (max-width: 820px) {
+            .header-inner {
+                flex-wrap: wrap;
+                padding: 8px 14px;
+                gap: 8px;
+            }
+            .header-brand {
+                font-size: 16px;
+            }
+            .header-nav {
+                order: 3;
+                width: 100%;
+                justify-content: space-between;
+                gap: 4px;
+            }
+            #navShowcase, #navCurriculum, #navResume {
+                width: auto;
+                flex: 1 1 0;
+                font-size: 13px;
+                padding: 0 2px;
+            }
+            .lang-group {
+                order: 2;
+                width: auto;
+            }
         }
 
         /* Container Layout */
@@ -722,17 +785,17 @@
     <header class="global-header" id="globalHeader">
         <div class="header-inner">
             <a href="#showcase" class="header-brand" id="brandLogo">Simon (Seungwon) Lee</a>
-            <nav class="header-nav">
+            <nav class="header-nav" id="headerNav" aria-label="Main Navigation">
                 <a href="#showcase" class="nav-item active" id="navShowcase" data-i18n="nav_showcase">Showcase & Projects</a>
                 <a href="#curriculum" class="nav-item" id="navCurriculum" data-i18n="nav_curriculum">Curriculum & Proofs</a>
                 <a href="#resume" class="nav-item" id="navResume" data-i18n="nav_resume">Academic CV</a>
-                <div class="lang-group">
-                    <button class="lang-btn active" data-lang="en">EN</button>
-                    <button class="lang-btn" data-lang="kor">KO</button>
-                    <button class="lang-btn" data-lang="jp">JA</button>
-                    <button class="lang-btn" data-lang="chn">ZH</button>
-                </div>
             </nav>
+            <div class="lang-group" id="headerLangGroup" aria-label="Language Selector">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="kor">KO</button>
+                <button class="lang-btn" data-lang="jp">JA</button>
+                <button class="lang-btn" data-lang="chn">ZH</button>
+            </div>
         </div>
     </header>
 
@@ -1179,7 +1242,7 @@
         'nav_skills': "Skills",
         'nav_certs': "Certifications",
         'nav_showcase': "Showcase & Projects",
-        'nav_curriculum': "Graduate Curriculum & Mathematical Proofs",
+        'nav_curriculum': "Curriculum & Proofs",
         'nav_resume': "Academic CV",
         'hero_subtitle': "AI & Systems Researcher · Mathematical Foundations & Neuro-Symbolic Computing",
         'hero_location': "Seoul, Republic of Korea",
@@ -1278,8 +1341,8 @@
         'nav_running_projects': "운영 서비스",
         'nav_skills': "기술 스택",
         'nav_certs': "자격 및 병역",
-        'nav_showcase': "쇼케이스 및 연구 자산",
-        'nav_curriculum': "대학원 커리큘럼 및 수식 증명",
+        'nav_showcase': "쇼케이스 & 프로젝트",
+        'nav_curriculum': "커리큘럼 & 수식 증명",
         'nav_resume': "학술 이력서 (CV)",
         'hero_subtitle': "인공지능 및 시스템 연구자 · 수리적 기초 및 뉴로-심볼릭 컴퓨팅",
         'hero_location': "대한민국 서울",
@@ -1378,8 +1441,8 @@
         'nav_running_projects': "実行中のサービス",
         'nav_skills': "スキル",
         'nav_certs': "資格・服務",
-        'nav_showcase': "ショーケース＆研究プロジェクト",
-        'nav_curriculum': "大学院カリキュラム＆数理証明",
+        'nav_showcase': "ショーケース & 成果",
+        'nav_curriculum': "カリキュラム & 数理証明",
         'nav_resume': "学術履歴書 (CV)",
         'hero_subtitle': "AI・システム研究者 · 数理的基礎およびニューロシンボリック・コンピューティング",
         'hero_location': "大韓民国 ソウル",
@@ -1478,8 +1541,8 @@
         'nav_running_projects': "运行服务",
         'nav_skills': "技能",
         'nav_certs': "证书与兵役",
-        'nav_showcase': "项目展示与核心研究",
-        'nav_curriculum': "研究生课程与数理推导",
+        'nav_showcase': "项目展示 & 核心研究",
+        'nav_curriculum': "课程推导 & 数理证明",
         'nav_resume': "学术简历 (CV)",
         'hero_subtitle': "人工智能与系统研究员 · 数理基础与神经符号计算",
         'hero_location': "韩国首尔",
