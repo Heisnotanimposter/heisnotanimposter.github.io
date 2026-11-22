@@ -688,31 +688,40 @@
             margin: 0 auto;
         }
 
+        .resume-header,
         .resume-container header {
             border-bottom: 1px solid var(--border-primary);
             padding-bottom: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
+        .resume-header h1,
         .resume-container h1 {
             font-size: 28px;
             font-weight: bold;
             margin-bottom: 6px;
         }
 
+        .resume-header .contact-info,
         .resume-container .contact-info {
             font-size: 13.5px;
             color: var(--text-secondary);
             line-height: 1.8;
         }
 
+        .resume-header .contact-info a,
         .resume-container .contact-info a {
             color: var(--text-primary);
         }
 
+        .resume-header .separator,
         .resume-container .separator {
             margin: 0 4px;
             color: var(--border-secondary);
+        }
+
+        #view-curriculum .section-header {
+            margin-top: 0;
         }
 
         .resume-container section {
@@ -776,6 +785,20 @@
             #view-curriculum {
                 display: none !important;
             }
+            .resume-header {
+                display: block !important;
+                border-bottom: 1px solid #000000 !important;
+                padding-bottom: 10px !important;
+                margin-bottom: 16px !important;
+            }
+            .resume-header h1 {
+                font-size: 24pt !important;
+                margin-bottom: 4pt !important;
+            }
+            .resume-header .contact-info {
+                font-size: 9.5pt !important;
+                line-height: 1.5 !important;
+            }
         }
     </style>
 </head>
@@ -801,19 +824,43 @@
 
     <div class="container">
 
+        <!-- Universal Action Banner (persistent layout across all 3 views) -->
+        <div class="resume-banner" id="universalActionBanner">
+            <button class="btn-minimal" id="bannerLeftBtn">Curriculum &amp; Proofs &rarr;</button>
+            <div>
+                <button class="btn-minimal" id="bannerRightBtn">View Academic CV &rarr;</button>
+            </div>
+        </div>
+
+        <!-- Universal Profile Header (identical academic CV layout across all 3 views) -->
+        <header class="resume-header" id="universalProfileHeader">
+            <h1 id="header-name" data-key="header_name">Seungwon (Simon) Lee</h1>
+            <div class="contact-info">
+                <span>Email: <a href="mailto:redcar1024@gmail.com">redcar1024@gmail.com</a></span>
+                <span class="separator">|</span>
+                <span>Phone: +82-10-7726-2102</span>
+                <span class="separator">|</span>
+                <span>Line ID: ngc1024</span>
+                <span class="separator">|</span>
+                <span>Kakao ID: redcar359</span>
+                <span class="separator">|</span>
+                <span>WeChat ID: wxid_acxnq69n3f1912</span>
+                <span class="separator">|</span>
+                <span>Location: <span data-i18n="header_location">South Korea</span></span>
+                <br>
+                <span>GitHub: <a href="https://github.com/OpenOurMinds" target="_blank">github.com/OpenOurMinds</a></span>
+                <span class="separator">|</span>
+                <span>LinkedIn: <a href="https://www.linkedin.com/in/simon-lee-003689288/" target="_blank">linkedin.com/in/simon-lee-003689288</a></span>
+                <span class="separator">|</span>
+                <span>HuggingFace: <a href="https://huggingface.co/ngc1024" target="_blank">huggingface.co/ngc1024</a></span>
+            </div>
+        </header>
+
         <!-- ================= VIEW 1: ACADEMIC SHOWCASE ================= -->
         <main id="view-showcase">
             <!-- Hero / Abstract -->
             <section class="academic-hero">
-                <h1 class="hero-title">Simon (Seungwon) Lee</h1>
                 <div class="hero-subtitle" data-i18n="hero_subtitle">AI & Systems Researcher · Mathematical Foundations & Neuro-Symbolic Computing</div>
-                
-                <div class="hero-contacts">
-                    <span><strong>Email:</strong> <a href="mailto:redcar1024@gmail.com">redcar1024@gmail.com</a></span>
-                    <span><strong>GitHub:</strong> <a href="https://github.com/Heisnotanimposter" target="_blank">github.com/Heisnotanimposter</a></span>
-                    <span><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/simon-lee-003689288/" target="_blank">simon-lee-003689288</a></span>
-                    <span><strong>Location:</strong> <span data-i18n="hero_location">Seoul, Republic of Korea</span></span>
-                </div>
 
                 <p class="hero-statement" data-i18n="hero_statement">
                     Focusing on neuro-symbolic artificial intelligence, discrete program synthesis under spatial constraints, and real-time state estimation for autonomous systems. Ranked in the <strong>Top 4% Globally in ARC Prize 2026 (Silver Medal, 194th / 4,795+)</strong> and <strong>Top 13% in ARC Prize 2025</strong> (Abstraction and Reasoning Corpus). Developer of high-performance interactive scientific platforms, 3D spatial simulation engines, and rigorous open-source implementations of graduate machine learning curricula (Stanford CS229 & CS230).
@@ -1127,38 +1174,7 @@
 
         <!-- ================= VIEW 3: MULTI-LINGUAL ACADEMIC RESUME ================= -->
         <main id="view-resume">
-            <div class="resume-banner">
-                <a class="btn-minimal" id="btnBackToShowcase" data-i18n="resume_back_showcase">← Back to Showcase & Projects</a>
-                <div>
-                    <button onclick="window.print()" class="btn-minimal" data-i18n="resume_print">🖨️ Print CV</button>
-                </div>
-            </div>
-
             <div class="resume-container">
-                <header id="summary-sec">
-                    <h1 id="header-name" data-key="header_name">Simon Lee</h1>
-                    
-                    <div class="contact-info">
-                        <span>Email: <a href="mailto:redcar1024@gmail.com">redcar1024@gmail.com</a></span>
-                        <span class="separator">|</span>
-                        <span>Phone: +82-10-7726-2102</span>
-                        <span class="separator">|</span>
-                        <span>Line ID: ngc1024</span>
-                        <span class="separator">|</span>
-                        <span>Kakao ID: redcar359</span>
-                        <span class="separator">|</span>
-                        <span>WeChat ID: wxid_acxnq69n3f1912</span>
-                        <span class="separator">|</span>
-                        <span>Location: South Korea</span>
-                        <br>
-                        <span>GitHub: <a href="https://github.com/OpenOurMinds" target="_blank">github.com/OpenOurMinds</a></span>
-                        <span class="separator">|</span>
-                        <span>LinkedIn: <a href="https://www.linkedin.com/in/simon-lee-003689288/" target="_blank">linkedin.com/in/simon-lee-003689288</a></span>
-                        <span class="separator">|</span>
-                        <span>HuggingFace: <a href="https://huggingface.co/ngc1024" target="_blank">huggingface.co/ngc1024</a></span>
-                    </div>
-                </header>
-
                 <section class="section" id="summary-sec">
                     <h2 data-key="h2_summary">Research Interests</h2>
                     <div id="div_summary">
@@ -1245,6 +1261,11 @@
     'en': {
         'title_suffix': "EN",
         'header_name': "Seungwon (Simon) Lee",
+        'banner_back_showcase': "← Back to Showcase",
+        'banner_to_curriculum': "Curriculum & Proofs →",
+        'banner_to_resume': "View Academic CV →",
+        'banner_print_cv': "🖨️ Print CV",
+        'header_location': "South Korea",
         'nav_summary': "Summary",
         'nav_education': "Education",
         'nav_admissions': "Admissions",
@@ -1349,6 +1370,11 @@
     'kor': {
         'title_suffix': "KOR",
         'header_name': "이승원 (Seungwon Lee)",
+        'banner_back_showcase': "← 쇼케이스로 돌아가기",
+        'banner_to_curriculum': "커리큘럼 & 수식 증명 →",
+        'banner_to_resume': "학술 이력서 (CV) 보기 →",
+        'banner_print_cv': "🖨️ 이력서 인쇄 (Print CV)",
+        'header_location': "대한민국",
         'nav_summary': "요약",
         'nav_education': "학력",
         'nav_admissions': "합격 실적",
@@ -1453,6 +1479,11 @@
     'jp': {
         'title_suffix': "JP",
         'header_name': "李承洹 (Simon Lee)",
+        'banner_back_showcase': "← ショーケースへ戻る",
+        'banner_to_curriculum': "カリキュラム & 数理証明 →",
+        'banner_to_resume': "学術履歴書 (CV) を見る →",
+        'banner_print_cv': "🖨️ 履歴書を印刷 (Print CV)",
+        'header_location': "大韓民国",
         'nav_summary': "概要",
         'nav_education': "学歴",
         'nav_admissions': "合格実績",
@@ -1557,6 +1588,11 @@
     'chn': {
         'title_suffix': "CHN",
         'header_name': "李承洹 (Simon Lee)",
+        'banner_back_showcase': "← 返回项目展示",
+        'banner_to_curriculum': "课程推导 & 数理证明 →",
+        'banner_to_resume': "查看学术简历 (CV) →",
+        'banner_print_cv': "🖨️ 打印简历 (Print CV)",
+        'header_location': "韩国",
         'nav_summary': "概要",
         'nav_education': "教育背景",
         'nav_admissions': "学术录取",
@@ -1949,6 +1985,39 @@
                     btn.classList.add('active');
                 }
             });
+
+            if (typeof updateActionBanner === 'function') {
+                updateActionBanner(currentView, lang);
+            }
+        }
+
+        let currentView = 'showcase';
+
+        function updateActionBanner(view, lang) {
+            if (!lang) lang = currentLang || 'en';
+            if (!translations[lang]) lang = 'en';
+            const t = translations[lang];
+
+            const leftBtn = document.getElementById('bannerLeftBtn');
+            const rightBtn = document.getElementById('bannerRightBtn');
+            if (!leftBtn || !rightBtn) return;
+
+            if (view === 'showcase') {
+                leftBtn.textContent = t.banner_to_curriculum || 'Curriculum & Proofs →';
+                leftBtn.onclick = (e) => { e.preventDefault(); switchView('curriculum'); };
+                rightBtn.textContent = t.banner_to_resume || 'View Academic CV →';
+                rightBtn.onclick = (e) => { e.preventDefault(); switchView('resume'); };
+            } else if (view === 'curriculum') {
+                leftBtn.textContent = t.banner_back_showcase || '← Back to Showcase';
+                leftBtn.onclick = (e) => { e.preventDefault(); switchView('showcase'); };
+                rightBtn.textContent = t.banner_to_resume || 'View Academic CV →';
+                rightBtn.onclick = (e) => { e.preventDefault(); switchView('resume'); };
+            } else if (view === 'resume') {
+                leftBtn.textContent = t.banner_back_showcase || '← Back to Showcase';
+                leftBtn.onclick = (e) => { e.preventDefault(); switchView('showcase'); };
+                rightBtn.textContent = t.banner_print_cv || '🖨️ Print CV';
+                rightBtn.onclick = (e) => { e.preventDefault(); window.print(); };
+            }
         }
 
         function switchView(targetView, updateHash = true) {
@@ -2000,6 +2069,8 @@
                     }
                 }
             }
+            currentView = targetView || 'showcase';
+            updateActionBanner(currentView, currentLang);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -2111,6 +2182,11 @@
             });
 
             document.getElementById('navShowcase')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchView('showcase');
+            });
+
+            document.getElementById('brandLogo')?.addEventListener('click', (e) => {
                 e.preventDefault();
                 switchView('showcase');
             });
